@@ -30,14 +30,17 @@ SOURCES += \
     Qt-OpenCV-AdditionalLibrary.cpp \
     algorithms.cpp \
     camera.cpp \
-    errors.cpp
+    errors.cpp \
+    usersettings.cpp
 
 HEADERS += \
         mainwindow.h \
     Qt-OpenCV-AdditionalLibrary.h \
     algorithms.h \
     camera.h \
-    errors.h
+    errors.h \
+    usersettings.h \
+    options.h
 
 FORMS += \
         mainwindow.ui

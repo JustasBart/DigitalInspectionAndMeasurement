@@ -18,6 +18,8 @@
 #include "algorithms.h"
 #include "camera.h"
 #include "errors.h"
+#include "options.h"
+#include "usersettings.h"
 
 namespace Ui
 {
@@ -48,6 +50,7 @@ private:
 
     QTimer _videoFPSTimer;
     Camera camObj;
+    Options usrOptions;
 };
 
 #endif // MAINWINDOW_H

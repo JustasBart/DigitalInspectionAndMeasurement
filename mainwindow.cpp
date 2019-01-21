@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui -> setupUi(this);
     connect(&_videoFPSTimer, SIGNAL(timeout()), this, SLOT(captureImage()));
+
     MainWindow::init();
 }
 
@@ -21,6 +22,7 @@ void MainWindow::init()
 {
     camObj.cameraInit(CAMERA_HARDWARE, FPS);
     _videoFPSTimer.start(1000 / FPS);
+    UserSettings::readSettings(usrOptions);
 }
 
 void MainWindow::captureImage()
