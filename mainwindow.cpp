@@ -5,63 +5,33 @@ using namespace cv;
 
 static VideoCapture camera(0);
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui -> setupUi(this);
 
-    if (!camera.isOpened())
-    {
-       qDebug() << "Cannot access the camera.\nProgram will not close down.";
-       exit(EXIT_FAILURE);
-    }
+    MainWindow::init();
 
-    // User defined functionality //
-    projectSettings.loadSettings();
-    Algorithms::sayHello();
-    // End
-
-    if (FPS == 60)
-    {
-        camera.set(cv::CAP_PROP_FRAME_WIDTH, 640);
-        camera.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
-    }
-    else if (FPS == 30)
-    {
-        camera.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
-        camera.set(cv::CAP_PROP_FRAME_HEIGHT, 720);
-    }
-
-    camera.set(cv::CAP_PROP_AUTOFOCUS, 1);
-
-    camera.set(cv::CAP_PROP_FOURCC, CV_FOURCC('M','J','P','G'));
-    camera.set(cv::CAP_PROP_FPS, FPS);
-    
-    // Setting up the C922 to 1080p @ 30FPS.
-    // camera.open(CV_CAP_DSHOW);
-    // camera.set(CV_CAP_PROP_FOURCC, CV_FOURCC('M', 'J', 'P', 'G'));
-    // camera.set(CV_CAP_PROP_FRAME_WIDTH, 1920);
-    // camera.set(CV_CAP_PROP_FRAME_HEIGHT, 1080);
-    // End
-    
-
-    connect(&videoFPSTimer, SIGNAL(timeout()), this, SLOT(captureImage()));
-
-    videoFPSTimer.start(1000 / FPS);
+    connect(&_videoFPSTimer, SIGNAL(timeout()), this, SLOT(captureImage()));
+    _videoFPSTimer.start(1000 / FPS);
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+void MainWindow::init()
+{
+    Camera::cameraInit(camera, 30);
+    Algorithms::sayHello();
+}
+
 void MainWindow::captureImage()
 {
-    camera >> currentFrameMat;
-
-    currentFramePixmap = MatToQPixmap( currentFrameMat );
-
-    ui -> videoFeed -> setPixmap(currentFramePixmap);
-
+    camera >> _currentFrameMat;
+    _currentFramePixmap = MatToQPixmap( _currentFrameMat );
+    ui -> videoFeed -> setPixmap( _currentFramePixmap );
     int getFPS = (int)camera.get(CAP_PROP_FPS);
     ui -> fpsLabel -> setText( QString::number(getFPS) );
 }

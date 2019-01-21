@@ -20,8 +20,8 @@
 #include <QString>
 
 // General functions
-#include "settingshandler.h"
 #include "algorithms.h"
+#include "camera.h"
 
 namespace Ui
 {
@@ -36,6 +36,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void init();
+
 private slots:
     void captureImage();
     void on_contrastSpinBox_valueChanged(int arg1);
@@ -48,16 +50,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    // Variables //
-    QTimer videoFPSTimer;
-    Settings projectSettings;
-
     //_- Live Feed
-    cv::Mat currentFrameMat;
-    QPixmap currentFramePixmap;
-
+    cv::Mat _currentFrameMat;
+    QPixmap _currentFramePixmap;
     // Functions //
 
+    QTimer _videoFPSTimer;
 };
 
 #endif // MAINWINDOW_H
