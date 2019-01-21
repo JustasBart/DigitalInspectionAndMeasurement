@@ -1,11 +1,6 @@
 #include "camera.h"
 
-Camera::Camera()
-{
-
-}
-
-void Camera::cameraInit(VideoCapture &cameraObj, unsigned int fps)
+void Camera::cameraInit(VideoCapture &cameraObj, unsigned char fps)
 {
     if (!cameraObj.isOpened())
     {
@@ -35,4 +30,9 @@ void Camera::cameraInit(VideoCapture &cameraObj, unsigned int fps)
     // camera.set(CV_CAP_PROP_FRAME_WIDTH, 1920);
     // camera.set(CV_CAP_PROP_FRAME_HEIGHT, 1080);
     // End
+}
+
+void Camera::setParam(VideoCapture &cameraObj, cv::VideoCaptureProperties property, unsigned char value)
+{
+    cameraObj.set(property, value);
 }

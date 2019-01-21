@@ -12,9 +12,7 @@ using namespace cv;
 class Algorithms
 {
 public:
-    Algorithms();
     static void sayHello();
-
 private:
     Mat PictureMat;
 };

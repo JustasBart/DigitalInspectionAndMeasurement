@@ -1,6 +1,7 @@
 #include "errors.h"
 
-void fatalError(QString errorMessage)
+void Errors::fatalError(QString errorMessage)
 {
     qDebug() << "CRICITAL ERROR: " + errorMessage;
+    exit(EXIT_FAILURE);
 }

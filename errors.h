@@ -7,7 +7,7 @@
 class Errors
 {
 public:
-    void fatalError(QString errorMessage);
+    static void fatalError(QString errorMessage);
 };
 
 #endif // ERRORS_H
