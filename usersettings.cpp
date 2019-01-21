@@ -1,63 +1,20 @@
 #include "usersettings.h"
 
-void UserSettings::readSettings(Options &optionsBuffer)
+void UserSettings::saveSettings(const QString &key, const QVariant &value, const QString &group)
 {
-    // Options options;
-    QString buffer;
+    QSettings settings;
 
-    if (readFromFile(FILE_PATH, buffer))
-    {
-        QStringList optionsList = buffer.split( "\n" );
-
-        QString neededWord = optionsList.value( 0 );
-
-        qDebug() << neededWord;
-    }
-    else
-    {
-        Errors::fatalError("Could not read the settings file!");
-    }
+    settings.beginGroup(group);
+    settings.setValue(key, value);
+    settings.endGroup();
 }
 
-void UserSettings::saveSettings(Options &optionsBuffer)
+QVariant UserSettings::loadSettings(const QString &key, const QVariant &defaultValue, const QString &group)
 {
+    QSettings settings;
 
-}
-
-bool UserSettings::writeToFile(const QString &filePath, QString &buffer)
-{
-    QFile file(filePath);
-
-    if (file.open(QIODevice::WriteOnly))
-    {
-        QTextStream stream( &file );
-        stream >> buffer;
-
-        return true;
-    }
-    else
-    {
-        Errors::fatalError("The file: [" + filePath + "] can not be written to!");
-    }
-
-    return false;
-}
-
-bool UserSettings::readFromFile(const QString &filePath, QString &buffer)
-{
-    QFile file(filePath);
-
-    if (file.open(QIODevice::ReadOnly))
-    {
-        QTextStream stream( &file );
-        stream << buffer << endl;
-
-        return true;
-    }
-    else
-    {
-        Errors::fatalError("The file: [" + filePath + "] can not be read from!");
-    }
-
-    return false;
+    settings.beginGroup(group);
+    QVariant value = settings.value(key, defaultValue);
+    settings.endGroup();
+    return value;
 }

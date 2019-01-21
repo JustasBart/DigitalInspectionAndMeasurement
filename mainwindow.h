@@ -13,6 +13,7 @@
 // General QT includes:
 #include <QTimer>
 #include <QString>
+#include <QVariant>
 
 // General functions
 #include "algorithms.h"
@@ -47,6 +48,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void loadGUISettings();
+    void saveGUISettings();
 
     QTimer _videoFPSTimer;
     Camera camObj;
