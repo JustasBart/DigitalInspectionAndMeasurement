@@ -1,28 +1,29 @@
 #include "camera.h"
 
-void Camera::cameraInit(VideoCapture &cameraObj, unsigned char fps)
+void Camera::cameraInit(unsigned char camera, unsigned char fps)
 {
-    if (!cameraObj.isOpened())
+    _cameraObj = new VideoCapture(camera);
+
+    if (!_cameraObj -> isOpened())
     {
-       // qDebug() << "Cannot access the camera.\nProgram will not close down.";
        exit(EXIT_FAILURE);
     }
 
     if (fps == 60)
     {
-        cameraObj.set(cv::CAP_PROP_FRAME_WIDTH, 640);
-        cameraObj.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+        setParam(CAP_PROP_FRAME_WIDTH, 640);
+        setParam(CAP_PROP_FRAME_HEIGHT, 480);
     }
     else if (fps == 30)
     {
-        cameraObj.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
-        cameraObj.set(cv::CAP_PROP_FRAME_HEIGHT, 720);
+        setParam(CAP_PROP_FRAME_WIDTH, 1280);
+        setParam(CAP_PROP_FRAME_HEIGHT, 720);
     }
 
-    cameraObj.set(cv::CAP_PROP_AUTOFOCUS, 1);
+    setParam(CAP_PROP_AUTOFOCUS, 1);
 
-    cameraObj.set(cv::CAP_PROP_FOURCC, CV_FOURCC('M','J','P','G'));
-    cameraObj.set(cv::CAP_PROP_FPS, fps);
+    setParam(CAP_PROP_FOURCC, CV_FOURCC('M','J','P','G'));
+    setParam(CAP_PROP_FPS, fps);
 
     // Setting up the C922 to 1080p @ 30FPS.
     // camera.open(CV_CAP_DSHOW);
@@ -32,7 +33,23 @@ void Camera::cameraInit(VideoCapture &cameraObj, unsigned char fps)
     // End
 }
 
-void Camera::setParam(VideoCapture &cameraObj, cv::VideoCaptureProperties property, unsigned char value)
+void Camera::setParam(cv::VideoCaptureProperties param, unsigned char value)
 {
-    cameraObj.set(property, value);
+    _cameraObj -> set(param, value);
+}
+
+unsigned char Camera::getParam(VideoCaptureProperties param)
+{
+    return _cameraObj -> get(param);
+}
+
+QPixmap Camera::captureImage()
+{
+    *_cameraObj >> _currentFrameMat;
+    return MatToQPixmap( _currentFrameMat );
+}
+
+unsigned char Camera::getFPS()
+{
+    return getParam(CAP_PROP_FPS);
 }

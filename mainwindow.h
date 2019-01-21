@@ -5,15 +5,10 @@
 
 // Defines
 #define FPS 30
+#define CAMERA_HARDWARE 0
 
 // OpenCV main image processing includes //
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-
-// OpenCV label to Mat additional function includes //
-#include "Qt-OpenCV-AdditionalLibrary.h"
 
 // General QT includes:
 #include <QTimer>
@@ -22,6 +17,7 @@
 // General functions
 #include "algorithms.h"
 #include "camera.h"
+#include "errors.h"
 
 namespace Ui
 {
@@ -50,12 +46,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    //_- Live Feed
-    cv::Mat _currentFrameMat;
-    QPixmap _currentFramePixmap;
-    // Functions //
-
     QTimer _videoFPSTimer;
+    Camera camObj;
 };
 
 #endif // MAINWINDOW_H

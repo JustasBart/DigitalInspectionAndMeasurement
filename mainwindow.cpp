@@ -3,19 +3,15 @@
 
 using namespace cv;
 
-static VideoCapture camera(0);
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui -> setupUi(this);
-
-    MainWindow::init();
-
     connect(&_videoFPSTimer, SIGNAL(timeout()), this, SLOT(captureImage()));
-    _videoFPSTimer.start(1000 / FPS);
+    MainWindow::init();
 }
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -23,39 +19,36 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-    Camera::cameraInit(camera, FPS);
-    Algorithms::sayHello();
+    camObj.cameraInit(CAMERA_HARDWARE, FPS);
+    _videoFPSTimer.start(1000 / FPS);
 }
 
 void MainWindow::captureImage()
 {
-    camera >> _currentFrameMat;
-    _currentFramePixmap = MatToQPixmap( _currentFrameMat );
-    ui -> videoFeed -> setPixmap( _currentFramePixmap );
-    int getFPS = (int)camera.get( CAP_PROP_FPS );
-    ui -> fpsLabel -> setText( QString::number(getFPS) );
+    ui -> videoFeed -> setPixmap( camObj.captureImage() );
+    ui -> fpsLabel -> setText( QString::number(camObj.getFPS()) );
 }
 
 void MainWindow::on_contrastSpinBox_valueChanged(int arg1)
 {
-    Camera::setParam(camera, CAP_PROP_CONTRAST, arg1);
+    camObj.setParam(CAP_PROP_CONTRAST, arg1);
 }
 
 void MainWindow::on_brightnesspinBox_valueChanged(int arg1)
 {
-    Camera::setParam(camera, CAP_PROP_BRIGHTNESS, arg1);
+    camObj.setParam(CAP_PROP_BRIGHTNESS, arg1);
 }
 
 void MainWindow::on_saturationSpinBox_valueChanged(int arg1)
 {
-    Camera::setParam(camera, CAP_PROP_SATURATION, arg1);
+    camObj.setParam(CAP_PROP_SATURATION, arg1);
 }
 
 void MainWindow::on_focusButton_pressed()
 {
     if (ui -> focusButton -> text() == "Focus: Auto")
     {
-        Camera::setParam(camera, CAP_PROP_AUTOFOCUS, 0);
+        camObj.setParam(CAP_PROP_AUTOFOCUS, 0);
         ui -> focusButton -> setText("Focus: Manual");
 
         ui -> focusLabel -> setEnabled(true);
@@ -63,7 +56,7 @@ void MainWindow::on_focusButton_pressed()
     }
     else
     {
-        Camera::setParam(camera, CAP_PROP_AUTOFOCUS, 1);
+        camObj.setParam(CAP_PROP_AUTOFOCUS, 1);
         ui -> focusButton -> setText("Focus: Auto");
 
         ui -> focusLabel -> setEnabled(false);
@@ -73,10 +66,10 @@ void MainWindow::on_focusButton_pressed()
 
 void MainWindow::on_focusSpinBox_valueChanged(int arg1)
 {
-    Camera::setParam(camera, CAP_PROP_FOCUS, arg1);
+    camObj.setParam(CAP_PROP_FOCUS, arg1);
 }
 
 void MainWindow::on_zoomSpinBox_valueChanged(int arg1)
 {
-    Camera::setParam(camera, CAP_PROP_ZOOM, arg1 + 100);
+    camObj.setParam(CAP_PROP_ZOOM, arg1 + 100);
 }
