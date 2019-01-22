@@ -15,7 +15,7 @@ class UserSettings
 {
 public:
     static void saveSettings(const QString &key, const QVariant &value, const QString &group);
-    static QVariant loadSettings(const QString &key, const QVariant &defaultValue = QVariant(), const QString &group = "");
+    static QVariant loadSettings(const QString &key, const QVariant &defaultValue, const QString &group);
 };
 
 #endif // USERSETTINGS_H

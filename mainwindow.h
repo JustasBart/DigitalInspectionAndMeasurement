@@ -4,8 +4,9 @@
 #include <QMainWindow>
 
 // Defines
-#define FPS 30
+#define FPS             30
 #define CAMERA_HARDWARE 0
+#define GROUP_LOCATION  "GUISettings"
 
 // OpenCV main image processing includes //
 #include <opencv2/highgui/highgui.hpp>
@@ -52,8 +53,8 @@ private:
     void saveGUISettings();
 
     QTimer _videoFPSTimer;
-    Camera camObj;
-    Options usrOptions;
+    Camera _camObj;
+    Options _usrOptions;
 };
 
 #endif // MAINWINDOW_H

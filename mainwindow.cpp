@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui -> setupUi(this);
-    // connect(&_videoFPSTimer, SIGNAL(timeout()), this, SLOT(captureImage()));
 
     MainWindow::init();
 }
@@ -16,5 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     saveGUISettings();
+
     delete ui;
 }
