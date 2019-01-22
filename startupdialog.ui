@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
+    <width>583</width>
     <height>70</height>
    </rect>
   </property>
@@ -130,6 +130,13 @@
          <string>30</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="fullScreencheckBox">
+       <property name="text">
+        <string>Full screen</string>
+       </property>
       </widget>
      </item>
     </layout>

@@ -9,7 +9,7 @@ void MainWindow::init()
     {
         if (_camObj.cameraInit(0, static_cast<unsigned char>(_fps)) == -1)
         {
-            Errors::fatalError("The camera cannot be opened.");
+            Errors::fatalError("The camera cannot be initialized.");
         }
     }
 
