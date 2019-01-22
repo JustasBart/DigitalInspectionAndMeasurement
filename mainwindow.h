@@ -52,6 +52,8 @@ private slots:
 //    void on_focusButton_pressed();
 //    void on_focusSpinBox_valueChanged(int arg1);
 
+    void on_actionFull_screen_triggered(bool checked);
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *startUpDialog;
@@ -65,6 +67,7 @@ private:
     Options _usrOptions;
 
     unsigned int _camPort;
+    bool _fullScreen;
     unsigned int _res_Width;
     unsigned int _res_Height;
     unsigned int _fps;

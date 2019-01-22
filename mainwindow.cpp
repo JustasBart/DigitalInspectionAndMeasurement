@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     startUpDialog(new StartupDialog),
     _camPort(0),
+    _fullScreen(false),
     _res_Width(1920),
     _res_Height(1080),
     _fps(30)

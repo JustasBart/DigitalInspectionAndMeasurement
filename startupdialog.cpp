@@ -27,3 +27,8 @@ void StartupDialog::on_fpsComboBox_currentIndexChanged(const QString &arg1)
 {
     emit sendData(2, arg1);
 }
+
+void StartupDialog::on_fullScreenCheckBox_toggled(bool checked)
+{
+    emit sendData(3, QString::number(checked));
+}

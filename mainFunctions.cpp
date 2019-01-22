@@ -21,14 +21,21 @@ void MainWindow::init()
 
 void MainWindow::centerWindow()
 {
-    MainWindow::window()->setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            MainWindow::window()->size(),
-            qApp->desktop()->availableGeometry()
-        )
-    );
+    if (_fullScreen)
+    {
+        MainWindow::window()->setWindowState(Qt::WindowFullScreen);
+    }
+    else
+    {
+        MainWindow::window()->setGeometry(
+            QStyle::alignedRect(
+                Qt::LeftToRight,
+                Qt::AlignCenter,
+                MainWindow::window()->size(),
+                qApp->desktop()->availableGeometry()
+            )
+        );
+    }
 }
 
 void MainWindow::captureImage()
@@ -85,20 +92,44 @@ void MainWindow::saveGUISettings()
 
 void MainWindow::receiveData(unsigned int val, QString param)
 {
-    if (val == 0)
+    switch (val)
     {
-        _camPort = param.toUInt();
-    }
-    else if (val == 1)
-    {
-        QString resWidth = param.mid(0, 4);
-        QString resHeight = param.mid(5, 9);
+        case 0:
+        {
+            _camPort = param.toUInt();
+            break;
+        }
+        case 1:
+        {
+            QString resWidth = param.mid(0, 4);
+            QString resHeight = param.mid(5, 9);
 
-        _res_Width = resWidth.toUInt();
-        _res_Height = resHeight.toUInt();
+            _res_Width = resWidth.toUInt();
+            _res_Height = resHeight.toUInt();
+            break;
+        }
+        case 2:
+        {
+            _fps = param.toUInt();
+            break;
+        }
+        case 3:
+        {
+            _fullScreen = param.toInt();
+            break;
+        }
+        default:
+        {
+            qDebug() << "Unrecognised command [" << val << "] received";
+            break;
+        }
     }
+}
+
+void MainWindow::on_actionFull_screen_triggered(bool checked)
+{
+    if (checked)
+        MainWindow::window()->setWindowState(Qt::WindowFullScreen);
     else
-    {
-        _camPort = param.toUInt();
-    }
+        MainWindow::window()->setWindowState(Qt::WindowNoState);
 }

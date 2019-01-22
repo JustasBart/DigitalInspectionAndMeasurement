@@ -2,6 +2,7 @@
 #define STARTUPDIALOG_H
 
 #include <QDialog>
+#include <QString>
 
 namespace Ui {
 class StartupDialog;
@@ -21,10 +22,9 @@ signals:
 private slots:
 
     void on_camPortComboBox_currentIndexChanged(const QString &arg1);
-
     void on_resComboBox_currentIndexChanged(const QString &arg1);
-
     void on_fpsComboBox_currentIndexChanged(const QString &arg1);
+    void on_fullScreenCheckBox_toggled(bool checked);
 
 private:
     Ui::StartupDialog *ui;
