@@ -31,7 +31,9 @@ SOURCES += \
     algorithms.cpp \
     camera.cpp \
     errors.cpp \
-    usersettings.cpp
+    usersettings.cpp \
+    mainFunctions.cpp \
+    mainEvents.cpp
 
 HEADERS += \
         mainwindow.h \
