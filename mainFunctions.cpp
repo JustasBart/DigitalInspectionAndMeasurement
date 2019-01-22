@@ -3,12 +3,27 @@
 
 void MainWindow::init()
 {
+    centerWindow();
     _camObj.cameraInit(CAMERA_HARDWARE, FPS);
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
     _videoFPSTimer.start(1000 / FPS);
 
-    loadGUISettings();
+    // loadGUISettings();
 }
+
+void MainWindow::centerWindow()
+{
+    MainWindow::window()->setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            MainWindow::window()->size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
+}
+
+/*
 void MainWindow::captureImage()
 {
     ui -> videoFeed -> setPixmap( _camObj.captureImage() );
@@ -58,3 +73,10 @@ void MainWindow::saveGUISettings()
         UserSettings::saveSettings("FocusMode", false, GROUP_LOCATION);
     UserSettings::saveSettings("Focus", ui->focusSpinBox->value(), GROUP_LOCATION);
 }
+*/
+
+void MainWindow::receiveData(QString param)
+{
+    ui->labelTest->setText( param );
+}
+

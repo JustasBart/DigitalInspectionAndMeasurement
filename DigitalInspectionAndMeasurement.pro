@@ -33,7 +33,8 @@ SOURCES += \
     errors.cpp \
     usersettings.cpp \
     mainFunctions.cpp \
-    mainEvents.cpp
+    mainEvents.cpp \
+    startupdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,10 +43,12 @@ HEADERS += \
     camera.h \
     errors.h \
     usersettings.h \
-    options.h
+    options.h \
+    startupdialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    startupdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

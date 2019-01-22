@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/*
 void MainWindow::on_contrastSpinBox_valueChanged(int arg1)
 {
     _camObj.setParam(CAP_PROP_CONTRAST, arg1);
@@ -45,3 +46,4 @@ void MainWindow::on_zoomSpinBox_valueChanged(int arg1)
 {
     _camObj.setParam(CAP_PROP_ZOOM, arg1 + 100);
 }
+*/

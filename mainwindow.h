@@ -15,10 +15,13 @@
 #include <QTimer>
 #include <QString>
 #include <QVariant>
+#include <QStyle>
+#include <QDesktopWidget>
 
 // General functions
-#include "algorithms.h"
+#include "startupdialog.h"
 #include "camera.h"
+#include "algorithms.h"
 #include "errors.h"
 #include "options.h"
 #include "usersettings.h"
@@ -38,23 +41,34 @@ public:
 
     void init();
 
+public slots:
+    void receiveData(QString param);
+
 private slots:
-    void captureImage();
-    void on_contrastSpinBox_valueChanged(int arg1);
-    void on_brightnesspinBox_valueChanged(int arg1);
-    void on_saturationSpinBox_valueChanged(int arg1);
-    void on_zoomSpinBox_valueChanged(int arg1);
-    void on_focusButton_pressed();
-    void on_focusSpinBox_valueChanged(int arg1);
+    // void captureImage();
+
+//    void on_contrastSpinBox_valueChanged(int arg1);
+//    void on_brightnesspinBox_valueChanged(int arg1);
+//    void on_saturationSpinBox_valueChanged(int arg1);
+//    void on_zoomSpinBox_valueChanged(int arg1);
+//    void on_focusButton_pressed();
+//    void on_focusSpinBox_valueChanged(int arg1);
 
 private:
     Ui::MainWindow *ui;
+    StartupDialog *startUpDialog;
+
+    void centerWindow();
     void loadGUISettings();
     void saveGUISettings();
 
     QTimer _videoFPSTimer;
     Camera _camObj;
     Options _usrOptions;
+
+    static unsigned int _res_Width;
+    static unsigned int _res_Height;
+    static unsigned char _fps;
 };
 
 #endif // MAINWINDOW_H
