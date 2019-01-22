@@ -9,7 +9,7 @@ class Errors
 {
 public:
     static void fatalError(QString errorMessage);
-    static void windowFatalError(QString errorMessage, QString infoText);
+    static void cameraOpenErrorWindow();
 };
 
 #endif // ERRORS_H

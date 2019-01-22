@@ -6,7 +6,7 @@ int Camera::cameraInit(unsigned char camera, unsigned char fps)
 
     if (!_cameraObj -> isOpened())
     {
-       Errors::windowFatalError("The camera port refused to open...", "Would you like to try opening a default port?\nThe default Port is 0.");
+       Errors::cameraOpenErrorWindow();
        return -1;
     }
 
@@ -32,6 +32,8 @@ int Camera::cameraInit(unsigned char camera, unsigned char fps)
     // camera.set(CV_CAP_PROP_FRAME_WIDTH, 1920);
     // camera.set(CV_CAP_PROP_FRAME_HEIGHT, 1080);
     // End
+
+    return 0;
 }
 
 void Camera::setParam(cv::VideoCaptureProperties param, unsigned char value)

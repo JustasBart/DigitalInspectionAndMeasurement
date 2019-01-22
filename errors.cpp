@@ -6,12 +6,12 @@ void Errors::fatalError(QString errorMessage)
     exit(EXIT_FAILURE);
 }
 
-void Errors::windowFatalError(QString errorMessage, QString infoText)
+void Errors::cameraOpenErrorWindow()
 {
     QMessageBox msgBox;
 
-    msgBox.setText(errorMessage);
-    msgBox.setInformativeText(infoText);
+    msgBox.setText("The camera port refused to open...");
+    msgBox.setInformativeText("Would you like to try opening a default port?\nThe default Port is 0.");
 
     msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Close);
     msgBox.setDefaultButton(QMessageBox::Ok);
