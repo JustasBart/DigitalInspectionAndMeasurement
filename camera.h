@@ -5,13 +5,14 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <QDebug>
 #include <QString>
+#include "errors.h"
 
 using namespace cv;
 
 class Camera
 {
 public:
-    void cameraInit(unsigned char camera, unsigned char fps);
+    int cameraInit(unsigned char camera, unsigned char fps);
     void setParam(VideoCaptureProperties param, unsigned char value);
     unsigned char getParam(cv::VideoCaptureProperties param);
     QPixmap captureImage();

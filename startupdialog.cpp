@@ -13,7 +13,17 @@ StartupDialog::~StartupDialog()
     delete ui;
 }
 
-void StartupDialog::on_comboBox_currentIndexChanged(const QString &arg1)
+void StartupDialog::on_camPortComboBox_currentIndexChanged(const QString &arg1)
 {
-    emit sendData("const QString text");
+    emit sendData(0, arg1);
+}
+
+void StartupDialog::on_resComboBox_currentIndexChanged(const QString &arg1)
+{
+    emit sendData(1, arg1);
+}
+
+void StartupDialog::on_fpsComboBox_currentIndexChanged(const QString &arg1)
+{
+    emit sendData(2, arg1);
 }

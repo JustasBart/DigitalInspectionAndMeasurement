@@ -4,9 +4,17 @@
 void MainWindow::init()
 {
     centerWindow();
-    _camObj.cameraInit(CAMERA_HARDWARE, FPS);
+
+    if (_camObj.cameraInit(static_cast<unsigned char>(_camPort), static_cast<unsigned char>(_fps)) == -1)
+    {
+        if (_camObj.cameraInit(0, static_cast<unsigned char>(_fps)) == -1)
+        {
+            Errors::fatalError("The camera cannot be opened.");
+        }
+    }
+
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
-    _videoFPSTimer.start(1000 / FPS);
+    _videoFPSTimer.start(1000 / _fps);
 
     // loadGUISettings();
 }
@@ -23,13 +31,13 @@ void MainWindow::centerWindow()
     );
 }
 
-/*
 void MainWindow::captureImage()
 {
-    ui -> videoFeed -> setPixmap( _camObj.captureImage() );
-    ui -> fpsLabel -> setText( QString::number(_camObj.getFPS()) );
+    ui -> videoLabel -> setPixmap( _camObj.captureImage() );
+    // ui -> fpsLabel -> setText( QString::number(_camObj.getFPS()) );
 }
 
+/*
 void MainWindow::loadGUISettings()
 {
     QVariant settingsVar;
@@ -75,8 +83,22 @@ void MainWindow::saveGUISettings()
 }
 */
 
-void MainWindow::receiveData(QString param)
+void MainWindow::receiveData(unsigned int val, QString param)
 {
-    ui->labelTest->setText( param );
-}
+    if (val == 0)
+    {
+        _camPort = param.toUInt();
+    }
+    else if (val == 1)
+    {
+        QString resWidth = param.mid(0, 4);
+        QString resHeight = param.mid(5, 9);
 
+        _res_Width = resWidth.toUInt();
+        _res_Height = resHeight.toUInt();
+    }
+    else
+    {
+        _camPort = param.toUInt();
+    }
+}

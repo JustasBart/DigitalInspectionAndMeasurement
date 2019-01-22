@@ -6,9 +6,13 @@ using namespace cv;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    startUpDialog(new StartupDialog)
+    startUpDialog(new StartupDialog),
+    _camPort(0),
+    _res_Width(1920),
+    _res_Height(1080),
+    _fps(30)
 {
-    connect(startUpDialog, SIGNAL(sendData(QString)), this, SLOT(receiveData(QString)));
+    connect(startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
     startUpDialog -> exec();
     ui -> setupUi(this);
 

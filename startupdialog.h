@@ -16,10 +16,15 @@ public:
     ~StartupDialog();
 
 signals:
-    void sendData(QString param);
+    void sendData(unsigned int val, QString param);
 
 private slots:
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_camPortComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_resComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_fpsComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::StartupDialog *ui;

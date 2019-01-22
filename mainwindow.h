@@ -4,8 +4,6 @@
 #include <QMainWindow>
 
 // Defines
-#define FPS             30
-#define CAMERA_HARDWARE 0
 #define GROUP_LOCATION  "GUISettings"
 
 // OpenCV main image processing includes //
@@ -42,10 +40,10 @@ public:
     void init();
 
 public slots:
-    void receiveData(QString param);
+    void receiveData(unsigned int val, QString param);
 
 private slots:
-    // void captureImage();
+    void captureImage();
 
 //    void on_contrastSpinBox_valueChanged(int arg1);
 //    void on_brightnesspinBox_valueChanged(int arg1);
@@ -66,9 +64,10 @@ private:
     Camera _camObj;
     Options _usrOptions;
 
-    static unsigned int _res_Width;
-    static unsigned int _res_Height;
-    static unsigned char _fps;
+    unsigned int _camPort;
+    unsigned int _res_Width;
+    unsigned int _res_Height;
+    unsigned int _fps;
 };
 
 #endif // MAINWINDOW_H
