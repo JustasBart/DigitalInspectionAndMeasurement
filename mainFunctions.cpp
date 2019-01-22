@@ -118,6 +118,11 @@ void MainWindow::receiveData(unsigned int val, QString param)
             _fullScreen = param.toInt();
             break;
         }
+        case 4:
+        {
+
+            break;
+        }
         default:
         {
             qDebug() << "Unrecognised command [" << val << "] received";

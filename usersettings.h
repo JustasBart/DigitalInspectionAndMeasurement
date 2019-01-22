@@ -3,7 +3,6 @@
 
 #include "options.h"
 #include <QString>
-
 #include <QVariant>
 #include <QSettings>
 

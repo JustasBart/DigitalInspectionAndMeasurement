@@ -67,6 +67,7 @@ private:
     Options _usrOptions;
 
     unsigned int _camPort;
+    bool _savePreferences;
     bool _fullScreen;
     unsigned int _res_Width;
     unsigned int _res_Height;
