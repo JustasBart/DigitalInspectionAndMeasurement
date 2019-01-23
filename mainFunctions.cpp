@@ -22,7 +22,8 @@ void MainWindow::init()
 
 void MainWindow::resizeWindowToResolution()
 {
-    MainWindow::window()->setFixedSize(QSize(_res_Width, _res_Height));
+    MainWindow::window()->setFixedWidth( _screenGeometry.width() * 2/3 );
+    MainWindow::window()->setFixedHeight( _screenGeometry.height() * 2/3 );
 }
 
 void MainWindow::centerWindow()
@@ -38,7 +39,7 @@ void MainWindow::centerWindow()
                 Qt::LeftToRight,
                 Qt::AlignCenter,
                 MainWindow::window()->size(),
-                qApp->desktop()->availableGeometry()
+                QRect(0, 0, _screenGeometry.size().width(), _screenGeometry.size().height())
             )
         );
     }
@@ -110,8 +111,8 @@ void MainWindow::receiveData(unsigned int val, QString param)
             QString resWidth = param.mid(0, 4);
             QString resHeight = param.mid(5, 9);
 
-            _res_Width = resWidth.toUInt();
-            _res_Height = resHeight.toUInt();
+            _res_Width = resWidth.trimmed().toUInt();
+            _res_Height = resHeight.trimmed().toUInt();
             break;
         }
         case 2:

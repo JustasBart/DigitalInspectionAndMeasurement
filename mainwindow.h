@@ -3,20 +3,22 @@
 
 #include <QMainWindow>
 
-// Defines
+// Defines //
 #define GROUP_LOCATION  "GUISettings"
 
 // OpenCV main image processing includes //
 #include <opencv2/highgui/highgui.hpp>
 
-// General QT includes:
+// General QT includes //
 #include <QTimer>
 #include <QString>
 #include <QVariant>
 #include <QStyle>
 #include <QDesktopWidget>
+#include <QGuiApplication>
+#include <QScreen>
 
-// General functions
+// General functions //
 #include "startupdialog.h"
 #include "camera.h"
 #include "algorithms.h"
@@ -56,7 +58,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    StartupDialog *startUpDialog;
+    StartupDialog *_startUpDialog;
+    QScreen *_screen;
+    QRect _screenGeometry;
 
     void resizeWindowToResolution();
     void centerWindow();

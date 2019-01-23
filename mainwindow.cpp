@@ -6,7 +6,9 @@ using namespace cv;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    startUpDialog(new StartupDialog),
+    _startUpDialog(new StartupDialog),
+    _screen(QGuiApplication::primaryScreen()),
+    _screenGeometry(_screen->geometry()),
     _camPort(0),
     _savePreferences(false),
     _fullScreen(false),
@@ -14,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _res_Height(0),
     _fps(0)
 {
-    connect(startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
-    startUpDialog -> exec();
+    connect(_startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
+    _startUpDialog -> exec();
 
     ui -> setupUi(this);
 
