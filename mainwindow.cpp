@@ -10,12 +10,13 @@ MainWindow::MainWindow(QWidget *parent) :
     _camPort(0),
     _savePreferences(false),
     _fullScreen(false),
-    _res_Width(1920),
-    _res_Height(1080),
-    _fps(30)
+    _res_Width(0),
+    _res_Height(0),
+    _fps(0)
 {
     connect(startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
     startUpDialog -> exec();
+
     ui -> setupUi(this);
 
     MainWindow::init();

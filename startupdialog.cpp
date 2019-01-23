@@ -70,8 +70,7 @@ void StartupDialog::saveSettings()
 
 void StartupDialog::flushSettings()
 {
-    // if (ui->camPortComboBox->currentIndex() != 0)
-        emit sendData(0, QString::number(ui->camPortComboBox->currentIndex()));
+    emit sendData(0, QString::number(ui->camPortComboBox->currentIndex()));
     emit sendData(1, QString::number(ui->resComboBox->currentIndex()));
     emit sendData(2, ui->fpsComboBox->currentText());
     if (ui->fullScreenCheckBox->checkState() == Qt::Checked)

@@ -3,21 +3,26 @@
 
 void MainWindow::init()
 {
-    centerWindow();
     ui->actionFull_screen->setChecked( _fullScreen );
 
-    if (_camObj.cameraInit(static_cast<unsigned char>(_camPort), static_cast<unsigned char>(_fps)) == -1)
+    resizeWindowToResolution();
+    centerWindow();
+
+    if (_camObj.cameraInit(static_cast<unsigned char>(_camPort), static_cast<unsigned char>(_fps), static_cast<unsigned char>(_res_Width), static_cast<unsigned char>(_res_Height)) == -1)
     {
-        if (_camObj.cameraInit(0, static_cast<unsigned char>(_fps)) == -1)
-        {
+        if (_camObj.cameraInit(0, static_cast<unsigned char>(_fps), static_cast<unsigned char>(_res_Width), static_cast<unsigned char>(_res_Height)) == -1)
             Errors::fatalError("The camera cannot be initialized.");
-        }
     }
 
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
     _videoFPSTimer.start(1000 / _fps);
 
     // loadGUISettings();
+}
+
+void MainWindow::resizeWindowToResolution()
+{
+    MainWindow::window()->setFixedSize(QSize(_res_Width, _res_Height));
 }
 
 void MainWindow::centerWindow()
@@ -27,7 +32,7 @@ void MainWindow::centerWindow()
         MainWindow::window()->setWindowState(Qt::WindowFullScreen);
     }
     else
-    {
+    {   
         MainWindow::window()->setGeometry(
             QStyle::alignedRect(
                 Qt::LeftToRight,

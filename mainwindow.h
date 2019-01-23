@@ -58,6 +58,7 @@ private:
     Ui::MainWindow *ui;
     StartupDialog *startUpDialog;
 
+    void resizeWindowToResolution();
     void centerWindow();
     void loadGUISettings();
     void saveGUISettings();
