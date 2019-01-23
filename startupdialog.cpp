@@ -9,35 +9,9 @@ StartupDialog::StartupDialog(QWidget *parent) :
 
     loadSettings();
 }
-
 StartupDialog::~StartupDialog()
 {
     delete ui;
-}
-
-void StartupDialog::on_camPortComboBox_currentIndexChanged(const QString &arg1)
-{
-    emit sendData(0, arg1);
-}
-
-void StartupDialog::on_resComboBox_currentIndexChanged(const QString &arg1)
-{
-    emit sendData(1, arg1);
-}
-
-void StartupDialog::on_fpsComboBox_currentIndexChanged(const QString &arg1)
-{
-    emit sendData(2, arg1);
-}
-
-void StartupDialog::on_fullScreenCheckBox_toggled(bool checked)
-{
-    emit sendData(3, QString::number(checked));
-}
-
-void StartupDialog::on_savePreferencesCheckBox_toggled(bool checked)
-{
-    emit sendData(4, QString::number(checked));
 }
 
 void StartupDialog::on_buttonBox_rejected()
@@ -54,53 +28,31 @@ void StartupDialog::loadSettings()
     if (settingsVar.toBool())
     {
         ui->saveSetupSettingsCheckBox->setCheckState( Qt::Checked );
-
         settingsVar = UserSettings::loadSettings("saveMainPref", 0, GROUP_LOCATION);
+
         if (settingsVar.toBool())
-        {
             ui->saveMainSettingsCheckBox->setCheckState( Qt::Checked );
-            emit sendData(4, "1");
-        }
         else
-        {
             ui->saveMainSettingsCheckBox->setCheckState( Qt::Unchecked );
-            emit sendData(4, "0");
-        }
 
         settingsVar = UserSettings::loadSettings("fullScreen", 0, GROUP_LOCATION);
         if (settingsVar.toBool())
-        {
             ui->fullScreenCheckBox->setCheckState( Qt::Checked );
-            emit sendData(3, "1");
-        }
         else
-        {
             ui->fullScreenCheckBox->setCheckState( Qt::Unchecked );
-            emit sendData(3, "0");
-        }
 
         settingsVar = UserSettings::loadSettings("cameraPort", 0, GROUP_LOCATION);
         if (settingsVar.toInt() != 0)
-        {
             ui->camPortComboBox->setCurrentIndex(settingsVar.toInt());
-        }
-
         settingsVar = UserSettings::loadSettings("resolutionSel", 0, GROUP_LOCATION);
         if (settingsVar.toInt() != 0)
-        {
             ui->resComboBox->setCurrentIndex( settingsVar.toInt() );
-        }
-
         settingsVar = UserSettings::loadSettings("resolutionSel", 0, GROUP_LOCATION);
         if (settingsVar.toInt() != 0)
-        {
             ui->fpsComboBox->setCurrentIndex( settingsVar.toInt() );
-        }
     }
     else
-    {
         ui->saveSetupSettingsCheckBox->setCheckState( Qt::Unchecked );
-    }
 }
 
 void StartupDialog::saveSettings()
@@ -118,9 +70,10 @@ void StartupDialog::saveSettings()
 
 void StartupDialog::flushSettings()
 {
-    emit sendData(0, QString::number(ui->camPortComboBox->currentIndex()));
+    // if (ui->camPortComboBox->currentIndex() != 0)
+        emit sendData(0, QString::number(ui->camPortComboBox->currentIndex()));
     emit sendData(1, QString::number(ui->resComboBox->currentIndex()));
-    emit sendData(2, QString::number(ui->fpsComboBox->currentIndex()));
+    emit sendData(2, ui->fpsComboBox->currentText());
     if (ui->fullScreenCheckBox->checkState() == Qt::Checked)
         emit sendData(3, "1");
     else
@@ -133,6 +86,6 @@ void StartupDialog::flushSettings()
 
 void StartupDialog::on_StartupDialog_finished(int result)
 {
-    saveSettings();
     flushSettings();
+    saveSettings();
 }
