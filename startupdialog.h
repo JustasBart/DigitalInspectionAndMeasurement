@@ -1,7 +1,7 @@
 #ifndef STARTUPDIALOG_H
 #define STARTUPDIALOG_H
 
-#define GROUP_LOCATION  "PreStartOptions"
+#define GROUP_LOCATION  "GUISettings"
 
 #include <QDialog>
 #include <QString>
@@ -29,13 +29,15 @@ private slots:
     void on_fpsComboBox_currentIndexChanged(const QString &arg1);
     void on_fullScreenCheckBox_toggled(bool checked);
     void on_buttonBox_rejected();
-    void on_StartupDialog_finished(int result);
     void on_savePreferencesCheckBox_toggled(bool checked);
+    void on_StartupDialog_finished(int result);
 
 private:
+    Ui::StartupDialog *ui;
+
     void loadSettings();
     void saveSettings();
-    Ui::StartupDialog *ui;
+    void flushSettings();
 };
 
 #endif // STARTUPDIALOG_H

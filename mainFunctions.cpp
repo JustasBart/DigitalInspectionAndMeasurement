@@ -4,6 +4,7 @@
 void MainWindow::init()
 {
     centerWindow();
+    ui->actionFull_screen->setChecked( _fullScreen );
 
     if (_camObj.cameraInit(static_cast<unsigned char>(_camPort), static_cast<unsigned char>(_fps)) == -1)
     {
@@ -120,7 +121,7 @@ void MainWindow::receiveData(unsigned int val, QString param)
         }
         case 4:
         {
-
+            _savePreferences = param.toInt();
             break;
         }
         default:
