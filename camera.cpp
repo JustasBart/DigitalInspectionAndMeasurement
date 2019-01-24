@@ -41,21 +41,15 @@ unsigned char Camera::getParam(VideoCaptureProperties param)
     return static_cast<unsigned char>(_cameraObj -> get(param));
 }
 
-QImage Camera::captureImage()
+QPixmap Camera::captureImage()
 {
     *_cameraObj >> _currentFrameMat;
 
-    return Mat2QImage( _currentFrameMat );
-}
-
-QImage Camera::Mat2QImage(cv::Mat const &src)
-{
-    cv::Mat temp;
-    cv::cvtColor(src, temp, CV_BGR2RGB);
-    QImage dest((const uchar *)temp.data, temp.cols, temp.rows, temp.step, QImage::Format_RGB888);
+    cv::cvtColor(_currentFrameMat, _currentFrameMat, CV_BGR2RGB);
+    QImage dest((const uchar *)_currentFrameMat.data, _currentFrameMat.cols, _currentFrameMat.rows, _currentFrameMat.step, QImage::Format_RGB888);
     dest.bits();
-    // of QImage::QImage ( const uchar * data, int width, int height, Format format )
-    return dest;
+
+    return QPixmap::fromImage(dest);
 }
 
 unsigned char Camera::getFPS()

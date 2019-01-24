@@ -47,7 +47,7 @@ void StartupDialog::loadSettings()
         settingsVar = UserSettings::loadSettings("resolutionSel", 0, GROUP_LOCATION);
         if (settingsVar.toInt() != 0)
             ui->resComboBox->setCurrentIndex( settingsVar.toInt() );
-        settingsVar = UserSettings::loadSettings("resolutionSel", 0, GROUP_LOCATION);
+        settingsVar = UserSettings::loadSettings("fpsSel", 0, GROUP_LOCATION);
         if (settingsVar.toInt() != 0)
             ui->fpsComboBox->setCurrentIndex( settingsVar.toInt() );
     }
@@ -65,6 +65,7 @@ void StartupDialog::saveSettings()
         UserSettings::saveSettings("fullScreen", ui->fullScreenCheckBox->checkState(), GROUP_LOCATION);
         UserSettings::saveSettings("cameraPort", ui->camPortComboBox->currentIndex(), GROUP_LOCATION);
         UserSettings::saveSettings("resolutionSel", ui->resComboBox->currentIndex(), GROUP_LOCATION);
+        UserSettings::saveSettings("fpsSel", ui->fpsComboBox->currentIndex(), GROUP_LOCATION);
     }
 }
 

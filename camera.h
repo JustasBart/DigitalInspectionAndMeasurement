@@ -16,7 +16,7 @@ public:
     int cameraInit(const int camera, const int fps, const int &width, const int &height);
     void setParam(VideoCaptureProperties param, int value);
     unsigned char getParam(cv::VideoCaptureProperties param);
-    QImage captureImage();
+    QPixmap captureImage();
     unsigned char getFPS();
 
 private:
