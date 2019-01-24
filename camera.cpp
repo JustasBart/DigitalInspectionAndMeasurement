@@ -46,7 +46,7 @@ QPixmap Camera::captureImage()
     *_cameraObj >> _currentFrameMat;
 
     cv::cvtColor(_currentFrameMat, _currentFrameMat, CV_BGR2RGB);
-    QImage dest((const uchar *)_currentFrameMat.data, _currentFrameMat.cols, _currentFrameMat.rows, _currentFrameMat.step, QImage::Format_RGB888);
+    QImage dest(static_cast<const uchar *>(_currentFrameMat.data), _currentFrameMat.cols, _currentFrameMat.rows, static_cast<int>(_currentFrameMat.step), QImage::Format_RGB888);
     dest.bits();
 
     return QPixmap::fromImage(dest);

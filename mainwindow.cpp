@@ -26,7 +26,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    // saveGUISettings();
+    _videoFPSTimer.stop();
+
+    if (_savePreferences)
+    {
+        saveGUISettings();
+    }
 
     delete ui;
 }

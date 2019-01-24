@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDebug>
 #include <QMessageBox>
+#include <QApplication>
 
 class Errors
 {

@@ -6,9 +6,9 @@ void MainWindow::init()
     ui->actionFull_screen->setChecked( _fullScreen );
 
     resizeWindowToScreenSize();
-    centerWindow();
-
     resizeLabelToWindow();
+
+    centerWindow();
 
     if (_camObj.cameraInit(_camPort, _fps, _res_Width, _res_Height) == -1)
     {
@@ -21,7 +21,9 @@ void MainWindow::init()
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
     _videoFPSTimer.start(1000 / _fps);
 
-    // loadGUISettings();
+    if (_savePreferences) loadGUISettings();
+
+    ui->fpsLabel->setText( QString::number(_camObj.getParam(CAP_PROP_BRIGHTNESS)) );
 }
 
 void MainWindow::resizeWindowToScreenSize()
@@ -58,10 +60,8 @@ void MainWindow::centerWindow()
 void MainWindow::captureImage()
 {
     ui -> videoLabel -> setPixmap( _camObj.captureImage() );
-    // ui -> fpsLabel -> setText( QString::number(_camObj.getFPS()) );
 }
 
-/*
 void MainWindow::loadGUISettings()
 {
     QVariant settingsVar;
@@ -69,43 +69,42 @@ void MainWindow::loadGUISettings()
     settingsVar = UserSettings::loadSettings("Contrast", 0, GROUP_LOCATION);
     ui->contrastSpinBox->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Brightness", 0, GROUP_LOCATION);
-    ui->brightnesspinBox->setValue( settingsVar.toInt() );
+    ui->brightnesSpinBox->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Saturation", 0, GROUP_LOCATION);
     ui->saturationSpinBox->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Zoom", 0, GROUP_LOCATION);
     ui->zoomSpinBox->setValue( settingsVar.toInt() );
+    settingsVar = UserSettings::loadSettings("Focus", 0, GROUP_LOCATION);
+    ui->focusSpinBox->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("FocusMode", 0, GROUP_LOCATION);
     if (settingsVar.toBool())
     {
         _camObj.setParam(CAP_PROP_AUTOFOCUS, 1);
-        ui -> focusButton -> setText("Focus: Auto");
+        ui -> focusButton -> setText("Focus mode: Automatic");
         ui -> focusLabel -> setEnabled(false);
         ui -> focusSpinBox -> setEnabled(false);
     }
     else
     {
         _camObj.setParam(CAP_PROP_AUTOFOCUS, 0);
-        ui -> focusButton -> setText("Focus: Manual");
+        ui -> focusButton -> setText("Focus mode: Manual");
         ui -> focusLabel -> setEnabled(true);
         ui -> focusSpinBox -> setEnabled(true);
     }
-    settingsVar = UserSettings::loadSettings("Focus", 0, GROUP_LOCATION);
-    ui->focusSpinBox->setValue( settingsVar.toInt() );
 }
 
 void MainWindow::saveGUISettings()
 {
     UserSettings::saveSettings("Contrast", ui->contrastSpinBox->value(), GROUP_LOCATION);
-    UserSettings::saveSettings("Brightness", ui->brightnesspinBox->value(), GROUP_LOCATION);
+    UserSettings::saveSettings("Brightness", ui->brightnesSpinBox->value(), GROUP_LOCATION);
     UserSettings::saveSettings("Saturation", ui->saturationSpinBox->value(), GROUP_LOCATION);
     UserSettings::saveSettings("Zoom", ui->zoomSpinBox->value(), GROUP_LOCATION);
-    if (ui->focusButton->text() == "Focus: Auto")
+    UserSettings::saveSettings("Focus", ui->focusSpinBox->value(), GROUP_LOCATION);
+    if (ui->focusButton->text() == "Focus mode: Automatic")
         UserSettings::saveSettings("FocusMode", true, GROUP_LOCATION);
     else
         UserSettings::saveSettings("FocusMode", false, GROUP_LOCATION);
-    UserSettings::saveSettings("Focus", ui->focusSpinBox->value(), GROUP_LOCATION);
 }
-*/
 
 void MainWindow::receiveData(unsigned int val, QString param)
 {
@@ -118,11 +117,10 @@ void MainWindow::receiveData(unsigned int val, QString param)
         }
         case 1:
         {
-            QString resWidth = param.mid(0, 4);
-            QString resHeight = param.mid(5, 9);
+            QStringList resWH = param.split("x");
 
-            _res_Width = resWidth.trimmed().toInt();
-            _res_Height = resHeight.trimmed().toInt();
+            _res_Width =  resWH[0].trimmed().toInt();
+            _res_Height = resWH[1].trimmed().toInt();
             break;
         }
         case 2:
@@ -151,9 +149,20 @@ void MainWindow::receiveData(unsigned int val, QString param)
 void MainWindow::on_actionFull_screen_triggered(bool checked)
 {
     if (checked)
+    {
         MainWindow::window()->setWindowState(Qt::WindowFullScreen);
+        ui->actionCenter_window->setEnabled(false);
+    }
     else
+    {
         MainWindow::window()->setWindowState(Qt::WindowNoState);
+        ui->actionCenter_window->setEnabled(true);
+    }
 
     resizeLabelToWindow();
+}
+
+void MainWindow::on_actionCenter_window_triggered()
+{
+    centerWindow();
 }

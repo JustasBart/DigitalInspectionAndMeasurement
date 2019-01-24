@@ -94,7 +94,22 @@
        </item>
        <item>
         <property name="text">
+         <string>1280×720</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>1080x840</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>720×480</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>640x240</string>
         </property>
        </item>
       </widget>
