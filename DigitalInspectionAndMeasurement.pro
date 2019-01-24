@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    Qt-OpenCV-AdditionalLibrary.cpp \
     algorithms.cpp \
     camera.cpp \
     errors.cpp \
@@ -38,7 +37,6 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-    Qt-OpenCV-AdditionalLibrary.h \
     algorithms.h \
     camera.h \
     errors.h \

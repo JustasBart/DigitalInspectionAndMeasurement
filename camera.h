@@ -3,6 +3,7 @@
 
 #include "Qt-OpenCV-AdditionalLibrary.h"
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <QDebug>
 #include <QString>
 #include "errors.h"
@@ -15,10 +16,11 @@ public:
     int cameraInit(const int camera, const int fps, const int &width, const int &height);
     void setParam(VideoCaptureProperties param, int value);
     unsigned char getParam(cv::VideoCaptureProperties param);
-    QPixmap captureImage();
+    QImage captureImage();
     unsigned char getFPS();
 
 private:
+    QImage Mat2QImage(cv::Mat const &src);
     VideoCapture *_cameraObj;
     Mat _currentFrameMat;
 };

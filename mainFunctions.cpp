@@ -57,7 +57,7 @@ void MainWindow::centerWindow()
 
 void MainWindow::captureImage()
 {
-    ui -> videoLabel -> setPixmap( _camObj.captureImage() );
+    ui -> videoLabel -> setPixmap( QPixmap::fromImage(_camObj.captureImage()) );
     // ui -> fpsLabel -> setText( QString::number(_camObj.getFPS()) );
 }
 
