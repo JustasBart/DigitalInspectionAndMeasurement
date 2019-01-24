@@ -62,7 +62,8 @@ private:
     QScreen *_screen;
     QRect _screenGeometry;
 
-    void resizeWindowToResolution();
+    void resizeWindowToScreenSize();
+    void resizeLabelToWindow();
     void centerWindow();
     void loadGUISettings();
     void saveGUISettings();
@@ -71,12 +72,12 @@ private:
     Camera _camObj;
     Options _usrOptions;
 
-    unsigned int _camPort;
+    int _camPort;
     bool _savePreferences;
     bool _fullScreen;
-    unsigned int _res_Width;
-    unsigned int _res_Height;
-    unsigned int _fps;
+    int _res_Width;
+    int _res_Height;
+    int _fps;
 };
 
 #endif // MAINWINDOW_H

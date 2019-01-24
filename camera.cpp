@@ -1,6 +1,6 @@
 #include "camera.h"
 
-int Camera::cameraInit(unsigned char camera, unsigned char fps, unsigned char width, unsigned char height)
+int Camera::cameraInit(const int camera, const int fps, const int &width, const int &height)
 {
     _cameraObj = new VideoCapture(camera);
 
@@ -10,8 +10,11 @@ int Camera::cameraInit(unsigned char camera, unsigned char fps, unsigned char wi
        return -1;
     }
 
-    setParam(CAP_PROP_FRAME_WIDTH, static_cast<unsigned char>(width));
-    setParam(CAP_PROP_FRAME_HEIGHT, static_cast<unsigned char>(height));
+    qDebug() << "Setting frame W: " << width;
+    qDebug() << "Setting frame H: " << height;
+
+    setParam(CAP_PROP_FRAME_WIDTH, width);
+    setParam(CAP_PROP_FRAME_HEIGHT, height);
 
     setParam(CAP_PROP_AUTOFOCUS, 1);
 
@@ -28,7 +31,7 @@ int Camera::cameraInit(unsigned char camera, unsigned char fps, unsigned char wi
     return 0;
 }
 
-void Camera::setParam(cv::VideoCaptureProperties param, unsigned char value)
+void Camera::setParam(cv::VideoCaptureProperties param, int value)
 {
     _cameraObj -> set(param, value);
 }

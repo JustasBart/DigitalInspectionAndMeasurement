@@ -12,8 +12,8 @@ using namespace cv;
 class Camera
 {
 public:
-    int cameraInit(unsigned char camera, unsigned char fps, unsigned char width, unsigned char height);
-    void setParam(VideoCaptureProperties param, unsigned char value);
+    int cameraInit(const int camera, const int fps, const int &width, const int &height);
+    void setParam(VideoCaptureProperties param, int value);
     unsigned char getParam(cv::VideoCaptureProperties param);
     QPixmap captureImage();
     unsigned char getFPS();

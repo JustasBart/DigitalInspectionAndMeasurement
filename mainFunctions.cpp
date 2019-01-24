@@ -5,14 +5,18 @@ void MainWindow::init()
 {
     ui->actionFull_screen->setChecked( _fullScreen );
 
-    resizeWindowToResolution();
+    resizeWindowToScreenSize();
     centerWindow();
 
-    if (_camObj.cameraInit(static_cast<unsigned char>(_camPort), static_cast<unsigned char>(_fps), static_cast<unsigned char>(_res_Width), static_cast<unsigned char>(_res_Height)) == -1)
+    resizeLabelToWindow();
+
+    if (_camObj.cameraInit(_camPort, _fps, _res_Width, _res_Height) == -1)
     {
-        if (_camObj.cameraInit(0, static_cast<unsigned char>(_fps), static_cast<unsigned char>(_res_Width), static_cast<unsigned char>(_res_Height)) == -1)
+        if (_camObj.cameraInit(0, _fps, _res_Width, _res_Height) == -1)
             Errors::fatalError("The camera cannot be initialized.");
     }
+
+    ui->fpsLabel->setText( "Frames per second: " + QString::number(_camObj.getFPS()) );
 
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
     _videoFPSTimer.start(1000 / _fps);
@@ -20,10 +24,16 @@ void MainWindow::init()
     // loadGUISettings();
 }
 
-void MainWindow::resizeWindowToResolution()
+void MainWindow::resizeWindowToScreenSize()
 {
     MainWindow::window()->setFixedWidth( _screenGeometry.width() * 2/3 );
     MainWindow::window()->setFixedHeight( _screenGeometry.height() * 2/3 );
+}
+
+void MainWindow::resizeLabelToWindow()
+{
+    ui->videoLabel->heightForWidth(16/9);
+    ui->videoLabel->setMaximumWidth( this->width() - ui->settingsGroup->width() - 30 );
 }
 
 void MainWindow::centerWindow()
@@ -103,7 +113,7 @@ void MainWindow::receiveData(unsigned int val, QString param)
     {
         case 0:
         {
-            _camPort = param.toUInt();
+            _camPort = param.toInt();
             break;
         }
         case 1:
@@ -111,13 +121,13 @@ void MainWindow::receiveData(unsigned int val, QString param)
             QString resWidth = param.mid(0, 4);
             QString resHeight = param.mid(5, 9);
 
-            _res_Width = resWidth.trimmed().toUInt();
-            _res_Height = resHeight.trimmed().toUInt();
+            _res_Width = resWidth.trimmed().toInt();
+            _res_Height = resHeight.trimmed().toInt();
             break;
         }
         case 2:
         {
-            _fps = param.toUInt();
+            _fps = param.toInt();
             break;
         }
         case 3:
@@ -144,4 +154,6 @@ void MainWindow::on_actionFull_screen_triggered(bool checked)
         MainWindow::window()->setWindowState(Qt::WindowFullScreen);
     else
         MainWindow::window()->setWindowState(Qt::WindowNoState);
+
+    resizeLabelToWindow();
 }
