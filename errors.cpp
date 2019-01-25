@@ -3,8 +3,7 @@
 void Errors::fatalError(QString errorMessage)
 {
     qDebug() << "CRICITAL ERROR: " + errorMessage;
-    QApplication::quit();
-    return;
+    exit(EXIT_FAILURE);
 }
 
 void Errors::cameraOpenErrorWindow()

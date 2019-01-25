@@ -22,8 +22,6 @@ void MainWindow::init()
     _videoFPSTimer.start(1000 / _fps);
 
     if (_savePreferences) loadGUISettings();
-
-    ui->fpsLabel->setText( QString::number(_camObj.getParam(CAP_PROP_BRIGHTNESS)) );
 }
 
 void MainWindow::resizeWindowToScreenSize()

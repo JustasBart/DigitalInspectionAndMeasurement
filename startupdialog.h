@@ -28,6 +28,8 @@ private slots:
     void on_buttonBox_rejected();
     void on_StartupDialog_finished(int result);
 
+    void on_buttonBox_accepted();
+
 private:
     Ui::StartupDialog *ui;
 

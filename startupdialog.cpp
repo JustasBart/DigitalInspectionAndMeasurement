@@ -89,3 +89,45 @@ void StartupDialog::on_StartupDialog_finished(int result)
     flushSettings();
     saveSettings();
 }
+
+void StartupDialog::on_buttonBox_accepted()
+{
+    if (ui->resComboBox->currentIndex() == 0 && ui->fpsComboBox->currentIndex() == 0)
+    {
+        QMessageBox msgBox;
+
+        msgBox.setText("Warning camera limitations exceeded");
+        msgBox.setInformativeText("Would you like to set the FPS to 30 instead?\nOtherwise the resolution will be lowered.");
+
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Yes);
+
+        int ret = msgBox.exec();
+
+        switch (ret)
+        {
+            case QMessageBox::Yes:
+            {
+                ui->fpsComboBox->setCurrentIndex(1);
+                emit sendData(2, ui->fpsComboBox->currentText());
+                break;
+            }
+            case QMessageBox::No:
+            {
+                ui->resComboBox->setCurrentIndex(1);
+                emit sendData(1, ui->resComboBox->currentText());
+                break;
+            }
+            case QMessageBox::Cancel:
+            {
+                Errors::fatalError("The camera hardware has been exceeded.");
+                return;
+            }
+            default:
+            {
+                qDebug() << "Unexpected input to the set default Camera method.";
+                return;
+            }
+        }
+    }
+}
