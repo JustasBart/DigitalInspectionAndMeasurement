@@ -151,3 +151,19 @@ void MainWindow::on_actionCenter_window_triggered()
 {
     centerWindow();
 }
+
+void MainWindow::on_streamingButton_clicked()
+{
+    if (ui->streamingButton->text() == "Streaming")
+    {
+        ui->streamingButton->setText("Still image");
+
+        _videoFPSTimer.stop();
+    }
+    else
+    {
+        ui->streamingButton->setText("Streaming");
+
+        _videoFPSTimer.start();
+    }
+}

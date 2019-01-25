@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _fullScreen(false),
     _res_Width(0),
     _res_Height(0),
-    _fps(0)
+    _fps(0),
+    _calibrationInProgress(false)
 {
     connect(_startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
     _startUpDialog -> exec();

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>930</width>
-    <height>519</height>
+    <height>736</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -67,7 +67,7 @@
     <item>
      <widget class="QFrame" name="frame">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -209,7 +209,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Focus</string>
+             <string>Focus:</string>
             </property>
            </widget>
           </item>
@@ -264,7 +264,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Zoom</string>
+             <string>Zoom:</string>
             </property>
            </widget>
           </item>
@@ -322,7 +322,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Brightness</string>
+             <string>Brightness:</string>
             </property>
            </widget>
           </item>
@@ -357,7 +357,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Saturation</string>
+             <string>Saturation:</string>
             </property>
            </widget>
           </item>
@@ -383,7 +383,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Contrast</string>
+             <string>Contrast:</string>
             </property>
            </widget>
           </item>
@@ -513,7 +513,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="calibrationLabel">
             <property name="text">
              <string>*Uncalibrated*</string>
             </property>
@@ -529,6 +529,58 @@
             </property>
             <property name="text">
              <string>Detail merge</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="calibrationGroup">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Adjustments</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="horizontalOffsetLabel">
+            <property name="text">
+             <string>Horizontal offset: </string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSlider" name="horizontalOffsetSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Vertical offset: </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSlider" name="horizontalSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>

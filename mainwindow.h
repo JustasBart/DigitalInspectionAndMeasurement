@@ -27,6 +27,7 @@
 #include "errors.h"
 #include "options.h"
 #include "usersettings.h"
+#include "measurements.h"
 
 namespace Ui
 {
@@ -46,6 +47,9 @@ public:
 public slots:
     void receiveData(unsigned int val, QString param);
 
+public: signals:
+    void sendOffsets(unsigned int arg, int val);
+
 private slots:
     void captureImage();
     void on_contrastSpinBox_valueChanged(int arg1);
@@ -59,6 +63,7 @@ private slots:
     void on_actionSet_to_defaults_triggered();
     void on_modeButton_clicked();
     void on_positionCalibrationButton_clicked();
+    void on_streamingButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -73,6 +78,7 @@ private:
     void saveGUISettings();
     void defaultCamOpt();
     void defaultUIVals();
+    void setMeasurementButtons(bool val);
 
     QTimer _videoFPSTimer;
     Camera _camObj;
@@ -85,6 +91,8 @@ private:
     int _res_Width;
     int _res_Height;
     int _fps;
+
+    bool _calibrationInProgress;
 };
 
 #endif // MAINWINDOW_H

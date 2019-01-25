@@ -5,6 +5,8 @@ void MainWindow::init()
 {
     ui->actionFull_screen->setChecked( _fullScreen );
     ui->modesLabel->setStyleSheet("QLabel { background-color : orange; color : black; }");
+    ui->calibrationGroup->setVisible(false);
+    ui->calibrationGroup->setEnabled(false);
 
     resizeWindowToScreenSize();
     resizeLabelToWindow();
@@ -60,10 +62,8 @@ void MainWindow::captureImage()
 {
     _globalFrame = _camObj.captureImage();
 
-    QPainter painter(&_globalFrame);
-
-    painter.setBrush(QBrush(Qt::black));
-    painter.drawRect(10, 10, 100, 100);
+    if (_calibrationInProgress)
+        Measurements::drawCalibrationLines( &_globalFrame );
 
     ui -> videoLabel -> setPixmap( _globalFrame );
 }
