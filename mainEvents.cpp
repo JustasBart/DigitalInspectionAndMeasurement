@@ -100,3 +100,54 @@ void MainWindow::defaultUIVals()
     ui->focusSpinBox->setValue(128);
     ui->zoomSpinBox->setValue(0);
 }
+
+void MainWindow::on_modeButton_clicked()
+{
+    if (ui->modeButton->text() == "Current mode: Dynamic")
+    {
+        ui->modeButton->setText("Current mode: Static");
+
+        ui->adjustmentsGroup->setTitle("Adjustments Group");
+        ui->algorithmsGroup->setTitle("*Algorithms group");
+
+        ui->modesLabel->setText("Measurement");
+        ui->modesLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
+
+        ui->adjustmentsGroup->setEnabled(false);
+        ui->algorithmsGroup->setEnabled(true);
+    }
+    else
+    {
+        ui->modeButton->setText("Current mode: Dynamic");
+
+        ui->adjustmentsGroup->setTitle("*Adjustments Group");
+        ui->algorithmsGroup->setTitle("Algorithms group");
+
+        ui->modesLabel->setText("Inspection");
+        ui->modesLabel->setStyleSheet("QLabel { background-color : orange; color : black; }");
+
+        ui->adjustmentsGroup->setEnabled(true);
+        ui->algorithmsGroup->setEnabled(false);
+    }
+}
+
+void MainWindow::on_actionFull_screen_triggered(bool checked)
+{
+    if (checked)
+    {
+        MainWindow::window()->setWindowState(Qt::WindowFullScreen);
+        ui->actionCenter_window->setEnabled(false);
+    }
+    else
+    {
+        MainWindow::window()->setWindowState(Qt::WindowNoState);
+        ui->actionCenter_window->setEnabled(true);
+    }
+
+    resizeLabelToWindow();
+}
+
+void MainWindow::on_actionCenter_window_triggered()
+{
+    centerWindow();
+}

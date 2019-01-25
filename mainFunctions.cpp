@@ -4,6 +4,7 @@
 void MainWindow::init()
 {
     ui->actionFull_screen->setChecked( _fullScreen );
+    ui->modesLabel->setStyleSheet("QLabel { background-color : orange; color : black; }");
 
     resizeWindowToScreenSize();
     resizeLabelToWindow();
@@ -27,13 +28,13 @@ void MainWindow::init()
 void MainWindow::resizeWindowToScreenSize()
 {
     MainWindow::window()->setFixedWidth( _screenGeometry.width() * 2/3 );
-    MainWindow::window()->setFixedHeight( _screenGeometry.height() * 2/3 );
+    MainWindow::window()->setFixedHeight( _screenGeometry.height() * 3/4 - 20 );
 }
 
 void MainWindow::resizeLabelToWindow()
 {
     ui->videoLabel->heightForWidth(16/9);
-    ui->videoLabel->setMaximumWidth( this->width() - ui->settingsGroup->width() - 30 );
+    ui->videoLabel->setMinimumWidth( this->width() - ui->adjustmentsGroup->width() - 30 );
 }
 
 void MainWindow::centerWindow()
@@ -57,7 +58,14 @@ void MainWindow::centerWindow()
 
 void MainWindow::captureImage()
 {
-    ui -> videoLabel -> setPixmap( _camObj.captureImage() );
+    _globalFrame = _camObj.captureImage();
+
+    QPainter painter(&_globalFrame);
+
+    painter.setBrush(QBrush(Qt::black));
+    painter.drawRect(10, 10, 100, 100);
+
+    ui -> videoLabel -> setPixmap( _globalFrame );
 }
 
 void MainWindow::loadGUISettings()
@@ -142,25 +150,4 @@ void MainWindow::receiveData(unsigned int val, QString param)
             break;
         }
     }
-}
-
-void MainWindow::on_actionFull_screen_triggered(bool checked)
-{
-    if (checked)
-    {
-        MainWindow::window()->setWindowState(Qt::WindowFullScreen);
-        ui->actionCenter_window->setEnabled(false);
-    }
-    else
-    {
-        MainWindow::window()->setWindowState(Qt::WindowNoState);
-        ui->actionCenter_window->setEnabled(true);
-    }
-
-    resizeLabelToWindow();
-}
-
-void MainWindow::on_actionCenter_window_triggered()
-{
-    centerWindow();
 }

@@ -18,6 +18,8 @@
 #include <QGuiApplication>
 #include <QScreen>
 
+#include <QPainter>
+
 // General functions //
 #include "startupdialog.h"
 #include "camera.h"
@@ -55,6 +57,8 @@ private slots:
     void on_actionFull_screen_triggered(bool checked);
     void on_actionCenter_window_triggered();
     void on_actionSet_to_defaults_triggered();
+    void on_modeButton_clicked();
+    void on_positionCalibrationButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -73,6 +77,7 @@ private:
     QTimer _videoFPSTimer;
     Camera _camObj;
     Options _usrOptions;
+    QPixmap _globalFrame;
 
     int _camPort;
     bool _savePreferences;

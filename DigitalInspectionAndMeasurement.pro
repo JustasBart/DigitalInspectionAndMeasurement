@@ -33,7 +33,9 @@ SOURCES += \
     usersettings.cpp \
     mainFunctions.cpp \
     mainEvents.cpp \
-    startupdialog.cpp
+    startupdialog.cpp \
+    measurementsEvents.cpp \
+    measurements.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +44,8 @@ HEADERS += \
     errors.h \
     usersettings.h \
     options.h \
-    startupdialog.h
+    startupdialog.h \
+    measurements.h
 
 FORMS += \
         mainwindow.ui \
