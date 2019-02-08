@@ -86,6 +86,10 @@ void StartupDialog::flushSettings()
 
 void StartupDialog::on_StartupDialog_finished(int result)
 {
+    if (result == 1)
+        qDebug() << "Settings dialog successful.";
+    else
+        qDebug() << "Settings dialog failed with error code: " << result;
     flushSettings();
     saveSettings();
 }

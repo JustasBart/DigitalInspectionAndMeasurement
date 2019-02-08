@@ -60,7 +60,7 @@ void MainWindow::centerWindow()
 
 void MainWindow::captureImage()
 {
-    _globalFrame = _camObj.captureImage();
+    // THREAD _globalFrame = _camObj.captureImage();
 
     if (_calibrationInProgress)
         Measurements::drawCalibrationLines( &_globalFrame );
@@ -127,6 +127,7 @@ void MainWindow::receiveData(unsigned int val, QString param)
 
             _res_Width =  resWH[0].trimmed().toInt();
             _res_Height = resWH[1].trimmed().toInt();
+
             break;
         }
         case 2:

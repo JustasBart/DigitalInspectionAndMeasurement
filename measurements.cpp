@@ -7,5 +7,5 @@ void Measurements::drawCalibrationLines(QPixmap *frameToDrawOn)
     painter.setBrush(QBrush(Qt::red));
 
     painter.setPen(QPen(Qt::black, 6, Qt::DashDotLine, Qt::RoundCap));
-    painter.drawLine(, 10, 10, frameToDrawOn->height() - 10);
+    painter.drawLine(10, 10, 10, frameToDrawOn->height() - 10);
 }

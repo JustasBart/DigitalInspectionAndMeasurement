@@ -1,9 +1,11 @@
 #include "errors.h"
 
-void Errors::fatalError(QString errorMessage)
+Q_NORETURN void Errors::fatalError(QString errorMessage)
 {
     qDebug() << "CRICITAL ERROR: " + errorMessage;
+    QApplication::closeAllWindows();
     exit(EXIT_FAILURE);
+
 }
 
 void Errors::cameraOpenErrorWindow()
@@ -25,12 +27,9 @@ void Errors::cameraOpenErrorWindow()
             break;
         case QMessageBox::Close:
             Errors::fatalError("The user closed the application.");
-            break;
         case QMessageBox::Cancel:
             Errors::fatalError("The user cancelled opening the default camera port.");
-            break;
         default:
             fatalError("Unexpected error occured in 'windowFatalError'");
-            break;
     }
 }
