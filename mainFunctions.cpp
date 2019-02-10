@@ -60,7 +60,7 @@ void MainWindow::centerWindow()
 
 void MainWindow::captureImage()
 {
-    // THREAD _globalFrame = _camObj.captureImage();
+    _globalFrame = _camObj.captureImage();
 
     if (_calibrationInProgress)
         Measurements::drawCalibrationLines( &_globalFrame );
