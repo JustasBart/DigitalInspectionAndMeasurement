@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _startUpDialog(new StartupDialog),
+    _measuringInterface(new MeasuringInterface),
     _screen(QGuiApplication::primaryScreen()),
     _screenGeometry(_screen->geometry()),
     _camPort(0),
@@ -19,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     connect(_startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
     _startUpDialog -> exec();
-
     ui -> setupUi(this);
 
     MainWindow::init();

@@ -142,9 +142,12 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QPushButton" name="streamingButton">
+           <widget class="QPushButton" name="captureButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
-             <string>Streaming</string>
+             <string>Capture</string>
             </property>
            </widget>
           </item>
@@ -181,26 +184,33 @@
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="8" column="1">
-           <widget class="QSpinBox" name="focusSpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item row="5" column="1">
+           <widget class="QSlider" name="contrastSlider">
+            <property name="contextMenuPolicy">
+             <enum>Qt::DefaultContextMenu</enum>
             </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>0</height>
-             </size>
+            <property name="minimum">
+             <number>1</number>
             </property>
             <property name="maximum">
              <number>200</number>
             </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
            </widget>
           </item>
-          <item row="8" column="0">
+          <item row="10" column="1">
+           <widget class="QSlider" name="focusSlider">
+            <property name="maximum">
+             <number>40</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
            <widget class="QLabel" name="focusLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -210,141 +220,6 @@
             </property>
             <property name="text">
              <string>Focus:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QSpinBox" name="brightnesSpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>200</number>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="2">
-           <widget class="QLabel" name="rangeLabel4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Range [0 to 200  ]</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0" colspan="3">
-           <widget class="QPushButton" name="focusButton">
-            <property name="text">
-             <string>Focus mode: Automatic</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0">
-           <widget class="QLabel" name="zoomLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Zoom:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="2">
-           <widget class="QLabel" name="rangeLabel2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Range [1 to 200  ]</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="1">
-           <widget class="QSpinBox" name="zoomSpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximum">
-             <number>80</number>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="2">
-           <widget class="QLabel" name="rangeLabel5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Range [ 0 to 80 ]</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="BrightnessLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Brightness:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
-           <widget class="QSpinBox" name="saturationSpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>200</number>
             </property>
            </widget>
           </item>
@@ -361,8 +236,8 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="2">
-           <widget class="QLabel" name="rangeLabel3">
+          <item row="6" column="0">
+           <widget class="QLabel" name="BrightnessLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
               <horstretch>0</horstretch>
@@ -370,7 +245,20 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Range [1 to 200  ]</string>
+             <string>Brightness:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="fpsLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Frames per second: 0</string>
             </property>
            </widget>
           </item>
@@ -387,50 +275,15 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
-           <widget class="QSpinBox" name="contrastSpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>200</number>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <widget class="QLabel" name="rangeLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Range [1 to 200  ]</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="3">
+          <item row="3" column="0" colspan="2">
            <widget class="Line" name="line">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="3">
-           <widget class="QLabel" name="fpsLabel">
+          <item row="9" column="0">
+           <widget class="QLabel" name="zoomLabel">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
               <horstretch>0</horstretch>
@@ -438,7 +291,163 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Frames per second: 0</string>
+             <string>Zoom:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QSlider" name="saturationSlider">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>200</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QSlider" name="brightnessSlider">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>200</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QSlider" name="zoomSlider">
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>80</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2">
+           <widget class="QPushButton" name="brightnessOptionsBtn">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QPushButton" name="contrastOptionsBtn">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QPushButton" name="saturationOptionsBtn">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="2">
+           <widget class="QPushButton" name="zoomOptionsBtn">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="2">
+           <widget class="QPushButton" name="focusOptionsBtn">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0" colspan="3">
+           <widget class="QPushButton" name="focusButton">
+            <property name="text">
+             <string>Focus mode: Automatic</string>
             </property>
            </widget>
           </item>
@@ -460,26 +469,6 @@
           <string>Algorithms group</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="0">
-           <widget class="QPushButton" name="stackImagesButton">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Stack images</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="measureButton">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Measure</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QPushButton" name="positionCalibrationButton">
             <property name="minimumSize">
@@ -502,6 +491,16 @@
             </property>
            </widget>
           </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="stackImagesButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Stack images</string>
+            </property>
+           </widget>
+          </item>
           <item row="4" column="0">
            <widget class="QPushButton" name="edgeDetectButton">
             <property name="enabled">
@@ -509,6 +508,16 @@
             </property>
             <property name="text">
              <string>Edge detect</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="measureButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Measure</string>
             </property>
            </widget>
           </item>
@@ -529,58 +538,6 @@
             </property>
             <property name="text">
              <string>Detail merge</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="calibrationGroup">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>Adjustments</string>
-         </property>
-         <layout class="QFormLayout" name="formLayout_2">
-          <item row="0" column="0">
-           <widget class="QLabel" name="horizontalOffsetLabel">
-            <property name="text">
-             <string>Horizontal offset: </string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QSlider" name="horizontalOffsetSlider">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Vertical offset: </string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSlider" name="horizontalSlider">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -679,12 +636,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <tabstops>
-  <tabstop>brightnesSpinBox</tabstop>
-  <tabstop>saturationSpinBox</tabstop>
-  <tabstop>focusSpinBox</tabstop>
-  <tabstop>zoomSpinBox</tabstop>
- </tabstops>
  <resources/>
  <connections>
   <connection>

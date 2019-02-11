@@ -15,8 +15,10 @@ public:
     int cameraInit(const int camera, const int fps, const int &width, const int &height);
     void setParam(VideoCaptureProperties param, int value);
     unsigned char getParam(cv::VideoCaptureProperties param);
+    void setBufferSize(int frames);
     QPixmap captureImage();
     unsigned char getFPS();
+    Mat retrieveGlobalFrame();
 
 private:
     QImage Mat2QImage(cv::Mat const &src);

@@ -56,3 +56,13 @@ unsigned char Camera::getFPS()
 {
     return getParam(CAP_PROP_FPS);
 }
+
+void Camera::setBufferSize(int frames)
+{
+    _cameraObj -> set(CV_CAP_PROP_BUFFERSIZE, frames);
+}
+
+Mat Camera::retrieveGlobalFrame()
+{
+    return _currentFrameMat;
+}

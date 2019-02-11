@@ -5,8 +5,6 @@ void MainWindow::init()
 {
     ui->actionFull_screen->setChecked( _fullScreen );
     ui->modesLabel->setStyleSheet("QLabel { background-color : orange; color : black; }");
-    ui->calibrationGroup->setVisible(false);
-    ui->calibrationGroup->setEnabled(false);
 
     resizeWindowToScreenSize();
     resizeLabelToWindow();
@@ -22,6 +20,10 @@ void MainWindow::init()
     ui->fpsLabel->setText( "Frames per second: " + QString::number(_camObj.getFPS()) );
 
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
+    connect(MainWindow::window(), SIGNAL(sendGlobalMat(Mat)), _measuringInterface, SLOT(receiveCurrentMat(Mat)));
+
+    // _camObj.setBufferSize(1);
+
     _videoFPSTimer.start(1000 / _fps);
 
     if (_savePreferences) loadGUISettings();
@@ -73,39 +75,39 @@ void MainWindow::loadGUISettings()
     QVariant settingsVar;
 
     settingsVar = UserSettings::loadSettings("Contrast", 0, GROUP_LOCATION);
-    ui->contrastSpinBox->setValue( settingsVar.toInt() );
+    ui->contrastSlider->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Brightness", 0, GROUP_LOCATION);
-    ui->brightnesSpinBox->setValue( settingsVar.toInt() );
+    ui->brightnessSlider->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Saturation", 0, GROUP_LOCATION);
-    ui->saturationSpinBox->setValue( settingsVar.toInt() );
+    ui->saturationSlider->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Zoom", 0, GROUP_LOCATION);
-    ui->zoomSpinBox->setValue( settingsVar.toInt() );
+    ui->zoomSlider->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("Focus", 0, GROUP_LOCATION);
-    ui->focusSpinBox->setValue( settingsVar.toInt() );
+    ui->focusSlider->setValue( settingsVar.toInt() );
     settingsVar = UserSettings::loadSettings("FocusMode", 0, GROUP_LOCATION);
     if (settingsVar.toBool())
     {
         _camObj.setParam(CAP_PROP_AUTOFOCUS, 1);
         ui -> focusButton -> setText("Focus mode: Automatic");
         ui -> focusLabel -> setEnabled(false);
-        ui -> focusSpinBox -> setEnabled(false);
+        ui -> focusSlider -> setEnabled(false);
     }
     else
     {
         _camObj.setParam(CAP_PROP_AUTOFOCUS, 0);
         ui -> focusButton -> setText("Focus mode: Manual");
         ui -> focusLabel -> setEnabled(true);
-        ui -> focusSpinBox -> setEnabled(true);
+        ui -> focusSlider -> setEnabled(true);
     }
 }
 
 void MainWindow::saveGUISettings()
 {
-    UserSettings::saveSettings("Contrast", ui->contrastSpinBox->value(), GROUP_LOCATION);
-    UserSettings::saveSettings("Brightness", ui->brightnesSpinBox->value(), GROUP_LOCATION);
-    UserSettings::saveSettings("Saturation", ui->saturationSpinBox->value(), GROUP_LOCATION);
-    UserSettings::saveSettings("Zoom", ui->zoomSpinBox->value(), GROUP_LOCATION);
-    UserSettings::saveSettings("Focus", ui->focusSpinBox->value(), GROUP_LOCATION);
+    UserSettings::saveSettings("Contrast", ui->contrastSlider->value(), GROUP_LOCATION);
+    UserSettings::saveSettings("Brightness", ui->brightnessSlider->value(), GROUP_LOCATION);
+    UserSettings::saveSettings("Saturation", ui->saturationSlider->value(), GROUP_LOCATION);
+    UserSettings::saveSettings("Zoom", ui->zoomSlider->value(), GROUP_LOCATION);
+    UserSettings::saveSettings("Focus", ui->focusSlider->value(), GROUP_LOCATION);
     if (ui->focusButton->text() == "Focus mode: Automatic")
         UserSettings::saveSettings("FocusMode", true, GROUP_LOCATION);
     else

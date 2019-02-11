@@ -28,6 +28,7 @@
 #include "options.h"
 #include "usersettings.h"
 #include "measurements.h"
+#include "measuringinterface.h"
 
 namespace Ui
 {
@@ -49,25 +50,35 @@ public slots:
 
 public: signals:
     void sendOffsets(unsigned int arg, int val);
+    void sendGlobalMat(Mat currentFrame);
 
 private slots:
     void captureImage();
-    void on_contrastSpinBox_valueChanged(int arg1);
-    void on_brightnesSpinBox_valueChanged(int arg1);
-    void on_saturationSpinBox_valueChanged(int arg1);
-    void on_zoomSpinBox_valueChanged(int arg1);
     void on_focusButton_pressed();
-    void on_focusSpinBox_valueChanged(int arg1);
     void on_actionFull_screen_triggered(bool checked);
     void on_actionCenter_window_triggered();
     void on_actionSet_to_defaults_triggered();
     void on_modeButton_clicked();
-    void on_positionCalibrationButton_clicked();
-    void on_streamingButton_clicked();
+    void on_positionCalibrationButton_pressed();
+
+    void on_focusSlider_sliderMoved(int position);
+    void on_zoomSlider_sliderMoved(int position);
+    void on_saturationSlider_sliderMoved(int position);
+    void on_brightnessSlider_sliderMoved(int position);
+    void on_contrastSlider_sliderMoved(int position);
+
+    void on_contrastOptionsBtn_pressed();
+    void on_brightnessOptionsBtn_pressed();
+    void on_saturationOptionsBtn_pressed();
+    void on_zoomOptionsBtn_pressed();
+    void on_focusOptionsBtn_pressed();
+    void on_captureButton_pressed();
+    void on_measureButton_pressed();
 
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;
+    MeasuringInterface *_measuringInterface;
     QScreen *_screen;
     QRect _screenGeometry;
 

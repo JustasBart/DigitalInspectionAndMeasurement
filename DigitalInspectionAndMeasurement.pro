@@ -35,7 +35,8 @@ SOURCES += \
     mainEvents.cpp \
     startupdialog.cpp \
     measurementsEvents.cpp \
-    measurements.cpp
+    measurements.cpp \
+    measuringinterface.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,11 +46,13 @@ HEADERS += \
     usersettings.h \
     options.h \
     startupdialog.h \
-    measurements.h
+    measurements.h \
+    measuringinterface.h
 
 FORMS += \
         mainwindow.ui \
-    startupdialog.ui
+    startupdialog.ui \
+    measuringinterface.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
