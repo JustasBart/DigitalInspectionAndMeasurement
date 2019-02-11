@@ -190,7 +190,7 @@ void MainWindow::on_focusOptionsBtn_pressed()
 
 void MainWindow::on_measureButton_pressed()
 {
-    emit sendGlobalMat(_camObj.retrieveGlobalFrame());
+    emit sendGlobalMat(_camObj.retrieveGlobalFrame(), _screenGeometry);
     _measuringInterface -> setModal(true);
     _measuringInterface -> exec();
 }

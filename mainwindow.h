@@ -50,7 +50,7 @@ public slots:
 
 public: signals:
     void sendOffsets(unsigned int arg, int val);
-    void sendGlobalMat(Mat currentFrame);
+    void sendGlobalMat(Mat currentFrame, QRect screenSize);
 
 private slots:
     void captureImage();

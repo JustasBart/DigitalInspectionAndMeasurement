@@ -20,7 +20,7 @@ void MainWindow::init()
     ui->fpsLabel->setText( "Frames per second: " + QString::number(_camObj.getFPS()) );
 
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
-    connect(MainWindow::window(), SIGNAL(sendGlobalMat(Mat)), _measuringInterface, SLOT(receiveCurrentMat(Mat)));
+    connect(MainWindow::window(), SIGNAL(sendGlobalMat(Mat, QRect)), _measuringInterface, SLOT(receiveCurrentMat(Mat, QRect)));
 
     // _camObj.setBufferSize(1);
 
@@ -31,14 +31,16 @@ void MainWindow::init()
 
 void MainWindow::resizeWindowToScreenSize()
 {
-    MainWindow::window()->setFixedWidth( _screenGeometry.width() * 2/3 );
-    MainWindow::window()->setFixedHeight( _screenGeometry.height() * 3/4 - 20 );
+    MainWindow::window()->setFixedWidth( _screenGeometry.width() * 3/4 + ui->adjustmentsGroup->width() );
+    MainWindow::window()->setFixedHeight( _screenGeometry.height() * 3/4 + 20);
 }
 
 void MainWindow::resizeLabelToWindow()
 {
-    ui->videoLabel->heightForWidth(16/9);
-    ui->videoLabel->setMinimumWidth( this->width() - ui->adjustmentsGroup->width() - 30 );
+    int calculatedWidth = this->width() - ui->adjustmentsGroup->width() - 45;
+
+    ui->videoLabel->setFixedWidth( calculatedWidth );
+    ui->videoLabel->setFixedHeight( static_cast<int>(calculatedWidth / (16.0/9.0)) );
 }
 
 void MainWindow::centerWindow()

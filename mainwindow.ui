@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Digital inspection and measuring</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
@@ -57,7 +57,7 @@
        <string>Video Feed</string>
       </property>
       <property name="scaledContents">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -65,7 +65,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="frame">
+     <widget class="QFrame" name="mainFrame">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
         <horstretch>0</horstretch>
