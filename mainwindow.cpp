@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    _camObj.releaseCamera();
     _videoFPSTimer.stop();
 
     if (_savePreferences)

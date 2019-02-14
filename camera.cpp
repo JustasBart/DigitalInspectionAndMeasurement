@@ -66,3 +66,8 @@ Mat Camera::retrieveGlobalFrame()
 {
     return _currentFrameMat;
 }
+
+void Camera::releaseCamera()
+{
+    _cameraObj -> release();
+}

@@ -19,6 +19,7 @@ public:
     QPixmap captureImage();
     unsigned char getFPS();
     Mat retrieveGlobalFrame();
+    void releaseCamera();
 
 private:
     QImage Mat2QImage(cv::Mat const &src);
