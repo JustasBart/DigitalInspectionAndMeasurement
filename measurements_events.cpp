@@ -8,6 +8,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
     if(ui->positionCalibrationButton->text() == "Position calibration")
     {
         ui->modesGroup->setEnabled(false);
+        _videoFPSTimer.start();
 
         ui->positionCalibrationButton->setText("*Confirm calibration*");
         ui->calibrationLabel->setText("Calibrating...");
@@ -20,6 +21,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
     else
     {
         ui->modesGroup->setEnabled(true);
+        _videoFPSTimer.stop();
 
         ui->positionCalibrationButton->setText("Position calibration");
         ui->positionCalibrationButton->setStyleSheet("background-color: lightGray");

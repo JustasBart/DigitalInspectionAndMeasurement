@@ -31,12 +31,15 @@ SOURCES += \
     camera.cpp \
     errors.cpp \
     usersettings.cpp \
-    mainFunctions.cpp \
-    mainEvents.cpp \
     startupdialog.cpp \
-    measurementsEvents.cpp \
     measurements.cpp \
-    measuringinterface.cpp
+    measuringinterface.cpp \
+    measuringinterface_events.cpp \
+    measuringinterface_functions.cpp \
+    main_events.cpp \
+    main_functions.cpp \
+    measurements_events.cpp \
+    grid.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +50,9 @@ HEADERS += \
     options.h \
     startupdialog.h \
     measurements.h \
-    measuringinterface.h
+    measuringinterface.h \
+    measuringinterface_functions.h \
+    grid.h
 
 FORMS += \
         mainwindow.ui \
@@ -73,3 +78,4 @@ LIBS += -LC:\\opencv\\release\\bin \
     libopencv_calib3d343 \
     libopencv_video343 \
     libopencv_videoio343 \
+    libopencv_imgcodecs343 \

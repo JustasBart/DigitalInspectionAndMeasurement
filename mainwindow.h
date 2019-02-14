@@ -7,7 +7,7 @@
 #define GROUP_LOCATION  "GUISettings"
 
 // OpenCV main image processing includes //
-#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/highgui.hpp>
 
 // General QT includes //
 #include <QTimer>
@@ -29,6 +29,7 @@
 #include "usersettings.h"
 #include "measurements.h"
 #include "measuringinterface.h"
+#include "grid.h"
 
 namespace Ui
 {

@@ -1,8 +1,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <QDebug>
 #include <QString>
 #include "errors.h"
@@ -24,6 +24,8 @@ private:
     QImage Mat2QImage(cv::Mat const &src);
     VideoCapture *_cameraObj;
     Mat _currentFrameMat;
+
+    // int focusToPXmmTable[] = {1, 2, 3, 4, 5};
 };
 
 #endif // CAMERA_H

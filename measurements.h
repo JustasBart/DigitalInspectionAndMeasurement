@@ -9,13 +9,6 @@ class Measurements
 {
 public:
     static void drawCalibrationLines(QPixmap *frameToDrawOn);
-
-public slots:
-    void receiveVals(unsigned int val, QString param);
-
-private:
-    int _horizontalOffset;
-    int _vertocalOffset;
 };
 
 #endif // MEASUREMENTS_H
