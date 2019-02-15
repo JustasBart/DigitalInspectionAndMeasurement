@@ -79,3 +79,4 @@ LIBS += -LC:\\opencv\\release\\bin \
     libopencv_video343 \
     libopencv_videoio343 \
     libopencv_imgcodecs343 \
+    libopencv_objdetect343 \

@@ -190,18 +190,7 @@ void MainWindow::on_focusOptionsBtn_pressed()
 
 void MainWindow::on_measureButton_pressed()
 {
-    Mat correctedMat;
-
-    Mat newCamMatrix = _cameraMatrix.clone();
-    double scale = double(_res_Width) / double(640);
-    newCamMatrix.at<double>(0,0) = scale * _cameraMatrix.at<double>(0,0);
-    newCamMatrix.at<double>(1,1) = scale * _cameraMatrix.at<double>(1,1);
-    newCamMatrix.at<double>(0,2) = scale * _cameraMatrix.at<double>(0,2);
-    newCamMatrix.at<double>(1,2) = scale * _cameraMatrix.at<double>(1,2);
-
-    undistort(_camObj.retrieveGlobalFrame(), correctedMat, newCamMatrix, _distortionCoefficients);
-
-    emit sendGlobalMat(correctedMat, _screenGeometry);
+    emit sendGlobalMat(_camObj.retrieveGlobalUndistortedFrame(_res_Width), _screenGeometry);
 
     _measuringInterface -> setModal(true);
     _measuringInterface -> exec();

@@ -105,9 +105,6 @@ private:
     int _fps;
 
     bool _calibrationInProgress;
-
-    const Mat _cameraMatrix = (Mat1d(3, 3) << 6.4495329640783768e+002, 0, 320., 0, 6.4495329640783768e+002, 240., 0, 0, 1);
-    const Mat _distortionCoefficients = (Mat1d(1, 5) << 6.9609557394874413e-002, -4.2268944349749588e-001, 0., 0., 7.2720693453931939e-001);
 };
 
 #endif // MAINWINDOW_H

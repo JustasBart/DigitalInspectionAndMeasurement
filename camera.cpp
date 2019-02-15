@@ -44,9 +44,10 @@ unsigned char Camera::getParam(VideoCaptureProperties param)
 QPixmap Camera::captureImage()
 {
     *_cameraObj >> _currentFrameMat;
+    _currentFrameMatAdjustedColor = _currentFrameMat.clone();
 
-    cv::cvtColor(_currentFrameMat, _currentFrameMat, CV_BGR2RGB);
-    QImage dest(static_cast<const uchar *>(_currentFrameMat.data), _currentFrameMat.cols, _currentFrameMat.rows, static_cast<int>(_currentFrameMat.step), QImage::Format_RGB888);
+    cv::cvtColor(_currentFrameMat, _currentFrameMatAdjustedColor, CV_BGR2RGB);
+    QImage dest(static_cast<const uchar *>(_currentFrameMatAdjustedColor.data), _currentFrameMatAdjustedColor.cols, _currentFrameMatAdjustedColor.rows, static_cast<int>(_currentFrameMatAdjustedColor.step), QImage::Format_RGB888);
     dest.bits();
 
     return QPixmap::fromImage(dest);
@@ -67,7 +68,37 @@ Mat Camera::retrieveGlobalFrame()
     return _currentFrameMat;
 }
 
+Mat Camera::retrieveGlobalUndistortedFrame(int width)
+{
+    Mat newCamMatrix = _cameraMatrix.clone();
+
+    double scale = double(width) / double(640);
+
+    newCamMatrix.at<double>(0,0) = scale * _cameraMatrix.at<double>(0,0);
+    newCamMatrix.at<double>(1,1) = scale * _cameraMatrix.at<double>(1,1);
+    newCamMatrix.at<double>(0,2) = scale * _cameraMatrix.at<double>(0,2);
+    newCamMatrix.at<double>(1,2) = scale * _cameraMatrix.at<double>(1,2);
+
+    qDebug() << "Correcting the lens at width: " << width;
+
+    undistort(_currentFrameMat, _correctedMat, newCamMatrix, _distortionCoefficients);
+
+    return _correctedMat;
+}
+
 void Camera::releaseCamera()
 {
     _cameraObj -> release();
+}
+
+void Camera::process_frame(const cv::UMat& frame)
+{
+    CV_TRACE_FUNCTION(); // OpenCV Trace macro for function
+
+    imshow("Live", frame);
+
+    UMat gray, processed;
+    cv::cvtColor(frame, gray, COLOR_BGR2GRAY);
+    Canny(gray, processed, 32, 64, 3);
+    imshow("Processed", processed);
 }
