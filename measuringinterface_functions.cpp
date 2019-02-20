@@ -5,6 +5,7 @@ void MeasuringInterface::receiveCurrentMat(Mat currentFrame, QRect screenSize)
 {
     qDebug() << "Received the frame for measuring...";
     _workingFrame = currentFrame;
+
     _workingPixmap = matToPixmap(_workingFrame);
 
     _screenWidth  = screenSize.width();
@@ -47,3 +48,4 @@ void MeasuringInterface::updateFrame(Mat newFrame)
 {
     ui -> frameLabel -> setPixmap( matToPixmap(newFrame) );
 }
+

@@ -27,7 +27,6 @@
 #include "errors.h"
 #include "options.h"
 #include "usersettings.h"
-#include "measurements.h"
 #include "measuringinterface.h"
 #include "grid.h"
 
@@ -59,7 +58,7 @@ private slots:
     void on_actionFull_screen_triggered(bool checked);
     void on_actionCenter_window_triggered();
     void on_actionSet_to_defaults_triggered();
-    void on_modeButton_clicked();
+    void on_modeButton_pressed();
     void on_positionCalibrationButton_pressed();
 
     void on_focusSlider_sliderMoved(int position);
@@ -90,12 +89,17 @@ private:
     void saveGUISettings();
     void defaultCamOpt();
     void defaultUIVals();
+    void setOptionsButtons(bool val);
     void setMeasurementButtons(bool val);
+    void drawCalibrationLines(QPixmap *frameToDrawOn);
 
     QTimer _videoFPSTimer;
+
     Camera _camObj;
     Options _usrOptions;
-    QPixmap _globalFrame;
+
+    Mat _globalFrame;
+    QPixmap _globalQPixmap;
 
     int _camPort;
     bool _savePreferences;

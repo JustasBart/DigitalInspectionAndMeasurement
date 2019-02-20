@@ -1,15 +1,25 @@
 #ifndef MEASURINGINTERFACE_H
 #define MEASURINGINTERFACE_H
 
-#include <stdlib.h>
+#include <QDebug>
 #include <QDialog>
+#include <QFileDialog>
+
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <utility>
+
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-#include <QDebug>
-#include <QFileDialog>
+#include "opencv2/core.hpp"
+#include "opencv2/features2d.hpp"
+#include <opencv2/core/utility.hpp>
+
 #include <grid.h>
 
 using namespace cv;
+using namespace std;
 
 namespace Ui
 {

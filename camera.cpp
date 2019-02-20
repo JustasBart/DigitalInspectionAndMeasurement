@@ -41,12 +41,16 @@ unsigned char Camera::getParam(VideoCaptureProperties param)
     return static_cast<unsigned char>(_cameraObj -> get(param));
 }
 
-QPixmap Camera::captureImage()
+Mat Camera::captureFrameMat()
 {
     *_cameraObj >> _currentFrameMat;
-    _currentFrameMatAdjustedColor = _currentFrameMat.clone();
 
-    cv::cvtColor(_currentFrameMat, _currentFrameMatAdjustedColor, CV_BGR2RGB);
+    return _currentFrameMat;
+}
+
+QPixmap Camera::convertMatToQPixmap(Mat &frameToConver)
+{
+    cv::cvtColor(frameToConver, _currentFrameMatAdjustedColor, CV_BGR2RGB);
     QImage dest(static_cast<const uchar *>(_currentFrameMatAdjustedColor.data), _currentFrameMatAdjustedColor.cols, _currentFrameMatAdjustedColor.rows, static_cast<int>(_currentFrameMatAdjustedColor.step), QImage::Format_RGB888);
     dest.bits();
 
@@ -89,16 +93,4 @@ Mat Camera::retrieveGlobalUndistortedFrame(int width)
 void Camera::releaseCamera()
 {
     _cameraObj -> release();
-}
-
-void Camera::process_frame(const cv::UMat& frame)
-{
-    CV_TRACE_FUNCTION(); // OpenCV Trace macro for function
-
-    imshow("Live", frame);
-
-    UMat gray, processed;
-    cv::cvtColor(frame, gray, COLOR_BGR2GRAY);
-    Canny(gray, processed, 32, 64, 3);
-    imshow("Processed", processed);
 }

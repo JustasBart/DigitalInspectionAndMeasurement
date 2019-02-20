@@ -78,27 +78,41 @@ void MainWindow::defaultUIVals()
     ui->zoomSlider->setValue(0);
 }
 
-void MainWindow::on_modeButton_clicked()
+void MainWindow::on_modeButton_pressed()
 {
     if (ui->modeButton->text() == "Current mode: Dynamic")
     {
-        ui->modeButton->setText("Current mode: Static");
-        _videoFPSTimer.stop();
+        if (ui->calibrationLabel->text() != "*Uncalibrated*")
+        {
+            ui->modeButton->setText("Current mode: Static");
+            _videoFPSTimer.stop();
 
-        ui->adjustmentsGroup->setTitle("Adjustments Group");
-        ui->algorithmsGroup->setTitle("*Algorithms group");
+            ui->positionCalibrationButton->setEnabled(false);
 
-        ui->modesLabel->setText("Measurement");
-        ui->modesLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
+            ui->adjustmentsGroup->setTitle("Adjustments Group");
+            ui->algorithmsGroup->setTitle("*Algorithms group");
 
-        ui->captureButton->setEnabled(true);
-        ui->adjustmentsGroup->setEnabled(false);
-        ui->algorithmsGroup->setEnabled(true);
+            ui->modesLabel->setText("Measurement");
+            ui->modesLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
+
+            ui->captureButton->setEnabled(true);
+            ui->adjustmentsGroup->setEnabled(false);
+            ui->algorithmsGroup->setEnabled(true);
+        }
+        else
+        {
+            if (Errors::cameraPositionUncalibrated() == 0)
+            {
+                on_positionCalibrationButton_pressed();
+            }
+        }
     }
     else
     {
         ui->modeButton->setText("Current mode: Dynamic");
         _videoFPSTimer.start();
+
+        ui->positionCalibrationButton->setEnabled(true);
 
         ui->adjustmentsGroup->setTitle("*Adjustments Group");
         ui->algorithmsGroup->setTitle("Algorithms group");
@@ -110,6 +124,54 @@ void MainWindow::on_modeButton_clicked()
         ui->adjustmentsGroup->setEnabled(true);
         ui->algorithmsGroup->setEnabled(false);
     }
+}
+
+void MainWindow::on_positionCalibrationButton_pressed()
+{
+    if(ui->positionCalibrationButton->text() == "Position calibration")
+    {
+        setOptionsButtons(false);
+
+        if (!_videoFPSTimer.isActive())
+            _videoFPSTimer.start();
+
+        ui->positionCalibrationButton->setText("*Confirm calibration*");
+        ui->calibrationLabel->setText("Calibrating...");
+
+        ui->positionCalibrationButton->setStyleSheet("background-color: cyan");
+        setMeasurementButtons(false);
+
+        _calibrationInProgress = true;
+    }
+    else
+    {
+        setOptionsButtons(true);
+
+        if (ui->modeButton->text() == "Current mode: Static")
+            _videoFPSTimer.stop();
+
+        ui->positionCalibrationButton->setText("Position calibration");
+        ui->positionCalibrationButton->setStyleSheet("background-color: lightGray");
+
+        ui->calibrationLabel->setText(">Calibrated<");
+        setMeasurementButtons(true);
+
+        _calibrationInProgress = false;
+    }
+}
+
+void MainWindow::setOptionsButtons(bool val)
+{
+    ui->modeButton->setEnabled(val);
+    ui->captureButton->setEnabled(val);
+}
+
+void MainWindow::setMeasurementButtons(bool val)
+{
+    ui->measureButton->setEnabled(val);
+    ui->detailMergeButton->setEnabled(val);
+    ui->stackImagesButton->setEnabled(val);
+    ui->edgeDetectButton->setEnabled(val);
 }
 
 void MainWindow::on_actionFull_screen_triggered(bool checked)

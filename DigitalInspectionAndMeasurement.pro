@@ -32,13 +32,11 @@ SOURCES += \
     errors.cpp \
     usersettings.cpp \
     startupdialog.cpp \
-    measurements.cpp \
     measuringinterface.cpp \
     measuringinterface_events.cpp \
     measuringinterface_functions.cpp \
     main_events.cpp \
     main_functions.cpp \
-    measurements_events.cpp \
     grid.cpp
 
 HEADERS += \
@@ -49,7 +47,6 @@ HEADERS += \
     usersettings.h \
     options.h \
     startupdialog.h \
-    measurements.h \
     measuringinterface.h \
     measuringinterface_functions.h \
     grid.h

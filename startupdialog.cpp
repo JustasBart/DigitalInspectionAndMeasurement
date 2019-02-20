@@ -135,3 +135,8 @@ void StartupDialog::on_buttonBox_accepted()
         }
     }
 }
+
+void StartupDialog::on_StartupDialog_rejected()
+{
+    Errors::fatalError("The user closed the startup dialog.");
+}

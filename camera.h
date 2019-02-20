@@ -7,12 +7,19 @@
 #include <opencv2/video/tracking.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/core/utils/trace.hpp>
+#include <opencv2/core/core.hpp>
+#include "opencv2/calib3d/calib3d.hpp"
+
+#include <limits>
+#include <numeric>
+
 
 #include <QDebug>
 #include <QString>
 #include "errors.h"
 
 using namespace cv;
+using namespace std;
 
 class Camera
 {
@@ -21,13 +28,12 @@ public:
     void setParam(VideoCaptureProperties param, int value);
     unsigned char getParam(cv::VideoCaptureProperties param);
     void setBufferSize(int frames);
-    QPixmap captureImage();
+    Mat captureFrameMat();
+    QPixmap convertMatToQPixmap(Mat &frameToConver);
     unsigned char getFPS();
     Mat retrieveGlobalFrame();
     Mat retrieveGlobalUndistortedFrame(int width);
     void releaseCamera();
-
-    static void process_frame(const cv::UMat& frame);
 
 private:
     QImage Mat2QImage(cv::Mat const &src);
@@ -36,12 +42,11 @@ private:
     Mat _currentFrameMatAdjustedColor;
     Mat _correctedMat;
 
-    const Mat _cameraMatrix = (Mat1d(3, 3) << 6.8489708657322979e+002, 0, 320, 0, 6.8489708657322979e+002, 240, 0, 0, 1);
-    const Mat _distortionCoefficients = (Mat1d(1, 5) << 4.4810908038479452e-002, 1.9604429778338306e-001, 0, 0, -7.0203187403062794e-001);
+    const Mat _cameraMatrix = (Mat1d(3, 3) << 6.5178005743280778e+002, 0, 320, 0, 6.5178005743280778e+002, 240, 0, 0, 1);
+    const Mat _distortionCoefficients = (Mat1d(1, 5) << 4.8696914178490348e-002, -7.3927152959877243e-002, 0, 0, -1.9647143782874946e-001);
 
     // Tracking variables //
     Rect2d _roi;
-
 };
 
 #endif // CAMERA_H

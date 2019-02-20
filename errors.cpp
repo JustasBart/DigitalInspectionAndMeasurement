@@ -30,6 +30,36 @@ void Errors::cameraOpenErrorWindow()
         case QMessageBox::Cancel:
             Errors::fatalError("The user cancelled opening the default camera port.");
         default:
-            fatalError("Unexpected error occured in 'windowFatalError'");
+            fatalError("Unexpected error occured in 'cameraOpenErrorWindow'");
     }
 }
+
+int Errors::cameraPositionUncalibrated()
+{
+    QMessageBox msgBox;
+
+    msgBox.setText("The camera position is uncalibrated...");
+    msgBox.setInformativeText("The measurements cannot be applied to an uncalibrated setup.\nWould you like to calibrate the camera positioning now?");
+
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+
+    int ret = msgBox.exec();
+
+    switch (ret)
+    {
+        case QMessageBox::Yes:
+        {
+            qDebug() << "User chose to calibrate the camera.";
+            return 0;
+        }
+        case QMessageBox::Cancel:
+        {
+            qDebug() << "User canceled the measurements mode.";
+            return 1;
+        }
+        default:
+            fatalError("Unexpected error occured in 'cameraPositionUncalibrated'");
+    }
+}
+
