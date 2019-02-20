@@ -13,7 +13,6 @@
 #include <limits>
 #include <numeric>
 
-
 #include <QDebug>
 #include <QString>
 #include "errors.h"

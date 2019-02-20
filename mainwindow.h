@@ -29,6 +29,7 @@
 #include "usersettings.h"
 #include "measuringinterface.h"
 #include "grid.h"
+#include "dynamicline.h"
 
 namespace Ui
 {
@@ -74,6 +75,7 @@ private slots:
     void on_focusOptionsBtn_pressed();
     void on_captureButton_pressed();
     void on_measureButton_pressed();
+    void on_correctLensButton_pressed();
 
 private:
     Ui::MainWindow *ui;
@@ -89,7 +91,6 @@ private:
     void saveGUISettings();
     void defaultCamOpt();
     void defaultUIVals();
-    void setOptionsButtons(bool val);
     void setMeasurementButtons(bool val);
     void drawCalibrationLines(QPixmap *frameToDrawOn);
 

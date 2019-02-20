@@ -88,6 +88,7 @@ void MainWindow::on_modeButton_pressed()
             _videoFPSTimer.stop();
 
             ui->positionCalibrationButton->setEnabled(false);
+            ui->captureButton->setEnabled(true);
 
             ui->adjustmentsGroup->setTitle("Adjustments Group");
             ui->algorithmsGroup->setTitle("*Algorithms group");
@@ -95,9 +96,10 @@ void MainWindow::on_modeButton_pressed()
             ui->modesLabel->setText("Measurement");
             ui->modesLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
 
-            ui->captureButton->setEnabled(true);
             ui->adjustmentsGroup->setEnabled(false);
             ui->algorithmsGroup->setEnabled(true);
+
+            // ui->measureButton->setEnabled(false);
         }
         else
         {
@@ -130,7 +132,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
 {
     if(ui->positionCalibrationButton->text() == "Position calibration")
     {
-        setOptionsButtons(false);
+        ui->modeButton->setEnabled(false);
 
         if (!_videoFPSTimer.isActive())
             _videoFPSTimer.start();
@@ -145,7 +147,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
     }
     else
     {
-        setOptionsButtons(true);
+        ui->modeButton->setEnabled(true);
 
         if (ui->modeButton->text() == "Current mode: Static")
             _videoFPSTimer.stop();
@@ -160,14 +162,9 @@ void MainWindow::on_positionCalibrationButton_pressed()
     }
 }
 
-void MainWindow::setOptionsButtons(bool val)
-{
-    ui->modeButton->setEnabled(val);
-    ui->captureButton->setEnabled(val);
-}
-
 void MainWindow::setMeasurementButtons(bool val)
 {
+    ui->correctLensButton->setEnabled(val);
     ui->measureButton->setEnabled(val);
     ui->detailMergeButton->setEnabled(val);
     ui->stackImagesButton->setEnabled(val);
@@ -261,4 +258,11 @@ void MainWindow::on_measureButton_pressed()
 void MainWindow::on_captureButton_pressed()
 {
     captureImage();
+    captureImage(); // Second frame flush to overcome the buffer
+}
+
+void MainWindow::on_correctLensButton_pressed()
+{
+    Mat tempMat = _camObj.retrieveGlobalUndistortedFrame(_res_Width);
+    ui->videoLabel->setPixmap( _camObj.convertMatToQPixmap( tempMat ) );
 }

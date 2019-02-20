@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-int thresh = 50, N = 11;
-const char* wndname = "Square Detection Demo";
-
 void MainWindow::init()
 {
     ui->actionFull_screen->setChecked( _fullScreen );
@@ -25,7 +22,7 @@ void MainWindow::init()
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
     connect(MainWindow::window(), SIGNAL(sendGlobalMat(Mat, QRect)), _measuringInterface, SLOT(receiveCurrentMat(Mat, QRect)));
 
-    // _camObj.setBufferSize(1);
+    _camObj.setBufferSize(0);
 
     _videoFPSTimer.start(1000 / _fps);
 
@@ -74,6 +71,8 @@ void MainWindow::captureImage()
         _globalQPixmap = _camObj.convertMatToQPixmap(_globalFrame);
 
         drawCalibrationLines( &_globalQPixmap );
+
+        // DynamicLine::drawLine( &_globalQPixmap );
     }
     else
     {
