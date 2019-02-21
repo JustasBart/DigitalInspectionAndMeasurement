@@ -16,7 +16,8 @@
 #include "opencv2/features2d.hpp"
 #include <opencv2/core/utility.hpp>
 
-#include <grid.h>
+#include "grid.h"
+#include "dynamicline.h"
 
 using namespace cv;
 using namespace std;
