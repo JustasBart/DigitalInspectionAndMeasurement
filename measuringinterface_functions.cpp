@@ -46,6 +46,7 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
 
             drawLine();
 
+            ui->removeScaleButton->setEnabled(true);
             ui->drawScaleButton->setText("Draw scale");
         }
 
@@ -87,4 +88,15 @@ void MeasuringInterface::resizeLabelToWindow()
 void MeasuringInterface::updateFrame(Mat newFrame)
 {
     ui -> frameLabel -> setPixmap( matToPixmap(newFrame) );
+}
+
+void MeasuringInterface::placeGrid(Mat &frame, int distance)
+{
+    int width  = frame.size().width;
+    int height = frame.size().height;
+
+    for(int i = 0; i < height; i += distance)
+      cv::line(frame, Point(0, i), Point(width, i), cv::Scalar(255, 255, 255));
+    for(int i = 0; i < width; i += distance)
+      cv::line(frame, Point(i, 0), Point(i, height), cv::Scalar(255, 255, 255));
 }

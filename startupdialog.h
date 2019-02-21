@@ -3,10 +3,13 @@
 
 #define GROUP_LOCATION  "GUISettings"
 
+// QtIncludes //
 #include <QDialog>
 #include <QString>
-#include <errors.h>
+
+// Local includes //
 #include "usersettings.h"
+#include "errors.h"
 
 namespace Ui
 {
@@ -27,9 +30,7 @@ signals:
 private slots:
     void on_buttonBox_rejected();
     void on_StartupDialog_finished(int result);
-
     void on_buttonBox_accepted();
-
     void on_StartupDialog_rejected();
 
 private:

@@ -22,7 +22,7 @@ void MeasuringInterface::on_drawGridCheckbox_stateChanged(int arg1)
 void MeasuringInterface::on_gridSlider_sliderMoved(int position)
 {
     _frameWithGrid = _workingFrame.clone();
-    Grid::placeGrid( _frameWithGrid, position );
+    placeGrid( _frameWithGrid, position );
     updateFrame( _frameWithGrid );
 }
 
@@ -46,4 +46,10 @@ void MeasuringInterface::on_drawScaleButton_pressed()
         ui->drawScaleButton->setText("Drawing scale");
         ui->scaledLabel->setText("Point 1");
     }
+}
+
+void MeasuringInterface::on_removeScaleButton_pressed()
+{
+    updateFrame(_workingFrame);
+    ui->removeScaleButton->setEnabled(false);
 }

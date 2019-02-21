@@ -1,6 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+// OpenCV includes //
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/core/utility.hpp>
@@ -10,12 +11,15 @@
 #include <opencv2/core/core.hpp>
 #include "opencv2/calib3d/calib3d.hpp"
 
+// Generic includes //
 #include <limits>
 #include <numeric>
 
-
+// QtIncludes //
 #include <QDebug>
 #include <QString>
+
+// Local includes //
 #include "errors.h"
 
 using namespace cv;
@@ -44,9 +48,6 @@ private:
 
     const Mat _cameraMatrix = (Mat1d(3, 3) << 6.5178005743280778e+002, 0, 320, 0, 6.5178005743280778e+002, 240, 0, 0, 1);
     const Mat _distortionCoefficients = (Mat1d(1, 5) << 4.8696914178490348e-002, -7.3927152959877243e-002, 0, 0, -1.9647143782874946e-001);
-
-    // Tracking variables //
-    Rect2d _roi;
 };
 
 #endif // CAMERA_H

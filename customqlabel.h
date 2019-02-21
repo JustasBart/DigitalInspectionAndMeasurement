@@ -1,10 +1,11 @@
 #ifndef CUSTOMQLABEL_H
 #define CUSTOMQLABEL_H
 
+// QtIncludes //
+#include <QMouseEvent>
 #include <QObject>
 #include <QWidget>
 #include <QLabel>
-#include <QMouseEvent>
 
 class CustomQLabel : public QLabel
 {

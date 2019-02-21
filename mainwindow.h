@@ -1,8 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-
 // Defines //
 #define GROUP_LOCATION  "GUISettings"
 
@@ -10,25 +8,22 @@
 #include <opencv2/highgui.hpp>
 
 // General QT includes //
-#include <QTimer>
-#include <QString>
-#include <QVariant>
-#include <QStyle>
-#include <QDesktopWidget>
 #include <QGuiApplication>
-#include <QScreen>
-
+#include <QDesktopWidget>
+#include <QMainWindow>
+#include <QVariant>
 #include <QPainter>
+#include <QString>
+#include <QScreen>
+#include <QTimer>
+#include <QStyle>
 
 // General functions //
-#include "startupdialog.h"
-#include "camera.h"
-#include "algorithms.h"
-#include "errors.h"
-#include "options.h"
-#include "usersettings.h"
 #include "measuringinterface.h"
-#include "grid.h"
+#include "startupdialog.h"
+#include "usersettings.h"
+#include "camera.h"
+#include "errors.h"
 
 namespace Ui
 {
@@ -74,7 +69,6 @@ private slots:
     void on_focusOptionsBtn_pressed();
     void on_captureButton_pressed();
     void on_measureButton_pressed();
-
     void on_distortionButton_pressed();
 
 private:

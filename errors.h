@@ -1,10 +1,12 @@
 #ifndef ERRORS_H
 #define ERRORS_H
 
+// QtIncludes //
+
+#include <QApplication>
+#include <QMessageBox>
 #include <QString>
 #include <QDebug>
-#include <QMessageBox>
-#include <QApplication>
 
 class Errors
 {

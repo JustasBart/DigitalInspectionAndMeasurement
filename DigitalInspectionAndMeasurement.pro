@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    algorithms.cpp \
     camera.cpp \
     errors.cpp \
     usersettings.cpp \
@@ -37,20 +36,16 @@ SOURCES += \
     measuringinterface_functions.cpp \
     main_events.cpp \
     main_functions.cpp \
-    grid.cpp \
     customqlabel.cpp
 
 HEADERS += \
         mainwindow.h \
-    algorithms.h \
     camera.h \
     errors.h \
     usersettings.h \
-    options.h \
     startupdialog.h \
     measuringinterface.h \
     measuringinterface_functions.h \
-    grid.h \
     customqlabel.h
 
 FORMS += \

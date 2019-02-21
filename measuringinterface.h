@@ -1,25 +1,26 @@
 #ifndef MEASURINGINTERFACE_H
 #define MEASURINGINTERFACE_H
 
-#include <QDebug>
-#include <QDialog>
-#include <QFileDialog>
+// QtIncludes //
 #include <QMouseEvent>
-#include <QPoint>
+#include <QFileDialog>
 #include <QPainter>
+#include <QDialog>
+#include <QDebug>
+#include <QPoint>
 
+// Generic includes //
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include <utility>
 
+// OpenCV includes //
+#include <opencv2/core/utility.hpp>
+#include "opencv2/features2d.hpp"
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include "opencv2/core.hpp"
-#include "opencv2/features2d.hpp"
-#include <opencv2/core/utility.hpp>
-
-#include <grid.h>
 
 using namespace cv;
 using namespace std;
@@ -35,6 +36,7 @@ class MeasuringInterface : public QDialog
 
 public:
     explicit MeasuringInterface(QWidget *parent = nullptr);
+    static void placeGrid(Mat &frame, int distance);
     ~MeasuringInterface();
 
 public slots:
@@ -47,6 +49,8 @@ private slots:
     void on_drawGridCheckbox_stateChanged(int arg1);
     void on_gridSlider_sliderMoved(int position);
     void on_drawScaleButton_pressed();
+
+    void on_removeScaleButton_pressed();
 
 private:
     Ui::MeasuringInterface *ui;
@@ -68,8 +72,6 @@ private:
 
     QPoint _scaleLinePoints[2];
     int _scaleDrawingIndex;
-
-    QPainter _painter;
 };
 
 #endif // MEASURINGINTERFACE_H

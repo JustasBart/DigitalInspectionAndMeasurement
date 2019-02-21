@@ -1,14 +1,23 @@
 #ifndef USERSETTINGS_H
 #define USERSETTINGS_H
 
-#include "options.h"
-#include <QString>
-#include <QVariant>
+// QtIncludes //
 #include <QSettings>
+#include <QVariant>
+#include <QString>
 
+// Local includes //
 #include "errors.h"
 
-#define FILE_PATH "Options.txt"
+struct Options
+{
+    unsigned char zoom;
+    unsigned char focus;
+    unsigned char contrast;
+    unsigned char saturation;
+    unsigned char brightness;
+    bool autoFocus;
+};
 
 class UserSettings
 {
