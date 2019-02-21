@@ -37,7 +37,8 @@ SOURCES += \
     measuringinterface_functions.cpp \
     main_events.cpp \
     main_functions.cpp \
-    grid.cpp
+    grid.cpp \
+    customqlabel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -49,7 +50,8 @@ HEADERS += \
     startupdialog.h \
     measuringinterface.h \
     measuringinterface_functions.h \
-    grid.h
+    grid.h \
+    customqlabel.h
 
 FORMS += \
         mainwindow.ui \

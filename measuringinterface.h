@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QMouseEvent>
 #include <QPoint>
+#include <QPainter>
 
 #include <iostream>
 #include <stdlib.h>
@@ -38,6 +39,8 @@ public:
 
 public slots:
     void receiveCurrentMat(Mat currentFrame, QRect screenSize);
+    void labelMousePos(QPoint &pos);
+    void labelMouseClickedPos(QPoint &pos);
 
 private slots:
     void on_saveImageButton_pressed();
@@ -52,14 +55,21 @@ private:
     void resizeWindowToScreenSize();
     void resizeLabelToWindow();
     void updateFrame(Mat newFrame);
+    void drawLine();
     void clickedLabel(QMouseEvent *event);
 
     Mat _workingFrame;
     Mat _frameWithGrid;
+    Mat _frameWithScale;
 
     QPixmap _workingPixmap;
     int _screenWidth;
     int _screenHeight;
+
+    QPoint _scaleLinePoints[2];
+    int _scaleDrawingIndex;
+
+    QPainter _painter;
 };
 
 #endif // MEASURINGINTERFACE_H

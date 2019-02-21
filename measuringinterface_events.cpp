@@ -40,5 +40,10 @@ void MeasuringInterface::on_saveImageButton_pressed()
 
 void MeasuringInterface::on_drawScaleButton_pressed()
 {
-    qDebug() << "Clicked";
+    if (ui->drawScaleButton->text() == "Draw scale")
+    {
+        _scaleDrawingIndex = 0;
+        ui->drawScaleButton->setText("Drawing scale");
+        ui->scaledLabel->setText("Point 1");
+    }
 }
