@@ -37,8 +37,7 @@ SOURCES += \
     measuringinterface_functions.cpp \
     main_events.cpp \
     main_functions.cpp \
-    grid.cpp \
-    dynamicline.cpp
+    grid.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,8 +49,7 @@ HEADERS += \
     startupdialog.h \
     measuringinterface.h \
     measuringinterface_functions.h \
-    grid.h \
-    dynamicline.h
+    grid.h
 
 FORMS += \
         mainwindow.ui \
