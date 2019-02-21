@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QDialog>
 #include <QFileDialog>
+#include <QMouseEvent>
+#include <QPoint>
 
 #include <iostream>
 #include <stdlib.h>
@@ -41,6 +43,7 @@ private slots:
     void on_saveImageButton_pressed();
     void on_drawGridCheckbox_stateChanged(int arg1);
     void on_gridSlider_sliderMoved(int position);
+    void on_drawScaleButton_pressed();
 
 private:
     Ui::MeasuringInterface *ui;
@@ -49,6 +52,7 @@ private:
     void resizeWindowToScreenSize();
     void resizeLabelToWindow();
     void updateFrame(Mat newFrame);
+    void clickedLabel(QMouseEvent *event);
 
     Mat _workingFrame;
     Mat _frameWithGrid;

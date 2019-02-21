@@ -261,4 +261,15 @@ void MainWindow::on_measureButton_pressed()
 void MainWindow::on_captureButton_pressed()
 {
     captureImage();
+    captureImage(); // Second capture to flush the buffer
+
+    ui->distortionLabel->setText("Undistorted");
+}
+
+void MainWindow::on_distortionButton_pressed()
+{
+    Mat undistortedMat = _camObj.retrieveGlobalUndistortedFrame(_res_Width);
+    ui->videoLabel->setPixmap( _camObj.convertMatToQPixmap(undistortedMat) );
+
+    ui->distortionLabel->setText("Undistorted");
 }

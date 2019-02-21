@@ -75,6 +75,8 @@ private slots:
     void on_captureButton_pressed();
     void on_measureButton_pressed();
 
+    void on_distortionButton_pressed();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;

@@ -37,3 +37,8 @@ void MeasuringInterface::on_saveImageButton_pressed()
     else
         qDebug() << "Saving image canceled by the user.";
 }
+
+void MeasuringInterface::on_drawScaleButton_pressed()
+{
+    qDebug() << "Clicked";
+}
