@@ -99,17 +99,7 @@
        </item>
        <item>
         <property name="text">
-         <string>1080x840</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>720x480</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>640x240</string>
+         <string>640x360</string>
         </property>
        </item>
       </widget>

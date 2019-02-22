@@ -1,15 +1,18 @@
 #include "measuringinterface.h"
 #include "ui_measuringinterface.h"
 
-void MeasuringInterface::receiveCurrentMat(Mat currentFrame, QRect screenSize)
+void MeasuringInterface::receiveCurrentMat(Mat currentFrame, QSize frameRes, QRect screenSize)
 {
     qDebug() << "Received the frame for measuring...";
-    _workingFrame = currentFrame;
 
+    _workingFrame = currentFrame.clone();
     _workingPixmap = matToPixmap(_workingFrame);
 
     _screenWidth  = screenSize.width();
     _screenHeight = screenSize.height();
+
+    _frameWidth = frameRes.width();
+    _frameHeight = frameRes.height();
 
     if (!_workingPixmap.isNull())
         updateFrame(currentFrame);
@@ -46,6 +49,7 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
 
             drawLine();
 
+
             ui->removeScaleButton->setEnabled(true);
             ui->drawScaleButton->setText("Draw scale");
         }
@@ -57,8 +61,27 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
 void MeasuringInterface::drawLine()
 {
     _frameWithScale = _workingFrame.clone();
-    cv::line(_frameWithScale, cv::Point(_scaleLinePoints[0].x(), _scaleLinePoints[0].y()), cv::Point(_scaleLinePoints[1].x(), _scaleLinePoints[1].y()), cv::Scalar(255, 255, 0));
+
+    cv::Point mappedPoint1;
+    mappedPoint1.x = HelperClass::map(_scaleLinePoints[0].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
+    mappedPoint1.y = HelperClass::map(_scaleLinePoints[0].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
+
+    qDebug() << _frameWidth << " and " << _frameHeight;
+
+    cv::Point mappedPoint2;
+    mappedPoint2.x = HelperClass::map(_scaleLinePoints[1].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
+    mappedPoint2.y = HelperClass::map(_scaleLinePoints[1].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
+
+    cv::line(_frameWithScale, mappedPoint1, mappedPoint2, cv::Scalar(255, 255, 0));
+
+    calculatePXtoMM(mappedPoint1, mappedPoint2);
+
     updateFrame(_frameWithScale);
+}
+
+int MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2)
+{
+
 }
 
 QPixmap MeasuringInterface::matToPixmap(Mat frame)
@@ -88,15 +111,4 @@ void MeasuringInterface::resizeLabelToWindow()
 void MeasuringInterface::updateFrame(Mat newFrame)
 {
     ui -> frameLabel -> setPixmap( matToPixmap(newFrame) );
-}
-
-void MeasuringInterface::placeGrid(Mat &frame, int distance)
-{
-    int width  = frame.size().width;
-    int height = frame.size().height;
-
-    for(int i = 0; i < height; i += distance)
-      cv::line(frame, Point(0, i), Point(width, i), cv::Scalar(255, 255, 255));
-    for(int i = 0; i < width; i += distance)
-      cv::line(frame, Point(i, 0), Point(i, height), cv::Scalar(255, 255, 255));
 }

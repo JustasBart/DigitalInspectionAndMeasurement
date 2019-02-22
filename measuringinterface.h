@@ -8,12 +8,16 @@
 #include <QDialog>
 #include <QDebug>
 #include <QPoint>
+#include <QRect>
 
 // Generic includes //
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include <utility>
+
+// Local includes //
+#include "helperclass.h"
 
 // OpenCV includes //
 #include <opencv2/core/utility.hpp>
@@ -36,11 +40,11 @@ class MeasuringInterface : public QDialog
 
 public:
     explicit MeasuringInterface(QWidget *parent = nullptr);
-    static void placeGrid(Mat &frame, int distance);
+    int calculatePXtoMM(cv::Point p1, cv::Point p2);
     ~MeasuringInterface();
 
 public slots:
-    void receiveCurrentMat(Mat currentFrame, QRect screenSize);
+    void receiveCurrentMat(Mat currentFrame, QSize frameRes, QRect screenSize);
     void labelMousePos(QPoint &pos);
     void labelMouseClickedPos(QPoint &pos);
 
@@ -49,7 +53,6 @@ private slots:
     void on_drawGridCheckbox_stateChanged(int arg1);
     void on_gridSlider_sliderMoved(int position);
     void on_drawScaleButton_pressed();
-
     void on_removeScaleButton_pressed();
 
 private:
@@ -69,6 +72,8 @@ private:
     QPixmap _workingPixmap;
     int _screenWidth;
     int _screenHeight;
+    int _frameWidth;
+    int _frameHeight;
 
     QPoint _scaleLinePoints[2];
     int _scaleDrawingIndex;

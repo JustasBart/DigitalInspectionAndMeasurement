@@ -7,6 +7,9 @@
 #include <QWidget>
 #include <QLabel>
 
+// Local includes //
+#include "mainwindow.h"
+
 class CustomQLabel : public QLabel
 {
     Q_OBJECT

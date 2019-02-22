@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-int thresh = 50, N = 11;
-const char* wndname = "Square Detection Demo";
-
 void MainWindow::init()
 {
     ui->actionFull_screen->setChecked( _fullScreen );
@@ -11,7 +8,6 @@ void MainWindow::init()
 
     resizeWindowToScreenSize();
     resizeLabelToWindow();
-
     centerWindow();
 
     if (_camObj.cameraInit(_camPort, _fps, _res_Width, _res_Height) == -1)
@@ -23,9 +19,9 @@ void MainWindow::init()
     ui->fpsLabel->setText( "Frames per second: " + QString::number(_camObj.getFPS()) );
 
     connect(&_videoFPSTimer, SIGNAL(timeout()), MainWindow::window(), SLOT(captureImage()));
-    connect(MainWindow::window(), SIGNAL(sendGlobalMat(Mat, QRect)), _measuringInterface, SLOT(receiveCurrentMat(Mat, QRect)));
+    connect(MainWindow::window(), SIGNAL(sendGlobalMat(Mat, QSize, QRect)), _measuringInterface, SLOT(receiveCurrentMat(Mat, QSize, QRect)));
 
-    // _camObj.setBufferSize(1);
+    // _camObj.setBufferSize(1); // Using double flushing instead
 
     _videoFPSTimer.start(1000 / _fps);
 

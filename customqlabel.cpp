@@ -23,6 +23,7 @@ void CustomQLabel::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         QPoint mousePosition = event->pos();
+
         emit sendMousePoint(mousePosition);
     }
 }

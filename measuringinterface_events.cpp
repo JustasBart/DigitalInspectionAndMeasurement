@@ -22,7 +22,7 @@ void MeasuringInterface::on_drawGridCheckbox_stateChanged(int arg1)
 void MeasuringInterface::on_gridSlider_sliderMoved(int position)
 {
     _frameWithGrid = _workingFrame.clone();
-    placeGrid( _frameWithGrid, position );
+    HelperClass::placeGrid( _frameWithGrid, position );
     updateFrame( _frameWithGrid );
 }
 
