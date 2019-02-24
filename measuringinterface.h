@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QPoint>
 #include <QRect>
+#include <QtMath>
 
 // Generic includes //
 #include <iostream>
@@ -40,7 +41,7 @@ class MeasuringInterface : public QDialog
 
 public:
     explicit MeasuringInterface(QWidget *parent = nullptr);
-    double calculatePXtoMM(cv::Point p1, cv::Point p2, int lenght);
+    double calculatePXtoMM(cv::Point p1, cv::Point p2, int distance);
     ~MeasuringInterface();
 
 public slots:
@@ -54,8 +55,9 @@ private slots:
     void on_gridSlider_sliderMoved(int position);
     void on_drawScaleButton_pressed();
     void on_removeScaleButton_pressed();
-
     void on_mmSpinbox_valueChanged(int arg1);
+
+    void on_smallGridSlider_sliderMoved(int position);
 
 private:
     Ui::MeasuringInterface *ui;

@@ -79,9 +79,9 @@ void MeasuringInterface::drawLine()
     updateFrame( _frameWithScale );
 }
 
-double MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2, int lenght)
+double MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2, int distance)
 {
-    return cv::norm(p1-p2) / lenght;
+    return qSqrt( qPow(p1.x - p2.x, 2) + qPow(p1.y - p2.y, 2) ) / distance;
 }
 
 QPixmap MeasuringInterface::matToPixmap(Mat frame)

@@ -23,3 +23,5 @@ MeasuringInterface::~MeasuringInterface()
 {
     delete ui;
 }
+
+
