@@ -1,9 +1,8 @@
 #include "helperclass.h"
 
-HelperClass::HelperClass()
-{
-
-}
+// Local includes //
+#include "measuringinterface.h"
+#include "ui_measuringinterface.h"
 
 int HelperClass::map(const int x, const int in_min, const int in_max, const int out_min, const int out_max)
 {

@@ -14,7 +14,6 @@ using namespace std;
 class HelperClass
 {
 public:
-    HelperClass();
     static void placeGrid(Mat &frame, int distance);
     static int map(const int x, const int in_min, const int in_max, const int out_min, const int out_max);
 };

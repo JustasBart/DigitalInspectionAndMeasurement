@@ -11,7 +11,7 @@ void CustomQLabel::mouseMoveEvent(QMouseEvent *event)
 
     if (mousePosition.x() <= this->size().width() && mousePosition.y() <= this->size().height())
     {
-        if (mousePosition.x() >= 0 && mousePosition.y() >= 0)
+        if (mousePosition.x() > 0 && mousePosition.y() > 0)
         {
             emit sendMousePosition(mousePosition);
         }

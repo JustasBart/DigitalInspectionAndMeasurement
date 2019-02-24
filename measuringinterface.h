@@ -40,7 +40,7 @@ class MeasuringInterface : public QDialog
 
 public:
     explicit MeasuringInterface(QWidget *parent = nullptr);
-    int calculatePXtoMM(cv::Point p1, cv::Point p2);
+    double calculatePXtoMM(cv::Point p1, cv::Point p2, int lenght);
     ~MeasuringInterface();
 
 public slots:
@@ -55,6 +55,8 @@ private slots:
     void on_drawScaleButton_pressed();
     void on_removeScaleButton_pressed();
 
+    void on_mmSpinbox_valueChanged(int arg1);
+
 private:
     Ui::MeasuringInterface *ui;
 
@@ -64,6 +66,7 @@ private:
     void updateFrame(Mat newFrame);
     void drawLine();
     void clickedLabel(QMouseEvent *event);
+    void updateGridSizeLabel(int val);
 
     Mat _workingFrame;
     Mat _frameWithGrid;
@@ -75,8 +78,14 @@ private:
     int _frameWidth;
     int _frameHeight;
 
+    vector <QPoint> rulerPoints;
+
     QPoint _scaleLinePoints[2];
     int _scaleDrawingIndex;
+    double _PXtoMM;
+
+    cv::Point _mappedPoint1;
+    cv::Point _mappedPoint2;
 };
 
 #endif // MEASURINGINTERFACE_H

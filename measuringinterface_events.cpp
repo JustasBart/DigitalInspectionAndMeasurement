@@ -23,6 +23,7 @@ void MeasuringInterface::on_gridSlider_sliderMoved(int position)
 {
     _frameWithGrid = _workingFrame.clone();
     HelperClass::placeGrid( _frameWithGrid, position );
+    updateGridSizeLabel(position);
     updateFrame( _frameWithGrid );
 }
 
@@ -52,4 +53,17 @@ void MeasuringInterface::on_removeScaleButton_pressed()
 {
     updateFrame(_workingFrame);
     ui->removeScaleButton->setEnabled(false);
+}
+
+void MeasuringInterface::on_mmSpinbox_valueChanged(int arg1)
+{
+    _PXtoMM = calculatePXtoMM(_mappedPoint1, _mappedPoint2, arg1);
+    updateGridSizeLabel(arg1);
+    ui->px_mmValueLabel->setText("Current PX/MM value: " + QString::number(_PXtoMM));
+}
+
+void MeasuringInterface::updateGridSizeLabel(int val)
+{
+    if (_PXtoMM != 0.0)
+        ui->gridSizeLabel->setText("Grid size: " + QString::number( val * _PXtoMM ));
 }

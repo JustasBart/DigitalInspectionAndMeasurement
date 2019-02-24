@@ -49,7 +49,6 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
 
             drawLine();
 
-
             ui->removeScaleButton->setEnabled(true);
             ui->drawScaleButton->setText("Draw scale");
         }
@@ -62,26 +61,27 @@ void MeasuringInterface::drawLine()
 {
     _frameWithScale = _workingFrame.clone();
 
-    cv::Point mappedPoint1;
-    mappedPoint1.x = HelperClass::map(_scaleLinePoints[0].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
-    mappedPoint1.y = HelperClass::map(_scaleLinePoints[0].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
+    _mappedPoint1.x = HelperClass::map(_scaleLinePoints[0].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
+    _mappedPoint1.y = HelperClass::map(_scaleLinePoints[0].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
 
     qDebug() << _frameWidth << " and " << _frameHeight;
 
-    cv::Point mappedPoint2;
-    mappedPoint2.x = HelperClass::map(_scaleLinePoints[1].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
-    mappedPoint2.y = HelperClass::map(_scaleLinePoints[1].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
+    _mappedPoint2.x = HelperClass::map(_scaleLinePoints[1].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
+    _mappedPoint2.y = HelperClass::map(_scaleLinePoints[1].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
 
-    cv::line(_frameWithScale, mappedPoint1, mappedPoint2, cv::Scalar(255, 255, 0));
+    cv::line(_frameWithScale, _mappedPoint1, _mappedPoint2, cv::Scalar(255, 255, 0));
 
-    calculatePXtoMM(mappedPoint1, mappedPoint2);
+    _PXtoMM = calculatePXtoMM(_mappedPoint1, _mappedPoint2, ui->mmSpinbox->value());
+    ui->px_mmValueLabel->setText("Current PX/MM value: " + QString::number(_PXtoMM));
 
-    updateFrame(_frameWithScale);
+    qDebug() << _PXtoMM;
+
+    updateFrame( _frameWithScale );
 }
 
-int MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2)
+double MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2, int lenght)
 {
-
+    return cv::norm(p1-p2) / lenght;
 }
 
 QPixmap MeasuringInterface::matToPixmap(Mat frame)

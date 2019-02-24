@@ -9,7 +9,10 @@ MeasuringInterface::MeasuringInterface(QWidget *parent) :
     _screenWidth(0),
     _screenHeight(0),
     _scaleLinePoints(),
-    _scaleDrawingIndex(0)
+    _scaleDrawingIndex(0),
+    _PXtoMM(0),
+    _mappedPoint1(0),
+    _mappedPoint2(0)
 {
     ui->setupUi(this);
 
