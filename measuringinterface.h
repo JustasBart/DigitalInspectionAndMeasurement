@@ -11,12 +11,6 @@
 #include <QRect>
 #include <QtMath>
 
-// Generic includes //
-#include <iostream>
-#include <stdlib.h>
-#include <vector>
-#include <utility>
-
 // Local includes //
 #include "helperclass.h"
 
@@ -28,7 +22,6 @@
 #include "opencv2/core.hpp"
 
 using namespace cv;
-using namespace std;
 
 namespace Ui
 {
@@ -80,10 +73,9 @@ private:
     int _frameWidth;
     int _frameHeight;
 
-    vector <QPoint> rulerPoints;
-
     QPoint _scaleLinePoints[2];
     int _scaleDrawingIndex;
+
     double _PXtoMM;
 
     cv::Point _mappedPoint1;
