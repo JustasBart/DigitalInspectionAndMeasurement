@@ -6,6 +6,8 @@ using namespace cv;
 MeasuringInterface::MeasuringInterface(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MeasuringInterface),
+    _lClassObj(new LinesClass()),
+    _rulerDrawingStatus(false),
     _screenWidth(0),
     _screenHeight(0),
     _scaleLinePoints(),
@@ -17,6 +19,7 @@ MeasuringInterface::MeasuringInterface(QWidget *parent) :
 
     connect(ui->frameLabel, SIGNAL(sendMousePosition(QPoint&)), this, SLOT(labelMousePos(QPoint&)));
     connect(ui->frameLabel, SIGNAL(sendMousePoint(QPoint&)), this, SLOT(labelMouseClickedPos(QPoint&)));
+    connect(MeasuringInterface::window(), SIGNAL(sendTableObject(QTableView&)), _lClassObj, SLOT(receiveTableObject(QTableView&)));
 }
 MeasuringInterface::~MeasuringInterface()
 {
@@ -24,3 +27,7 @@ MeasuringInterface::~MeasuringInterface()
 }
 
 
+void MeasuringInterface::on_rulersTable_doubleClicked(const QModelIndex &index)
+{
+    qDebug() << index.column();
+}

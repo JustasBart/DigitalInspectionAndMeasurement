@@ -4,15 +4,16 @@
 // QtIncludes //
 #include <QMouseEvent>
 #include <QFileDialog>
+#include <QTableView>
 #include <QPainter>
 #include <QDialog>
 #include <QDebug>
 #include <QPoint>
 #include <QRect>
-#include <QtMath>
 
 // Local includes //
 #include "helperclass.h"
+#include "linesclass.h"
 
 // OpenCV includes //
 #include <opencv2/core/utility.hpp>
@@ -34,13 +35,15 @@ class MeasuringInterface : public QDialog
 
 public:
     explicit MeasuringInterface(QWidget *parent = nullptr);
-    double calculatePXtoMM(cv::Point p1, cv::Point p2, int distance);
     ~MeasuringInterface();
 
 public slots:
     void receiveCurrentMat(Mat currentFrame, QSize frameRes, QRect screenSize);
     void labelMousePos(QPoint &pos);
     void labelMouseClickedPos(QPoint &pos);
+
+public: signals:
+    void sendTableObject(QTableView &listView);
 
 private slots:
     void on_saveImageButton_pressed();
@@ -49,8 +52,10 @@ private slots:
     void on_drawScaleButton_pressed();
     void on_removeScaleButton_pressed();
     void on_mmSpinbox_valueChanged(int arg1);
-
     void on_smallGridSlider_sliderMoved(int position);
+    void on_drawRulerButton_pressed();
+
+    void on_rulersTable_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MeasuringInterface *ui;
@@ -63,9 +68,17 @@ private:
     void clickedLabel(QMouseEvent *event);
     void updateGridSizeLabel(int val);
 
+    LinesClass *_lClassObj;
+
     Mat _workingFrame;
     Mat _frameWithGrid;
     Mat _frameWithScale;
+
+    Mat _frameWithRulers;
+
+    bool _rulerDrawingStatus;
+    QPoint _tempPoint1;
+    QPoint _tempPoint2;
 
     QPixmap _workingPixmap;
     int _screenWidth;

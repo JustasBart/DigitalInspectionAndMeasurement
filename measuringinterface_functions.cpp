@@ -29,34 +29,7 @@ void MeasuringInterface::labelMousePos(QPoint &pos)
         ui->scaledLabel->setText("x: " + QString::number(pos.x()) + ", y: " + QString::number(pos.y()));
 }
 
-void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
-{
-    if (ui->drawScaleButton->text() != "Draw scale")
-    {
-        qDebug() << "Clicked pos: x: " << QString::number(pos.x()) + ", y: " + QString::number(pos.y());
-
-        if (_scaleDrawingIndex == 0)
-        {
-            _scaleLinePoints[0] = pos;
-            ui->scaledLabel->setText("Point 2");
-        }
-        else if (_scaleDrawingIndex == 1)
-        {
-            _scaleLinePoints[1] = pos;
-            ui->scaledLabel->setText("Drawing line");
-
-            qDebug() << "Point 1: " << _scaleLinePoints[0] << " Point 2: " << _scaleLinePoints[1];
-
-            drawLine();
-
-            ui->removeScaleButton->setEnabled(true);
-            ui->drawScaleButton->setText("Draw scale");
-        }
-
-        _scaleDrawingIndex++;
-    }
-}
-
+/*
 void MeasuringInterface::drawLine()
 {
     _frameWithScale = _workingFrame.clone();
@@ -78,11 +51,14 @@ void MeasuringInterface::drawLine()
 
     updateFrame( _frameWithScale );
 }
+*/
 
+/*
 double MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2, int distance)
 {
     return qSqrt( qPow(p1.x - p2.x, 2) + qPow(p1.y - p2.y, 2) ) / distance;
 }
+*/
 
 QPixmap MeasuringInterface::matToPixmap(Mat frame)
 {

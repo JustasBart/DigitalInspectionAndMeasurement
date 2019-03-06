@@ -50,7 +50,8 @@ HEADERS += \
     measuringinterface_functions.h \
     customqlabel.h \
     helperclass.h \
-    linesclass.h
+    linesclass.h \
+    ruler.h
 
 FORMS += \
         mainwindow.ui \
