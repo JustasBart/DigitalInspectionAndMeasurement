@@ -8,12 +8,11 @@ MeasuringInterface::MeasuringInterface(QWidget *parent) :
     ui(new Ui::MeasuringInterface),
     _lClassObj(new LinesClass()),
     _rulerDrawingStatus(false),
+    _scaleDrawingStatus(false),
     _screenWidth(0),
     _screenHeight(0),
-    _scaleLinePoints(),
-    _scaleDrawingIndex(0),
-    _mappedPoint1(0),
-    _mappedPoint2(0)
+    _mappedPoint1(0, 0),
+    _mappedPoint2(0, 0)
 {
     ui->setupUi(this);
 
@@ -24,10 +23,4 @@ MeasuringInterface::MeasuringInterface(QWidget *parent) :
 MeasuringInterface::~MeasuringInterface()
 {
     delete ui;
-}
-
-
-void MeasuringInterface::on_rulersTable_doubleClicked(const QModelIndex &index)
-{
-    qDebug() << index.column();
 }

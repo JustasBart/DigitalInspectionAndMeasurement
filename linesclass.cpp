@@ -21,7 +21,9 @@ QPoint Ruler::getSecondPoint()
     return _point2;
 }
 
-////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief LinesClass::LinesClass
+/// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 LinesClass::LinesClass()
 {
@@ -29,26 +31,21 @@ LinesClass::LinesClass()
     _lineGuard = false;
     _currentState = 0;
 
-    _tableHeader << "Ruler" << "Name";
+    _tableHeader << "Ruler";
 }
 
-double LinesClass::calculatePXtoMM(cv::Point p1, cv::Point p2, int distance)
+double LinesClass::calculatePXtoMM(const QPoint p1, const QPoint p2, int distance)
 {
-    return qSqrt( qPow(p1.x - p2.x, 2) + qPow(p1.y - p2.y, 2) ) / distance;
+    return qSqrt( qPow(p1.x() - p2.x(), 2) + qPow(p1.y() - p2.y(), 2) ) / distance;
 }
 
 void LinesClass::addRuler(Mat &drawingMat, QPoint _tempPoint1, QPoint _tempPoint2, QSize frameSize, QSize matSize)
 {
-    // Map first
-    // Mapping = Frame size mapped onto the Mat size
-
     _scaledPoint1.setX( HelperClass::map(_tempPoint1.x(), 0, frameSize.width(), 0, matSize.width()) );
     _scaledPoint1.setY( HelperClass::map(_tempPoint1.y(), 0, frameSize.height(), 0, matSize.height()) );
 
     _scaledPoint2.setX( HelperClass::map(_tempPoint2.x(), 0, frameSize.width(), 0, matSize.width()) );
     _scaledPoint2.setY( HelperClass::map(_tempPoint2.y(), 0, frameSize.height(), 0, matSize.height()) );
-
-    // Push to vector
 
     Ruler tempRuler = *new Ruler(_scaledPoint1, _scaledPoint2);
 
@@ -81,4 +78,9 @@ void LinesClass::receiveTableObject(QTableView &tableView)
 
     tableView.setShowGrid(true);
     tableView.setModel(model);
+}
+
+double LinesClass::calculateLenghtOfLine(const QPoint p1, const QPoint p2)
+{
+    return qSqrt( qPow(p2.x() - p1.x(), 2) +  qPow(p2.y() - p1.y(), 2)  );
 }

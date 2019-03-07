@@ -55,8 +55,6 @@ private slots:
     void on_smallGridSlider_sliderMoved(int position);
     void on_drawRulerButton_pressed();
 
-    void on_rulersTable_doubleClicked(const QModelIndex &index);
-
 private:
     Ui::MeasuringInterface *ui;
 
@@ -73,10 +71,10 @@ private:
     Mat _workingFrame;
     Mat _frameWithGrid;
     Mat _frameWithScale;
-
     Mat _frameWithRulers;
 
     bool _rulerDrawingStatus;
+    bool _scaleDrawingStatus;
     QPoint _tempPoint1;
     QPoint _tempPoint2;
 
@@ -86,13 +84,10 @@ private:
     int _frameWidth;
     int _frameHeight;
 
-    QPoint _scaleLinePoints[2];
-    int _scaleDrawingIndex;
-
     double _PXtoMM;
 
-    cv::Point _mappedPoint1;
-    cv::Point _mappedPoint2;
+    QPoint _mappedPoint1;
+    QPoint _mappedPoint2;
 };
 
 #endif // MEASURINGINTERFACE_H

@@ -330,7 +330,7 @@
          <item row="12" column="0" colspan="3">
           <widget class="QTableView" name="rulersTable">
            <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
+            <set>QAbstractItemView::DoubleClicked</set>
            </property>
           </widget>
          </item>

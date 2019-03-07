@@ -255,7 +255,6 @@ void MainWindow::on_measureButton_pressed()
     emit sendGlobalMat(_camObj.retrieveGlobalUndistortedFrame(_res_Width), QSize(_res_Width, _res_Height), _screenGeometry);
 
     _measuringInterface -> setModal(true);
-    _measuringInterface -> topLevelWidget();
     _measuringInterface -> exec();
 }
 

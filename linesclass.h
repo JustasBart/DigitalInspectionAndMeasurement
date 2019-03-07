@@ -47,8 +47,10 @@ class LinesClass : public QObject
 public:
     LinesClass();
 
-    static double calculatePXtoMM(cv::Point p1, cv::Point p2, int distance);
     void addRuler(Mat &drawingMat, QPoint _tempPoint1, QPoint _tempPoint2, QSize frameSize, QSize matSize);
+
+    static double calculatePXtoMM(const QPoint p1, const QPoint p2, int distance);
+    static double calculateLenghtOfLine(const QPoint p1, const QPoint p2);
 
 public slots:
     void receiveTableObject(QTableView &tableView);
