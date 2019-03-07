@@ -231,6 +231,9 @@
          </item>
          <item row="6" column="0">
           <widget class="QCheckBox" name="drawGridCheckbox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Draw grid</string>
            </property>
@@ -315,6 +318,9 @@
          </item>
          <item row="13" column="0">
           <widget class="QPushButton" name="drawRulerButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Draw a ruler</string>
            </property>

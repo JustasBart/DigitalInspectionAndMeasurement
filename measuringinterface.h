@@ -65,6 +65,7 @@ private:
     void drawLine();
     void clickedLabel(QMouseEvent *event);
     void updateGridSizeLabel(int val);
+    void hideScaleLine();
 
     LinesClass *_lClassObj;
 

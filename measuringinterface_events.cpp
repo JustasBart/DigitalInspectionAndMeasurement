@@ -10,6 +10,7 @@ void MeasuringInterface::on_drawGridCheckbox_stateChanged(int arg1)
         ui->smallGridSlider->setEnabled(true);
 
         on_gridSlider_sliderMoved( ui->gridSlider->value() );
+        hideScaleLine();
     }
     else
     {
@@ -34,6 +35,7 @@ void MeasuringInterface::on_gridSlider_sliderMoved(int position)
 void MeasuringInterface::on_smallGridSlider_sliderMoved(int position)
 {
     on_gridSlider_sliderMoved( ui->gridSlider->value() );
+    qDebug() << "Smaller slider position: " << position;
 }
 
 void MeasuringInterface::on_saveImageButton_pressed()
@@ -84,6 +86,18 @@ void MeasuringInterface::on_drawRulerButton_pressed()
     ui->statusLabel->setText("Status: Drawing - Point 1");
     ui->statusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
     _rulerDrawingStatus = true;
+
+    ui->drawGridCheckbox->setCheckState(Qt::Unchecked);
+    hideScaleLine();
+}
+
+void MeasuringInterface::hideScaleLine()
+{
+    if (ui->removeScaleButton->isEnabled())
+    {
+        updateFrame(_workingFrame);
+        ui->removeScaleButton->setEnabled(false);
+    }
 }
 
 void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
@@ -135,13 +149,16 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
             _mappedPoint2.setY( HelperClass::map(_tempPoint2.y(), 0, ui->frameLabel->height(), 0, _workingFrame.rows) );
 
             _frameWithScale = _workingFrame.clone();
-            cv::line(_frameWithScale, cv::Point2d(_mappedPoint1.x(), _mappedPoint1.y()), cv::Point2d(_mappedPoint2.x(), _mappedPoint2.y()), cv::Scalar(255, 255, 0));
+            cv::line(_frameWithScale, cv::Point2d(_mappedPoint1.x(), _mappedPoint1.y()), cv::Point2d(_mappedPoint2.x(), _mappedPoint2.y()), cv::Scalar(35, 255, 214), 5, 4);
             updateFrame(_frameWithScale);
 
             ui->removeScaleButton->setEnabled(true);
 
             _PXtoMM = LinesClass::calculatePXtoMM(_mappedPoint1, _mappedPoint2, ui->mmSpinbox->value());
             ui->px_mmValueLabel->setText("Current PX/MM value: " + QString::number(_PXtoMM));
+
+            ui->drawGridCheckbox->setEnabled(true);
+            ui->drawRulerButton->setEnabled(true);
         }
     }
 }

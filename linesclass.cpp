@@ -8,7 +8,7 @@ Ruler::Ruler(QPoint p1, QPoint p2)
 
 void Ruler::drawRuler(Mat &frameMat)
 {
-    cv::line(frameMat, cv::Point2d(_point1.x(), _point1.y()), cv::Point2d(_point2.x(), _point2.y()), cv::Scalar(255, 255, 0));
+    cv::line(frameMat, cv::Point2d(_point1.x(), _point1.y()), cv::Point2d(_point2.x(), _point2.y()), cv::Scalar(243, 255, 20), 3);
 }
 
 QPoint Ruler::getFirstPoint()
