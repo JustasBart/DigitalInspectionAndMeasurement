@@ -31,7 +31,7 @@ class Ruler
 {
 public:
     Ruler(QPoint p1, QPoint p2);
-    void drawRuler(Mat &frameMat);
+    void drawRuler(Mat &frameMat, int rulerEnumerator);
     QPoint getFirstPoint();
     QPoint getSecondPoint();
 
@@ -47,8 +47,7 @@ class LinesClass : public QObject
 public:
     LinesClass();
 
-    void addRuler(Mat &drawingMat, QPoint _tempPoint1, QPoint _tempPoint2, QSize frameSize, QSize matSize);
-
+    void addRuler(Mat &drawingMat, QPoint _tempPoint1, QPoint _tempPoint2, QSize frameSize, QSize matSize, double pxToMMRatio);
     static double calculatePXtoMM(const QPoint p1, const QPoint p2, int distance);
     static double calculateLenghtOfLine(const QPoint p1, const QPoint p2);
 
@@ -57,7 +56,6 @@ public slots:
 
 private:
     double _PXtoMM;
-
     QList <Ruler> _rulersList;
 
     bool _lineGuard;

@@ -116,10 +116,31 @@
          <string>Measurements / Grids setup</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="10" column="0" colspan="3">
+         <item row="0" column="0" colspan="4">
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="15" column="0" colspan="4">
+          <widget class="Line" name="line_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0" colspan="4">
           <widget class="Line" name="line_4">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="4">
+          <widget class="QLabel" name="px_mmValueLabel">
+           <property name="text">
+            <string>Current PX/MM value: X</string>
            </property>
           </widget>
          </item>
@@ -130,31 +151,26 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="label">
+         <item row="1" column="1" colspan="3">
+          <widget class="QLabel" name="scaledLabel">
            <property name="text">
-            <string>mm</string>
+            <string>**Unscaled**</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
-         <item row="3" column="0" colspan="3">
-          <widget class="QLabel" name="px_mmValueLabel">
+         <item row="1" column="0">
+          <widget class="QPushButton" name="drawScaleButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>Current PX/MM value: X</string>
-           </property>
-          </widget>
-         </item>
-         <item row="15" column="0" colspan="3">
-          <widget class="Line" name="line_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" colspan="3">
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <string>Draw scale</string>
            </property>
           </widget>
          </item>
@@ -206,29 +222,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1" colspan="2">
-          <widget class="QLabel" name="scaledLabel">
-           <property name="text">
-            <string>**Unscaled**</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="drawScaleButton">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Draw scale</string>
-           </property>
-          </widget>
-         </item>
          <item row="6" column="0">
           <widget class="QCheckBox" name="drawGridCheckbox">
            <property name="enabled">
@@ -236,6 +229,35 @@
            </property>
            <property name="text">
             <string>Draw grid</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0" colspan="4">
+          <widget class="QSlider" name="gridSlider">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <number>20</number>
+           </property>
+           <property name="maximum">
+            <number>200</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="4">
+          <widget class="Line" name="line_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -261,43 +283,14 @@
            </property>
           </widget>
          </item>
-         <item row="7" column="0" colspan="3">
-          <widget class="QSlider" name="gridSlider">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="minimum">
-            <number>20</number>
-           </property>
-           <property name="maximum">
-            <number>200</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="3">
-          <widget class="Line" name="line_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="14" column="0" colspan="3">
+         <item row="14" column="0" colspan="4">
           <widget class="QLabel" name="statusLabel">
            <property name="text">
             <string>Status:</string>
            </property>
           </widget>
          </item>
-         <item row="9" column="0" colspan="3">
+         <item row="9" column="0" colspan="4">
           <widget class="QSlider" name="smallGridSlider">
            <property name="enabled">
             <bool>false</bool>
@@ -316,6 +309,27 @@
            </property>
           </widget>
          </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="smallAdjustmentsLabel">
+           <property name="text">
+            <string>Small adjustments</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="0" colspan="4">
+          <widget class="QTableView" name="rulersTable">
+           <property name="editTriggers">
+            <set>QAbstractItemView::DoubleClicked</set>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="1">
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>Remove ruler</string>
+           </property>
+          </widget>
+         </item>
          <item row="13" column="0">
           <widget class="QPushButton" name="drawRulerButton">
            <property name="enabled">
@@ -326,17 +340,10 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="smallAdjustmentsLabel">
+         <item row="2" column="2">
+          <widget class="QLabel" name="label">
            <property name="text">
-            <string>Small adjustments</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="0" colspan="3">
-          <widget class="QTableView" name="rulersTable">
-           <property name="editTriggers">
-            <set>QAbstractItemView::DoubleClicked</set>
+            <string>mm</string>
            </property>
           </widget>
          </item>

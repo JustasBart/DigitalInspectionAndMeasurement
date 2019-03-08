@@ -54,6 +54,7 @@ void MeasuringInterface::on_drawScaleButton_pressed()
 {
     if (ui->drawScaleButton->text() == "Draw scale")
     {
+        updateFrame(_workingFrame);
         ui->drawScaleButton->setText("Drawing scale");
         ui->drawScaleButton->setEnabled(false);
         ui->scaledLabel->setStyleSheet("QLabel { background-color : orange; color : white; }");
@@ -88,6 +89,7 @@ void MeasuringInterface::on_drawRulerButton_pressed()
     _rulerDrawingStatus = true;
 
     ui->drawGridCheckbox->setCheckState(Qt::Unchecked);
+
     hideScaleLine();
 }
 
@@ -119,7 +121,7 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
             _rulerDrawingStatus = false;
 
             _frameWithRulers = _workingFrame.clone();
-            _lClassObj->addRuler(_frameWithRulers, _tempPoint1, _tempPoint2, ui->frameLabel->size(), QSize(_workingFrame.cols, _workingFrame.rows));
+            _lClassObj->addRuler(_frameWithRulers, _tempPoint1, _tempPoint2, ui->frameLabel->size(), QSize(_workingFrame.cols, _workingFrame.rows), _PXtoMM);
             emit sendTableObject(*ui->rulersTable);
             updateFrame(_frameWithRulers);
         }
