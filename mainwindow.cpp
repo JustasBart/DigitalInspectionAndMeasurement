@@ -16,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _res_Width(640),
     _res_Height(480),
     _fps(60),
-    _calibrationInProgress(false)
+    _calibrationInProgress(false),
+    _liveLensCorrection(false)
 {
     connect(_startUpDialog, SIGNAL(sendData(unsigned int, QString)), this, SLOT(receiveData(unsigned int, QString)));
     _startUpDialog -> exec();

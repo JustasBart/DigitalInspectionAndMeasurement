@@ -273,3 +273,8 @@ void MainWindow::on_distortionButton_pressed()
 
     ui->distortionLabel->setText("Undistorted");
 }
+
+void MainWindow::on_lensCorrectioncheckBox_stateChanged(int arg1)
+{
+    _liveLensCorrection = arg1;
+}

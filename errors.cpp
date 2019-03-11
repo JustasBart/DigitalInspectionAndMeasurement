@@ -5,7 +5,6 @@ Q_NORETURN void Errors::fatalError(QString errorMessage)
     qDebug() << "CRICITAL ERROR: " + errorMessage;
     QApplication::closeAllWindows();
     exit(EXIT_FAILURE);
-
 }
 
 void Errors::cameraOpenErrorWindow()

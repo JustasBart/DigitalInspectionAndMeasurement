@@ -71,6 +71,8 @@ private slots:
     void on_measureButton_pressed();
     void on_distortionButton_pressed();
 
+    void on_lensCorrectioncheckBox_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;
@@ -105,6 +107,7 @@ private:
     int _fps;
 
     bool _calibrationInProgress;
+    bool _liveLensCorrection;
 };
 
 #endif // MAINWINDOW_H

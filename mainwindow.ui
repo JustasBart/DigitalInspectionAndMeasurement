@@ -183,6 +183,13 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="lensCorrectioncheckBox">
+            <property name="text">
+             <string>Correct lens</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

@@ -29,37 +29,6 @@ void MeasuringInterface::labelMousePos(QPoint &pos)
         ui->scaledLabel->setText("x: " + QString::number(pos.x()) + ", y: " + QString::number(pos.y()));
 }
 
-/*
-void MeasuringInterface::drawLine()
-{
-    _frameWithScale = _workingFrame.clone();
-
-    _mappedPoint1.x = HelperClass::map(_scaleLinePoints[0].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
-    _mappedPoint1.y = HelperClass::map(_scaleLinePoints[0].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
-
-    qDebug() << _frameWidth << " and " << _frameHeight;
-
-    _mappedPoint2.x = HelperClass::map(_scaleLinePoints[1].x(), 0, ui->frameLabel->width(), 0, _frameWidth);
-    _mappedPoint2.y = HelperClass::map(_scaleLinePoints[1].y(), 0, ui->frameLabel->height(), 0, _frameHeight);
-
-    cv::line(_frameWithScale, _mappedPoint1, _mappedPoint2, cv::Scalar(255, 255, 0));
-
-    _PXtoMM = calculatePXtoMM(_mappedPoint1, _mappedPoint2, ui->mmSpinbox->value());
-    ui->px_mmValueLabel->setText("Current PX/MM value: " + QString::number(_PXtoMM));
-
-    qDebug() << _PXtoMM;
-
-    updateFrame( _frameWithScale );
-}
-*/
-
-/*
-double MeasuringInterface::calculatePXtoMM(cv::Point p1, cv::Point p2, int distance)
-{
-    return qSqrt( qPow(p1.x - p2.x, 2) + qPow(p1.y - p2.y, 2) ) / distance;
-}
-*/
-
 QPixmap MeasuringInterface::matToPixmap(Mat frame)
 {
     Mat tempMat;

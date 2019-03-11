@@ -26,6 +26,8 @@ void MainWindow::init()
     _videoFPSTimer.start(1000 / _fps);
 
     if (_savePreferences) loadGUISettings();
+    if (ui->lensCorrectioncheckBox->isChecked())
+        _liveLensCorrection = true;
 }
 
 void MainWindow::resizeWindowToScreenSize()
@@ -68,15 +70,19 @@ void MainWindow::captureImage()
     if (_calibrationInProgress)
     {
         _globalQPixmap = _camObj.convertMatToQPixmap(_globalFrame);
-
         drawCalibrationLines( &_globalQPixmap );
+        ui -> videoLabel -> setPixmap( _globalQPixmap );
+    }
+    else if (_liveLensCorrection)
+    {
+        Mat undistortedMat = _camObj.retrieveGlobalUndistortedFrame(_res_Width);
+        ui->videoLabel->setPixmap( _camObj.convertMatToQPixmap(undistortedMat) );
     }
     else
     {
         _globalQPixmap = _camObj.convertMatToQPixmap(_globalFrame);
+        ui -> videoLabel -> setPixmap( _globalQPixmap );
     }
-
-    ui -> videoLabel -> setPixmap( _globalQPixmap );
 }
 
 void MainWindow::loadGUISettings()
@@ -108,6 +114,17 @@ void MainWindow::loadGUISettings()
         ui -> focusLabel -> setEnabled(true);
         ui -> focusSlider -> setEnabled(true);
     }
+    settingsVar = UserSettings::loadSettings("LensCorrection", 0, GROUP_LOCATION);
+    if (settingsVar.toBool())
+    {
+        _liveLensCorrection = true;
+        ui->lensCorrectioncheckBox->setCheckState( Qt::Checked );
+    }
+    else
+    {
+        _liveLensCorrection = false;
+        ui->lensCorrectioncheckBox->setCheckState( Qt::Unchecked );
+    }
 }
 
 void MainWindow::saveGUISettings()
@@ -121,6 +138,7 @@ void MainWindow::saveGUISettings()
         UserSettings::saveSettings("FocusMode", true, GROUP_LOCATION);
     else
         UserSettings::saveSettings("FocusMode", false, GROUP_LOCATION);
+    UserSettings::saveSettings("LensCorrection", ui->lensCorrectioncheckBox->checkState(), GROUP_LOCATION);
 }
 
 void MainWindow::receiveData(unsigned int val, QString param)

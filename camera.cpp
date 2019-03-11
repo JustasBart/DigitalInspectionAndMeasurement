@@ -83,7 +83,7 @@ Mat Camera::retrieveGlobalUndistortedFrame(int width)
     newCamMatrix.at<double>(0,2) = scale * _cameraMatrix.at<double>(0,2);
     newCamMatrix.at<double>(1,2) = scale * _cameraMatrix.at<double>(1,2);
 
-    qDebug() << "Correcting the lens at width: " << width;
+    // qDebug() << "Correcting the lens at width: " << width;
 
     undistort(_currentFrameMat, _correctedMat, newCamMatrix, _distortionCoefficients);
 
