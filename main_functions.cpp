@@ -125,6 +125,8 @@ void MainWindow::loadGUISettings()
         _liveLensCorrection = false;
         ui->lensCorrectioncheckBox->setCheckState( Qt::Unchecked );
     }
+    settingsVar = UserSettings::loadSettings("UserNotes", "", GROUP_LOCATION);
+    ui->notesTextEdit->setPlainText(settingsVar.toString());
 }
 
 void MainWindow::saveGUISettings()
@@ -139,6 +141,7 @@ void MainWindow::saveGUISettings()
     else
         UserSettings::saveSettings("FocusMode", false, GROUP_LOCATION);
     UserSettings::saveSettings("LensCorrection", ui->lensCorrectioncheckBox->checkState(), GROUP_LOCATION);
+    UserSettings::saveSettings("UserNotes", ui->notesTextEdit->toPlainText(), GROUP_LOCATION);
 }
 
 void MainWindow::receiveData(unsigned int val, QString param)
