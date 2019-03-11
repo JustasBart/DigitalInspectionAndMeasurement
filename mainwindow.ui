@@ -123,6 +123,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="whatsThis">
+             <string>This allows you to ensure that the camera is properly positioned through running a Position Calibration</string>
+            </property>
             <property name="text">
              <string>Position calibration</string>
             </property>

@@ -37,6 +37,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="whatsThis">
+        <string>This is used for selecting an active camera on the device (Where port 0 is the default webcam) and port 1 is the first USB camera (If available)</string>
+       </property>
        <item>
         <property name="text">
          <string>0</string>

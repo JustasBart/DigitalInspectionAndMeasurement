@@ -150,14 +150,22 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
         else
         {
             _tempPoint2 = pos;
-            ui->statusLabel->setText("Status:");
+            ui->statusLabel->setText("Status: Finished");
             ui->statusLabel->setStyleSheet("QLabel { background-color : transparent; color : black; }");
 
             _rulerDrawingStatus = false;
 
+            if (LinesClass::calculateLenghtOfLine(_tempPoint1, _tempPoint2) < 10)
+            {
+                qDebug() << "Warning the ruler is too short to be useful";
+                ui->statusLabel->setText("Status: Finished short ruler");
+            }
+
             if (_tempPoint1.x() == _tempPoint2.x() && _tempPoint1.y() == _tempPoint2.y())
             {
                 qDebug() << "Cannot add a ruler based on two identical points.";
+
+                ui->statusLabel->setText("Status: Cannot place identical points");
             }
             else
             {
@@ -165,11 +173,6 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
                 _lClassObj->addRuler(_frameWithRulers, _tempPoint1, _tempPoint2, ui->frameLabel->size(), QSize(_workingFrame.cols, _workingFrame.rows), _PXtoMM);
                 emit sendTableObject(*ui->rulersTable);
                 updateFrame(_frameWithRulers);
-            }
-
-            if (LinesClass::calculateLenghtOfLine(_tempPoint1, _tempPoint2) < 10)
-            {
-                qDebug() << "Warning the ruler is too short to be useful";
             }
         }
     }
@@ -212,6 +215,8 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
 
             ui->drawGridCheckbox->setEnabled(true);
             ui->drawRulerButton->setEnabled(true);
+
+            ui->statusLabel->setText("Status: Ready to draw rulers");
         }
     }
 }
@@ -250,4 +255,6 @@ void MeasuringInterface::on_updateRulersButton_pressed()
     emit sendTableObject(*ui->rulersTable);
     _lClassObj->reDrawRulers(_frameWithRulers);
     updateFrame(_frameWithRulers);
+
+    ui->statusLabel->setText("Status: Updated the rulers");
 }
