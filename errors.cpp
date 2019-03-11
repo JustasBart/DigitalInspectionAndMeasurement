@@ -62,7 +62,31 @@ int Errors::cameraPositionUncalibrated()
     }
 }
 
-void Errors::clearAllRulersErrorWindow()
+int Errors::clearAllRulersErrorWindow()
 {
+    QMessageBox msgBox;
 
+    msgBox.setText("Deleting all rulers...");
+    msgBox.setInformativeText("Are you sure you want to delete all of the rulers currently placed?");
+
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+
+    int ret = msgBox.exec();
+
+    switch (ret)
+    {
+        case QMessageBox::Yes:
+        {
+            qDebug() << "User chose to delete the rulers.";
+            return 0;
+        }
+        case QMessageBox::No:
+        {
+            qDebug() << "User canceled the deletion of all rulers.";
+            return 1;
+        }
+        default:
+            fatalError("Unexpected error occured in 'clearAllRulersErrorWindow'");
+    }
 }

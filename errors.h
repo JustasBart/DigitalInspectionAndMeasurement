@@ -13,7 +13,7 @@ class Errors
 public:
     static void fatalError(QString errorMessage);
     static void cameraOpenErrorWindow();
-    static void clearAllRulersErrorWindow();
+    static int clearAllRulersErrorWindow();
     static int cameraPositionUncalibrated();
 };
 

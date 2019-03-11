@@ -38,7 +38,7 @@ void MeasuringInterface::on_smallGridSlider_sliderMoved(int position)
     qDebug() << "Smaller slider position: " << position;
 }
 
-void MeasuringInterface::on_saveImageButton_pressed()
+void MeasuringInterface::on_savePlainImageButton_pressed()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save image"), "/Desktop/image",
@@ -46,6 +46,29 @@ void MeasuringInterface::on_saveImageButton_pressed()
 
     if (!fileName.isEmpty())
         cv::imwrite( fileName.toStdString().c_str(), _workingFrame );
+    else
+        qDebug() << "Saving image canceled by the user.";
+}
+
+void MeasuringInterface::on_saveImageWithRulersPushButton_pressed()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Save image"), "/Desktop/imageWithRulers",
+            tr("JPEG (*.jpg);;PNG *.png;;BITMAP *.bmp"));
+
+    if (!fileName.isEmpty())
+    {
+        on_updateRulersButton_pressed();
+        Mat frameWithRulersAndText(cv::Size(_frameWithRulers.cols + 380, _frameWithRulers.rows), _frameWithRulers.type());
+
+        cv::Rect roi = cv::Rect(0,0, _frameWithRulers.cols, _frameWithRulers.rows);
+        _frameWithRulers.copyTo( frameWithRulersAndText(roi) );
+
+        // This will attach the text
+        emit attachTableRulerText(&frameWithRulersAndText);
+
+        cv::imwrite( fileName.toStdString().c_str(), frameWithRulersAndText );
+    }
     else
         qDebug() << "Saving image canceled by the user.";
 }
@@ -89,13 +112,20 @@ void MeasuringInterface::updateGridSizeLabel(int pixels)
 
 void MeasuringInterface::on_drawRulerButton_pressed()
 {
-    ui->statusLabel->setText("Status: Drawing - Point 1");
-    ui->statusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
-    _rulerDrawingStatus = true;
+    if (_lClassObj->countRulers() <= 19)
+    {
+        ui->statusLabel->setText("Status: Drawing - Point 1");
+        ui->statusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
+        _rulerDrawingStatus = true;
 
-    ui->drawGridCheckbox->setCheckState(Qt::Unchecked);
+        ui->drawGridCheckbox->setCheckState(Qt::Unchecked);
 
-    hideScaleLine();
+        hideScaleLine();
+    }
+    else
+    {
+        ui->statusLabel->setText("Status: Cannot exceed 20 rulers!");
+    }
 }
 
 void MeasuringInterface::hideScaleLine()
@@ -195,16 +225,23 @@ void MeasuringInterface::on_removeRulerButton_pressed()
         emit sendTableObject(*ui->rulersTable);
         _lClassObj->reDrawRulers(_frameWithRulers);
         updateFrame(_frameWithRulers);
+
+        ui->statusLabel->setText("Status: Removed ruler " + QString::number(ui->rulersTable->currentIndex().row()));
     }
 }
 
 void MeasuringInterface::on_clearAllRulersButton_pressed()
 {
-    _frameWithRulers = _workingFrame.clone();
-    emit removeAllRulers();
-    emit sendTableObject(*ui->rulersTable);
-    _lClassObj->reDrawRulers(_frameWithRulers);
-    updateFrame(_frameWithRulers);
+    if (Errors::clearAllRulersErrorWindow() == 0)
+    {
+        _frameWithRulers = _workingFrame.clone();
+        emit removeAllRulers();
+        emit sendTableObject(*ui->rulersTable);
+        _lClassObj->reDrawRulers(_frameWithRulers);
+        updateFrame(_frameWithRulers);
+
+        ui->statusLabel->setText("Status: Deleted all rulers");
+    }
 }
 
 void MeasuringInterface::on_updateRulersButton_pressed()

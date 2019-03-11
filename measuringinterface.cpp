@@ -21,6 +21,7 @@ MeasuringInterface::MeasuringInterface(QWidget *parent) :
     connect(MeasuringInterface::window(), SIGNAL(sendTableObject(QTableView&)), _lClassObj, SLOT(receiveTableObject(QTableView&)));
     connect(MeasuringInterface::window(), SIGNAL(removeRulerAtIndex(int)), _lClassObj, SLOT(removeRuler(int)));
     connect(MeasuringInterface::window(), SIGNAL(removeAllRulers()), _lClassObj, SLOT(removeRulers()));
+    connect(MeasuringInterface::window(), SIGNAL(attachTableRulerText(Mat*)), _lClassObj, SLOT(addTableRulerText(Mat*)));
 }
 MeasuringInterface::~MeasuringInterface()
 {

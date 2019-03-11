@@ -46,9 +46,10 @@ public: signals:
     void sendTableObject(QTableView &listView);
     void removeRulerAtIndex(int rowIndex);
     void removeAllRulers();
+    void attachTableRulerText(Mat *frameToDrawOn);
 
 private slots:
-    void on_saveImageButton_pressed();
+    void on_savePlainImageButton_pressed();
     void on_drawGridCheckbox_stateChanged(int arg1);
     void on_gridSlider_sliderMoved(int position);
     void on_drawScaleButton_pressed();
@@ -58,8 +59,8 @@ private slots:
     void on_drawRulerButton_pressed();
     void on_removeRulerButton_pressed();
     void on_clearAllRulersButton_pressed();
-
     void on_updateRulersButton_pressed();
+    void on_saveImageWithRulersPushButton_pressed();
 
 private:
     Ui::MeasuringInterface *ui;

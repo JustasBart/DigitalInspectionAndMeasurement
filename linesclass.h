@@ -12,6 +12,7 @@
 #include <QLabel>
 #include <QDebug>
 #include <QList>
+#include <QDate>
 
 // Generic includes //
 #include <helperclass.h>
@@ -34,6 +35,7 @@ public:
     void drawRuler(Mat &frameMat, int rulerEnumerator);
     QPoint getFirstPoint();
     QPoint getSecondPoint();
+    cv::Scalar getColorAtIndex(int index);
 
 private:
     QPoint _point1;
@@ -54,11 +56,13 @@ public:
     static double calculatePXtoMM(const QPoint p1, const QPoint p2, int distance);
     static double calculateLenghtOfLine(const QPoint p1, const QPoint p2);
     void setNewPxToMM(double pixToMMRatio);
+    int countRulers();
 
 public slots:
     void receiveTableObject(QTableView &tableView);
     void removeRuler(int rowIndex);
     void removeRulers();
+    void addTableRulerText(Mat *frameToDrawOn);
 
 private:
     double _PXtoMM;
@@ -74,6 +78,8 @@ private:
     QPoint _scaledPoint2;
 
     QStringList _tableHeader;
+    QStandardItemModel *_tableModel;
+    QList<QStandardItem> _items;
 };
 
 #endif // LINESCLASS_H

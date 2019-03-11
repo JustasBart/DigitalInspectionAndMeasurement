@@ -5,26 +5,26 @@ Ruler::Ruler(QPoint p1, QPoint p2)
     _point1 = p1;
     _point2 = p2;
 
-    _rulerColors.push_back( Scalar(0, 100, 255) );   // Ruler 1
-    _rulerColors.push_back( Scalar(0, 195, 255) );   // Ruler 2
-    _rulerColors.push_back( Scalar(0, 255, 230) );   // Ruler 3
-    _rulerColors.push_back( Scalar(0, 255, 70) );    // Ruler 4
-    _rulerColors.push_back( Scalar(190, 255, 0) );   // Ruler 5
-    _rulerColors.push_back( Scalar(255, 225, 0) );   // Ruler 6
-    _rulerColors.push_back( Scalar(0, 106, 255) );   // Ruler 7
-    _rulerColors.push_back( Scalar(0, 55, 255) );    // Ruler 8
-    _rulerColors.push_back( Scalar(255, 38, 0) );    // Ruler 9
-    _rulerColors.push_back( Scalar(255, 0, 140) );   // Ruler 10
-    _rulerColors.push_back( Scalar(255, 0, 195) );   // Ruler 11
-    _rulerColors.push_back( Scalar(215, 0, 255) );   // Ruler 12
-    _rulerColors.push_back( Scalar(100, 0, 255) );   // Ruler 13
-    _rulerColors.push_back( Scalar(245, 255, 70) );  // Ruler 14
-    _rulerColors.push_back( Scalar(70, 255, 190) );  // Ruler 15
+    _rulerColors.push_back( Scalar(0, 100, 255)   ); // Ruler 1
+    _rulerColors.push_back( Scalar(0, 195, 255)   ); // Ruler 2
+    _rulerColors.push_back( Scalar(0, 255, 230)   ); // Ruler 3
+    _rulerColors.push_back( Scalar(0, 255, 70)    ); // Ruler 4
+    _rulerColors.push_back( Scalar(190, 255, 0)   ); // Ruler 5
+    _rulerColors.push_back( Scalar(255, 225, 0)   ); // Ruler 6
+    _rulerColors.push_back( Scalar(0, 106, 255)   ); // Ruler 7
+    _rulerColors.push_back( Scalar(0, 55, 255)    ); // Ruler 8
+    _rulerColors.push_back( Scalar(255, 38, 0)    ); // Ruler 9
+    _rulerColors.push_back( Scalar(255, 0, 140)   ); // Ruler 10
+    _rulerColors.push_back( Scalar(255, 0, 195)   ); // Ruler 11
+    _rulerColors.push_back( Scalar(215, 0, 255)   ); // Ruler 12
+    _rulerColors.push_back( Scalar(100, 0, 255)   ); // Ruler 13
+    _rulerColors.push_back( Scalar(245, 255, 70)  ); // Ruler 14
+    _rulerColors.push_back( Scalar(70, 255, 190)  ); // Ruler 15
     _rulerColors.push_back( Scalar(190, 112, 255) ); // Ruler 16
     _rulerColors.push_back( Scalar(250, 255, 110) ); // Ruler 17
     _rulerColors.push_back( Scalar(110, 200, 255) ); // Ruler 18
     _rulerColors.push_back( Scalar(110, 255, 160) ); // Ruler 19
-    _rulerColors.push_back( Scalar(255, 157, 90) );  // Ruler 20
+    _rulerColors.push_back( Scalar(255, 157, 90)  ); // Ruler 20
 }
 
 void Ruler::drawRuler(Mat &frameMat, int rulerEnumerator)
@@ -51,6 +51,11 @@ QPoint Ruler::getSecondPoint()
     return _point2;
 }
 
+cv::Scalar Ruler::getColorAtIndex(int index)
+{
+    return _rulerColors[index];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief LinesClass::LinesClass
 /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +65,7 @@ LinesClass::LinesClass()
     _lineGuard = false;
     _currentState = 0;
     _tableHeader << "Ruler";
+    _tableModel = new QStandardItemModel();
 }
 
 double LinesClass::calculatePXtoMM(const QPoint p1, const QPoint p2, int distance)
@@ -97,28 +103,29 @@ void LinesClass::reDrawRulers(Mat &frameMat)
 
 void LinesClass::receiveTableObject(QTableView &tableView)
 {
-    QStandardItemModel *model = new QStandardItemModel();
-    QList<QStandardItem> items;
-
     double lineLength = 0;
 
-    model->clear();
+    _tableModel->clear();
+
     for (int i = 0; i < _rulersList.count(); i++)
     {
         QString text = QString::number(i);
 
         lineLength = calculateLenghtOfLine(_rulersList[i].getFirstPoint(), _rulersList[i].getSecondPoint());
+
         // qDebug() << "P1 " << _rulersList[i].getFirstPoint() << " P2 " << _rulersList[i].getSecondPoint() << " Length " << lineLength;
 
-        QStandardItem *item = new QStandardItem("Ruler " + QString::number(i+1) + " " + QString::number(lineLength / _PXtoMM) + "mm");
+        QStandardItem *item = new QStandardItem("Ruler " + QString::number(i+1) + " Length: " + QString::number(lineLength / _PXtoMM) + "mm");
 
-        model->appendRow(item);
+        _tableModel->appendRow(item);
     }
 
-    model->setHorizontalHeaderLabels(_tableHeader);
+    _tableModel->setHorizontalHeaderLabels(_tableHeader);
 
     tableView.setShowGrid(true);
-    tableView.setModel(model);
+    tableView.setModel(_tableModel);
+
+    tableView.setColumnWidth(0, 190);
 }
 
 double LinesClass::calculateLenghtOfLine(const QPoint p1, const QPoint p2)
@@ -147,4 +154,33 @@ void LinesClass::removeRulers()
 void LinesClass::setNewPxToMM(double pixToMMRatio)
 {
     _PXtoMM = pixToMMRatio;
+}
+
+void LinesClass::addTableRulerText(Mat *frameToDrawOn)
+{
+    int row = _tableModel->rowCount();
+    int col = _tableModel->columnCount();
+
+    double lineLength = 0;
+    QVariant content;
+
+    for (int i = 0; i < row ; ++i)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            content = _tableModel->data(_tableModel->index(i, j), Qt::DisplayRole);
+            lineLength = calculateLenghtOfLine(_rulersList[i].getFirstPoint(), _rulersList[i].getSecondPoint());
+
+            cv::putText(*frameToDrawOn, "Ruler " + QString::number(i+1).toStdString() + " Lenght: " +
+                        QString::number(lineLength).toStdString() + "mm",
+                        cv::Point2d(frameToDrawOn->cols - 370, (i * 30) + 50),5, 1, _rulersList[0].getColorAtIndex(i));
+        }
+    }
+
+    cv::putText(*frameToDrawOn, "Date saved: " + QDate::currentDate().toString().toStdString(), cv::Point2d(frameToDrawOn->cols - 370, frameToDrawOn->rows - 20), 5, 0.9, Scalar(255, 255, 255));
+}
+
+int LinesClass::countRulers()
+{
+    return _rulersList.count();
 }
