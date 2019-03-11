@@ -116,17 +116,23 @@
          <string>Measurements / Grids setup</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0" colspan="4">
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="13" column="2">
+          <widget class="QPushButton" name="clearAllRulersButton">
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>C</string>
            </property>
           </widget>
          </item>
-         <item row="15" column="0" colspan="4">
-          <widget class="Line" name="line_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="3" column="0" colspan="4">
+          <widget class="QLabel" name="px_mmValueLabel">
+           <property name="text">
+            <string>Current PX/MM value: X</string>
            </property>
           </widget>
          </item>
@@ -137,10 +143,17 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0" colspan="4">
-          <widget class="QLabel" name="px_mmValueLabel">
-           <property name="text">
-            <string>Current PX/MM value: X</string>
+         <item row="16" column="0" colspan="4">
+          <widget class="Line" name="line_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="4">
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -158,19 +171,6 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="drawScaleButton">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Draw scale</string>
            </property>
           </widget>
          </item>
@@ -197,8 +197,31 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QSpinBox" name="mmSpinbox">
+         <item row="1" column="0">
+          <widget class="QPushButton" name="drawScaleButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Draw scale</string>
+           </property>
+          </widget>
+         </item>
+         <item row="15" column="0" colspan="4">
+          <widget class="QLabel" name="statusLabel">
+           <property name="text">
+            <string>Status:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLabel" name="gridSizeLabel">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -207,18 +230,19 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>50</width>
+             <width>16777215</width>
              <height>16777215</height>
             </size>
            </property>
-           <property name="minimum">
-            <number>1</number>
+           <property name="text">
+            <string>Grid size: No scale</string>
            </property>
-           <property name="maximum">
-            <number>200</number>
-           </property>
-           <property name="value">
-            <number>130</number>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="4">
+          <widget class="Line" name="line_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -254,18 +278,8 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="0" colspan="4">
-          <widget class="Line" name="line_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLabel" name="gridSizeLabel">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="mmSpinbox">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -274,19 +288,25 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>50</width>
              <height>16777215</height>
             </size>
            </property>
-           <property name="text">
-            <string>Grid size: No scale</string>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>200</number>
+           </property>
+           <property name="value">
+            <number>130</number>
            </property>
           </widget>
          </item>
-         <item row="14" column="0" colspan="4">
-          <widget class="QLabel" name="statusLabel">
+         <item row="8" column="0">
+          <widget class="QLabel" name="smallAdjustmentsLabel">
            <property name="text">
-            <string>Status:</string>
+            <string>Small adjustments</string>
            </property>
           </widget>
          </item>
@@ -309,27 +329,6 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="smallAdjustmentsLabel">
-           <property name="text">
-            <string>Small adjustments</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="0" colspan="4">
-          <widget class="QTableView" name="rulersTable">
-           <property name="editTriggers">
-            <set>QAbstractItemView::DoubleClicked</set>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="1">
-          <widget class="QPushButton" name="pushButton">
-           <property name="text">
-            <string>Remove ruler</string>
-           </property>
-          </widget>
-         </item>
          <item row="13" column="0">
           <widget class="QPushButton" name="drawRulerButton">
            <property name="enabled">
@@ -340,10 +339,34 @@
            </property>
           </widget>
          </item>
+         <item row="13" column="1">
+          <widget class="QPushButton" name="removeRulerButton">
+           <property name="text">
+            <string>Remove ruler</string>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="2">
           <widget class="QLabel" name="label">
            <property name="text">
             <string>mm</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="0" colspan="4">
+          <widget class="QTableView" name="rulersTable">
+           <property name="editTriggers">
+            <set>QAbstractItemView::DoubleClicked</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="14" column="0" colspan="3">
+          <widget class="QPushButton" name="updateRulersButton">
+           <property name="text">
+            <string>Update rulers</string>
            </property>
           </widget>
          </item>

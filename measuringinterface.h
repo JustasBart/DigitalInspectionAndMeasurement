@@ -44,6 +44,8 @@ public slots:
 
 public: signals:
     void sendTableObject(QTableView &listView);
+    void removeRulerAtIndex(int rowIndex);
+    void removeAllRulers();
 
 private slots:
     void on_saveImageButton_pressed();
@@ -54,6 +56,10 @@ private slots:
     void on_mmSpinbox_valueChanged(int arg1);
     void on_smallGridSlider_sliderMoved(int position);
     void on_drawRulerButton_pressed();
+    void on_removeRulerButton_pressed();
+    void on_clearAllRulersButton_pressed();
+
+    void on_updateRulersButton_pressed();
 
 private:
     Ui::MeasuringInterface *ui;

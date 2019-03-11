@@ -74,6 +74,11 @@ void MeasuringInterface::on_mmSpinbox_valueChanged(int arg1)
     _PXtoMM = LinesClass::calculatePXtoMM(_mappedPoint1, _mappedPoint2, arg1);
     updateGridSizeLabel(arg1);
     ui->px_mmValueLabel->setText("Current PX/MM value: " + QString::number(_PXtoMM));
+
+    // Need to update the table
+
+    _lClassObj->setNewPxToMM(_PXtoMM);
+    emit sendTableObject(*ui->rulersTable);
 }
 
 void MeasuringInterface::updateGridSizeLabel(int pixels)
@@ -120,10 +125,22 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
 
             _rulerDrawingStatus = false;
 
-            _frameWithRulers = _workingFrame.clone();
-            _lClassObj->addRuler(_frameWithRulers, _tempPoint1, _tempPoint2, ui->frameLabel->size(), QSize(_workingFrame.cols, _workingFrame.rows), _PXtoMM);
-            emit sendTableObject(*ui->rulersTable);
-            updateFrame(_frameWithRulers);
+            if (_tempPoint1.x() == _tempPoint2.x() && _tempPoint1.y() == _tempPoint2.y())
+            {
+                qDebug() << "Cannot add a ruler based on two identical points.";
+            }
+            else
+            {
+                _frameWithRulers = _workingFrame.clone();
+                _lClassObj->addRuler(_frameWithRulers, _tempPoint1, _tempPoint2, ui->frameLabel->size(), QSize(_workingFrame.cols, _workingFrame.rows), _PXtoMM);
+                emit sendTableObject(*ui->rulersTable);
+                updateFrame(_frameWithRulers);
+            }
+
+            if (LinesClass::calculateLenghtOfLine(_tempPoint1, _tempPoint2) < 10)
+            {
+                qDebug() << "Warning the ruler is too short to be useful";
+            }
         }
     }
     else if (_scaleDrawingStatus)
@@ -151,7 +168,11 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
             _mappedPoint2.setY( HelperClass::map(_tempPoint2.y(), 0, ui->frameLabel->height(), 0, _workingFrame.rows) );
 
             _frameWithScale = _workingFrame.clone();
-            cv::line(_frameWithScale, cv::Point2d(_mappedPoint1.x(), _mappedPoint1.y()), cv::Point2d(_mappedPoint2.x(), _mappedPoint2.y()), cv::Scalar(35, 255, 214), 5, 4);
+            cv::line(_frameWithScale, cv::Point2d(_mappedPoint1.x(), _mappedPoint1.y()), cv::Point2d(_mappedPoint2.x(), _mappedPoint2.y()), cv::Scalar(35, 255, 214), 1, 4);
+
+            cv::circle(_frameWithScale, cv::Point2d(_mappedPoint1.x(), _mappedPoint1.y()), 8, Scalar(0, 0, 255), 1);
+            cv::circle(_frameWithScale, cv::Point2d(_mappedPoint2.x(), _mappedPoint2.y()), 8, Scalar(0, 0, 255), 1);
+
             updateFrame(_frameWithScale);
 
             ui->removeScaleButton->setEnabled(true);
@@ -163,4 +184,33 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
             ui->drawRulerButton->setEnabled(true);
         }
     }
+}
+
+void MeasuringInterface::on_removeRulerButton_pressed()
+{
+    if (ui->rulersTable->currentIndex().row() != -1)
+    {
+        _frameWithRulers = _workingFrame.clone();
+        emit removeRulerAtIndex( ui->rulersTable->currentIndex().row() );
+        emit sendTableObject(*ui->rulersTable);
+        _lClassObj->reDrawRulers(_frameWithRulers);
+        updateFrame(_frameWithRulers);
+    }
+}
+
+void MeasuringInterface::on_clearAllRulersButton_pressed()
+{
+    _frameWithRulers = _workingFrame.clone();
+    emit removeAllRulers();
+    emit sendTableObject(*ui->rulersTable);
+    _lClassObj->reDrawRulers(_frameWithRulers);
+    updateFrame(_frameWithRulers);
+}
+
+void MeasuringInterface::on_updateRulersButton_pressed()
+{
+    _frameWithRulers = _workingFrame.clone();
+    emit sendTableObject(*ui->rulersTable);
+    _lClassObj->reDrawRulers(_frameWithRulers);
+    updateFrame(_frameWithRulers);
 }

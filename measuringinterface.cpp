@@ -19,6 +19,8 @@ MeasuringInterface::MeasuringInterface(QWidget *parent) :
     connect(ui->frameLabel, SIGNAL(sendMousePosition(QPoint&)), this, SLOT(labelMousePos(QPoint&)));
     connect(ui->frameLabel, SIGNAL(sendMousePoint(QPoint&)), this, SLOT(labelMouseClickedPos(QPoint&)));
     connect(MeasuringInterface::window(), SIGNAL(sendTableObject(QTableView&)), _lClassObj, SLOT(receiveTableObject(QTableView&)));
+    connect(MeasuringInterface::window(), SIGNAL(removeRulerAtIndex(int)), _lClassObj, SLOT(removeRuler(int)));
+    connect(MeasuringInterface::window(), SIGNAL(removeAllRulers()), _lClassObj, SLOT(removeRulers()));
 }
 MeasuringInterface::~MeasuringInterface()
 {

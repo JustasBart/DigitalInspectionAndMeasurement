@@ -4,17 +4,38 @@ Ruler::Ruler(QPoint p1, QPoint p2)
 {
     _point1 = p1;
     _point2 = p2;
+
+    _rulerColors.push_back( Scalar(0, 100, 255) );   // Ruler 1
+    _rulerColors.push_back( Scalar(0, 195, 255) );   // Ruler 2
+    _rulerColors.push_back( Scalar(0, 255, 230) );   // Ruler 3
+    _rulerColors.push_back( Scalar(0, 255, 70) );    // Ruler 4
+    _rulerColors.push_back( Scalar(190, 255, 0) );   // Ruler 5
+    _rulerColors.push_back( Scalar(255, 225, 0) );   // Ruler 6
+    _rulerColors.push_back( Scalar(0, 106, 255) );   // Ruler 7
+    _rulerColors.push_back( Scalar(0, 55, 255) );    // Ruler 8
+    _rulerColors.push_back( Scalar(255, 38, 0) );    // Ruler 9
+    _rulerColors.push_back( Scalar(255, 0, 140) );   // Ruler 10
+    _rulerColors.push_back( Scalar(255, 0, 195) );   // Ruler 11
+    _rulerColors.push_back( Scalar(215, 0, 255) );   // Ruler 12
+    _rulerColors.push_back( Scalar(100, 0, 255) );   // Ruler 13
+    _rulerColors.push_back( Scalar(245, 255, 70) );  // Ruler 14
+    _rulerColors.push_back( Scalar(70, 255, 190) );  // Ruler 15
+    _rulerColors.push_back( Scalar(190, 112, 255) ); // Ruler 16
+    _rulerColors.push_back( Scalar(250, 255, 110) ); // Ruler 17
+    _rulerColors.push_back( Scalar(110, 200, 255) ); // Ruler 18
+    _rulerColors.push_back( Scalar(110, 255, 160) ); // Ruler 19
+    _rulerColors.push_back( Scalar(255, 157, 90) );  // Ruler 20
 }
 
 void Ruler::drawRuler(Mat &frameMat, int rulerEnumerator)
 {
-    cv::line(frameMat, cv::Point2d(_point1.x(), _point1.y()), cv::Point2d(_point2.x(), _point2.y()), cv::Scalar((rulerEnumerator * 5) + 100, (rulerEnumerator * 10) + 55, (rulerEnumerator * 5)), 3);
+    cv::line(frameMat, cv::Point2d(_point1.x(), _point1.y()), cv::Point2d(_point2.x(), _point2.y()), _rulerColors[rulerEnumerator-1], 1);
 
     cv::circle(frameMat, cv::Point2d(_point1.x(), _point1.y()), 8, Scalar(0, 0, 255), 1);
     cv::circle(frameMat, cv::Point2d(_point2.x(), _point2.y()), 8, Scalar(0, 0, 255), 1);
 
     cv::Point midPoint;
-    midPoint.x = ((_point1.x() + _point2.x()) / 2);
+    midPoint.x = ((_point1.x() + _point2.x()) / 2 - 45);
     midPoint.y = ((_point1.y() + _point2.y()) / 2);
 
     cv::putText(frameMat, "Ruler " + QString::number(rulerEnumerator).toStdString(), midPoint, 5, 1, Scalar(255, 255, 255));
@@ -63,9 +84,14 @@ void LinesClass::addRuler(Mat &drawingMat, QPoint _tempPoint1, QPoint _tempPoint
 
     qDebug() << "Added a new ruler";
 
+    reDrawRulers(drawingMat);
+}
+
+void LinesClass::reDrawRulers(Mat &frameMat)
+{
     for (int i = 0; i < _rulersList.count(); i++)
     {
-        _rulersList[i].drawRuler(drawingMat, i+1);
+        _rulersList[i].drawRuler(frameMat, i+1);
     }
 }
 
@@ -82,7 +108,7 @@ void LinesClass::receiveTableObject(QTableView &tableView)
         QString text = QString::number(i);
 
         lineLength = calculateLenghtOfLine(_rulersList[i].getFirstPoint(), _rulersList[i].getSecondPoint());
-        qDebug() << "P1 " << _rulersList[i].getFirstPoint() << " P2 " << _rulersList[i].getSecondPoint() << " Length " << lineLength;
+        // qDebug() << "P1 " << _rulersList[i].getFirstPoint() << " P2 " << _rulersList[i].getSecondPoint() << " Length " << lineLength;
 
         QStandardItem *item = new QStandardItem("Ruler " + QString::number(i+1) + " " + QString::number(lineLength / _PXtoMM) + "mm");
 
@@ -97,5 +123,28 @@ void LinesClass::receiveTableObject(QTableView &tableView)
 
 double LinesClass::calculateLenghtOfLine(const QPoint p1, const QPoint p2)
 {
-    return qSqrt( qPow(p1.x() - p2.x(), 2) +  qPow(p1.y() - p2.y(), 2)  );
+    return qSqrt( qPow(p1.x() - p2.x(), 2) +  qPow(p1.y() - p2.y(), 2) );
+}
+
+void LinesClass::removeRuler(int rowIndex)
+{
+    if (rowIndex >= 0)
+    {
+        _rulersList.removeAt(rowIndex);
+        qDebug() << "Ruler at the index of [" << rowIndex << "] was removed.";
+    }
+    else
+    {
+        qDebug() << "Error the ruler was not found and could not be removed!";
+    }
+}
+
+void LinesClass::removeRulers()
+{
+    _rulersList.clear();
+}
+
+void LinesClass::setNewPxToMM(double pixToMMRatio)
+{
+    _PXtoMM = pixToMMRatio;
 }

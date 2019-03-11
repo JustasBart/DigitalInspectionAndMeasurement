@@ -38,6 +38,8 @@ public:
 private:
     QPoint _point1;
     QPoint _point2;
+
+    QList<Scalar> _rulerColors;
 };
 
 class LinesClass : public QObject
@@ -48,11 +50,15 @@ public:
     LinesClass();
 
     void addRuler(Mat &drawingMat, QPoint _tempPoint1, QPoint _tempPoint2, QSize frameSize, QSize matSize, double pxToMMRatio);
+    void reDrawRulers(Mat &frameMat);
     static double calculatePXtoMM(const QPoint p1, const QPoint p2, int distance);
     static double calculateLenghtOfLine(const QPoint p1, const QPoint p2);
+    void setNewPxToMM(double pixToMMRatio);
 
 public slots:
     void receiveTableObject(QTableView &tableView);
+    void removeRuler(int rowIndex);
+    void removeRulers();
 
 private:
     double _PXtoMM;

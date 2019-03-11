@@ -63,3 +63,7 @@ int Errors::cameraPositionUncalibrated()
     }
 }
 
+void Errors::clearAllRulersErrorWindow()
+{
+
+}
