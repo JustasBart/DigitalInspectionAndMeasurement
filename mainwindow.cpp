@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _startUpDialog -> exec();
     ui -> setupUi(this);
 
+    MainWindow::setWindowFlags(Qt::WindowContextHelpButtonHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     MainWindow::init();
 }
 
