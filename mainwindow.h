@@ -90,6 +90,7 @@ private:
     void setOptionsButtons(bool val);
     void setMeasurementButtons(bool val);
     void drawCalibrationLines(QPixmap *frameToDrawOn);
+    void listenToKeyPress(QKeyEvent *event);
 
     QTimer _videoFPSTimer;
 

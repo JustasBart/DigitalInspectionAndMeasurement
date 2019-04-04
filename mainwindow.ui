@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>930</width>
-    <height>776</height>
+    <height>789</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -53,6 +53,9 @@
         <height>0</height>
        </size>
       </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This frame label displays the camera footage.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Note that on the static mode the frame is only updated when the 'Capture' button is pressed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
@@ -74,6 +77,9 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the user options menu. From here the user chooses what action(s) to take next for example for changing modes or entering the Measurements mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
@@ -108,8 +114,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This group panel is used for setting up the main features of the program.&lt;/p&gt;&lt;p&gt;That is the Video/Images/Lens correction modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="title">
-          <string/>
+          <string>Setup group</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
           <item row="0" column="0">
@@ -127,7 +136,7 @@
              </size>
             </property>
             <property name="whatsThis">
-             <string>This allows you to ensure that the camera is properly positioned through running a Position Calibration</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to ensure that the camera is properly positioned in alignment of the base plate - through running a Position Calibration.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Position calibration</string>
@@ -139,6 +148,9 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="calibrationLabel">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label specifies the current camera position alignment state (Note that if the position changes unexpectedly the program would not be able to pick this up).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>*Uncalibrated*</string>
             </property>
@@ -155,6 +167,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is used to change between the Video (Dynamic) and the Image (Static) modes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Current mode: Dynamic</string>
             </property>
@@ -167,6 +182,9 @@
               <width>0</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label identifies the current mode (Video / Image).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="autoFillBackground">
              <bool>false</bool>
@@ -184,6 +202,9 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This captures a new frame (Picture) while in the Measurement (Static) mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Capture</string>
             </property>
@@ -191,6 +212,9 @@
           </item>
           <item row="2" column="1">
            <widget class="QCheckBox" name="lensCorrectioncheckBox">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This enables/disables live (Video) lens-correcting.&lt;/p&gt;&lt;p&gt;Note that enabling this might significantly slow down the FPS (Frames per second).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Correct lens</string>
             </property>
@@ -219,6 +243,9 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This group panel is used for adjusting the camera settings (Camera hardware) and is used for the Inspection (Video) mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
@@ -234,6 +261,9 @@
             <property name="contextMenuPolicy">
              <enum>Qt::DefaultContextMenu</enum>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This slider changes the contrast of the camera.&lt;/p&gt;&lt;p&gt;This is based on the camera hardware and may or may not be supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
@@ -247,6 +277,9 @@
           </item>
           <item row="10" column="1">
            <widget class="QSlider" name="focusSlider">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This slider changes the focus of the camera.&lt;/p&gt;&lt;p&gt;This is based on the camera hardware and may or may not be supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="maximum">
              <number>40</number>
             </property>
@@ -263,6 +296,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates the current focus of the camera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Focus:</string>
             </property>
@@ -275,6 +311,9 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates the current saturation of the camera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Saturation:</string>
@@ -289,6 +328,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates the current brightness of the camera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Brightness:</string>
             </property>
@@ -301,6 +343,9 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates how often the frames are being captured by the camera and displayed onto the screen when using the Inspection (Video) mode.&lt;/p&gt;&lt;p&gt;On the Measurements (Image) mode the frames are only updated when the user presses the 'Capture' button.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Frames per second: 0</string>
@@ -315,6 +360,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates the current contrast of the camera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Contrast:</string>
             </property>
@@ -328,6 +376,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates the current zoom of the camera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Zoom:</string>
             </property>
@@ -335,6 +386,9 @@
           </item>
           <item row="7" column="1">
            <widget class="QSlider" name="saturationSlider">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This slider changes the saturation of the camera.&lt;/p&gt;&lt;p&gt;This is based on the camera hardware and may or may not be supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
@@ -348,6 +402,9 @@
           </item>
           <item row="6" column="1">
            <widget class="QSlider" name="brightnessSlider">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This slider changes the brightness of the camera.&lt;/p&gt;&lt;p&gt;This is based on the camera hardware and may or may not be supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
@@ -361,6 +418,9 @@
           </item>
           <item row="9" column="1">
            <widget class="QSlider" name="zoomSlider">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This slider changes the zoom of the camera.&lt;/p&gt;&lt;p&gt;This is based on the camera hardware and may or may not be supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="minimum">
              <number>0</number>
             </property>
@@ -389,6 +449,9 @@
             <property name="contextMenuPolicy">
              <enum>Qt::NoContextMenu</enum>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button resets the current brightness value to it's default value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -410,6 +473,9 @@
             </property>
             <property name="contextMenuPolicy">
              <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button resets the current contrast value to it's default value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string/>
@@ -433,6 +499,9 @@
             <property name="contextMenuPolicy">
              <enum>Qt::NoContextMenu</enum>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button resets the current saturation value to it's default value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -454,6 +523,9 @@
             </property>
             <property name="contextMenuPolicy">
              <enum>Qt::NoContextMenu</enum>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button resets the current zoom value to it's default value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string/>
@@ -477,6 +549,9 @@
             <property name="contextMenuPolicy">
              <enum>Qt::NoContextMenu</enum>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button resets the current focus value to it's default value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -484,6 +559,9 @@
           </item>
           <item row="11" column="0" colspan="3">
            <widget class="QPushButton" name="focusButton">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button toggles between the automatic and the manual focus for the camera.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Note that on the automatic focus mode the manual focus cannot be changed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Focus mode: Automatic</string>
             </property>
@@ -509,6 +587,9 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This group panel is used for running the program algorithms.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;From here the user can preview the lens correction as well launch the Measurings window or run the Edge detection algorithm etc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="title">
           <string>Algorithms group</string>
@@ -538,6 +619,9 @@
            <widget class="QPushButton" name="measureButton">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will launch the Measuring interface window.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Note that this will run as a new Window on top of this Window and this current Window will not be usable until the Measurings Window is closed by the user.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Measure</string>
@@ -569,6 +653,9 @@
           </item>
           <item row="0" column="0">
            <widget class="QPushButton" name="distortionButton">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will run the lens correction algorithm on the current visible frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Correct lens</string>
             </property>

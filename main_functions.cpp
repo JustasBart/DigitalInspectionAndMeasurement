@@ -72,6 +72,8 @@ void MainWindow::captureImage()
         _globalQPixmap = _camObj.convertMatToQPixmap(_globalFrame);
         drawCalibrationLines( &_globalQPixmap );
         ui -> videoLabel -> setPixmap( _globalQPixmap );
+
+
     }
     else if (_liveLensCorrection)
     {
@@ -219,4 +221,8 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
 
     painter.drawLine(offset*5, height/2, width/2 - offset*2, height/2);
     painter.drawLine(width - offset*5, height/2, width/2 + offset*2, height/2);
+
+    painter.setPen(QPen(Qt::cyan));
+    painter.setFont(QFont("Arial", static_cast<int>(frameToDrawOn->width() * 0.02)));
+    painter.drawText(width/2 - 350, 30, "Use the arrow keys or the numpad to move the camera...");
 }
