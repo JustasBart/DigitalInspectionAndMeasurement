@@ -4,7 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += \
+            core gui \
+         serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -38,7 +40,8 @@ SOURCES += \
     main_functions.cpp \
     customqlabel.cpp \
     helperclass.cpp \
-    linesclass.cpp
+    linesclass.cpp \
+    serialcomms.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -51,7 +54,8 @@ HEADERS += \
     customqlabel.h \
     helperclass.h \
     linesclass.h \
-    ruler.h
+    ruler.h \
+    serialcomms.h
 
 FORMS += \
         mainwindow.ui \

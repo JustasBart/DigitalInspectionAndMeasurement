@@ -22,6 +22,7 @@
 #include "measuringinterface.h"
 #include "startupdialog.h"
 #include "usersettings.h"
+#include "serialcomms.h"
 #include "camera.h"
 #include "errors.h"
 
@@ -94,6 +95,7 @@ private:
 
     QTimer _videoFPSTimer;
 
+    // SerialComms _ardSerial;
     Camera _camObj;
     Options _usrOptions;
 

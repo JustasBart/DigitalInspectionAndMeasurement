@@ -90,3 +90,16 @@ int Errors::clearAllRulersErrorWindow()
             fatalError("Unexpected error occured in 'clearAllRulersErrorWindow'");
     }
 }
+
+void Errors::serialConnectionError(QString port)
+{
+    QMessageBox msgBox;
+
+    msgBox.setText("Serial connection error...");
+    msgBox.setInformativeText("The COM-Port " + port + " could not be connected to.");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+
+    msgBox.exec();
+
+    return;
+}
