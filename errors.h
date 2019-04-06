@@ -15,7 +15,7 @@ public:
     static void cameraOpenErrorWindow();
     static int clearAllRulersErrorWindow();
     static int cameraPositionUncalibrated();
-    static void serialConnectionError(QString port);
+    static void serialConnectionError();
 };
 
 #endif // ERRORS_H

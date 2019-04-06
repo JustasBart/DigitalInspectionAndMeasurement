@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _measuringInterface(new MeasuringInterface),
     _screen(QGuiApplication::primaryScreen()),
     _screenGeometry(_screen->geometry()),
+    _ardSerial(*new SerialComms),
     _camPort(0),
     _savePreferences(false),
     _fullScreen(false),

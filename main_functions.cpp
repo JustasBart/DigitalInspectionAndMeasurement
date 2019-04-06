@@ -28,6 +28,8 @@ void MainWindow::init()
     if (_savePreferences) loadGUISettings();
     if (ui->lensCorrectioncheckBox->isChecked())
         _liveLensCorrection = true;
+
+    _ardSerial.connectToSerial(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID);
 }
 
 void MainWindow::resizeWindowToScreenSize()

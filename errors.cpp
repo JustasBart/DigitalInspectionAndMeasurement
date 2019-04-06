@@ -91,12 +91,12 @@ int Errors::clearAllRulersErrorWindow()
     }
 }
 
-void Errors::serialConnectionError(QString port)
+void Errors::serialConnectionError()
 {
     QMessageBox msgBox;
 
     msgBox.setText("Serial connection error...");
-    msgBox.setInformativeText("The COM-Port " + port + " could not be connected to.");
+    msgBox.setInformativeText("Unable to locate the Arduino board!");
     msgBox.setStandardButtons(QMessageBox::Ok);
 
     msgBox.exec();

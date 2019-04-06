@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 // Defines //
-#define GROUP_LOCATION  "GUISettings"
+#define GROUP_LOCATION     "GUISettings"
+#define ARDUINO_VENDOR_ID  "2341"
+#define ARDUINO_PRODUCT_ID "8037"
 
 // OpenCV main image processing includes //
 #include <opencv2/highgui.hpp>
@@ -95,7 +97,7 @@ private:
 
     QTimer _videoFPSTimer;
 
-    // SerialComms _ardSerial;
+    SerialComms _ardSerial;
     Camera _camObj;
     Options _usrOptions;
 

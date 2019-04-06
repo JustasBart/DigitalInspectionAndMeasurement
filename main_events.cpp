@@ -130,6 +130,11 @@ void MainWindow::on_positionCalibrationButton_pressed()
 {
     if(ui->positionCalibrationButton->text() == "Position calibration")
     {
+        if(!_ardSerial.serialIsConnected())
+        {
+            Errors::serialConnectionError();
+        }
+
         setOptionsButtons(false);
 
         if (!_videoFPSTimer.isActive())

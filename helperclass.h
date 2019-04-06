@@ -1,12 +1,20 @@
 #ifndef HELPERCLASS_H
 #define HELPERCLASS_H
 
+// QtIncludes //
+#include <QMessageBox>
+#include <QString>
+#include <QDebug>
+
 // OpenCV includes //
 #include <opencv2/core/utility.hpp>
 #include "opencv2/features2d.hpp"
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include "opencv2/core.hpp"
+
+// Local Includes
+#include "serialcomms.h"
 
 using namespace cv;
 using namespace std;
