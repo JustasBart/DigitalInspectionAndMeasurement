@@ -61,48 +61,55 @@ void SerialComms::connectToSerial(QString vendorID, QString productID)
     qDebug() << "Enumerating the Serial ports...";
     getComPortsEnums();
 
-    if (_availablePorts.count() > 0)
+    if (!_serial->isOpen())
     {
-        qDebug() << "Found at least one possible Serial port!";
-
-        for (int i = 0; i < _availablePorts.count(); i++)
+        if (_availablePorts.count() > 0)
         {
-            qDebug() << "Trying to match the Serial board with the ID's...";
-            qDebug() << "Comparing:" << vendorID << "with:" << _availablePorts[i].getVendorID() << "- " "Comparing:" << productID << "with:" << _availablePorts[i].getProductID();
+            qDebug() << "Found at least one possible Serial port!";
 
-            if (_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID)
+            for (int i = 0; i < _availablePorts.count(); i++)
             {
-                qDebug() << "Located the Arduino board Serial Port!";
+                qDebug() << "Trying to match the Serial board with the ID's...";
+                qDebug() << "Comparing:" << vendorID << "with:" << _availablePorts[i].getVendorID() << "- " "Comparing:" << productID << "with:" << _availablePorts[i].getProductID();
 
-                if (_availablePorts[i].getBusyState() == "No")
+                if (_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID)
                 {
-                    qDebug() << "Attemped to connect to the board...";
-                    initSerialComms(_availablePorts[i].getPort());
-                }
-                else
-                {
-                    qDebug() << "Found the Arduino board, but the board is busy! Cannot connect!!!";
-                }
+                    qDebug() << "Located the Arduino board Serial Port!";
 
-                if (_serial->isOpen())
-                    qDebug() << "Successfully connected to the Arduino board!";
-                else
-                {
-                    qDebug() << "Could not connect to the board...";
-                    Errors::serialConnectionError();
-                }
+                    if (_availablePorts[i].getBusyState() == "No")
+                    {
+                        qDebug() << "Attemped to connect to the board...";
+                        initSerialComms(_availablePorts[i].getPort());
+                    }
+                    else
+                    {
+                        qDebug() << "Found the Arduino board, but the board is busy! Cannot connect!!!";
+                    }
 
-                break;
+                    if (_serial->isOpen())
+                        qDebug() << "Successfully connected to the Arduino board!";
+                    else
+                    {
+                        qDebug() << "Could not connect to the board...";
+                        Errors::serialConnectionError();
+                    }
+
+                    break;
+                }
             }
+        }
+        else
+        {
+            Errors::serialConnectionError();
         }
     }
     else
     {
-        Errors::serialConnectionError();
+        Errors::serialIsAlreadyConnected();
     }
 }
 
-bool SerialComms::serialIsConnected(QString vendorID, QString productID)
+int SerialComms::serialIsConnected(QString vendorID, QString productID)
 {
     getSerialEnumerations();
 
@@ -110,14 +117,20 @@ bool SerialComms::serialIsConnected(QString vendorID, QString productID)
     {
         for (int i = 0; i < _availablePorts.count(); i++)
         {
-            if (_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID)
+            if (_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID && _serial->isOpen())
             {
-                return true;
+                return 1; // Correct Port
             }
         }
+
+        return 2; // Required Port not available
+    }
+    else
+    {
+        return 0; // No Ports found
     }
 
-    return false;
+    return -1;
 }
 
 QList<QString> SerialComms::getSerialEnumerations()

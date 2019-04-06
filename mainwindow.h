@@ -78,6 +78,8 @@ private slots:
 
     void on_actionEnumerate_Ports_triggered();
 
+    void on_actionAttempt_to_connect_triggered();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;

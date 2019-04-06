@@ -52,7 +52,7 @@ public:
     void connectToSerial(QString vendorID, QString productID);
 
     QList<QString> getSerialEnumerations();
-    bool serialIsConnected(QString vendorID, QString productID);
+    int serialIsConnected(QString vendorID, QString productID);
     int receiveData();
     int sendData();
 

@@ -225,15 +225,32 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
     painter.drawLine(width - offset*5, height/2, width/2 + offset*2, height/2);
 
     painter.setFont(QFont("Arial", static_cast<int>(frameToDrawOn->width() * 0.02)));
-    if (_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
+
+    switch(_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
     {
-        painter.setPen(QPen(Qt::cyan));
-        painter.drawText(width/2 - 350, 30, "Use the arrow keys or the numpad to move the camera...");
-    }
-    else
-    {
-        painter.setPen(QPen(Qt::magenta));
-        painter.drawText(width/2 - 350, 30, "Board not connected, cannot move the camera motors!");
-        painter.drawText(width/2 - 350, 80, "Please try to re-connect the USB Port!");
+        case 0:
+        {
+            painter.setPen(QPen(Qt::red));
+            painter.drawText(width/2 - 350, 30, "No Serial connections ports found!!!");
+            break;
+        }
+        case 1:
+            {
+                painter.setPen(QPen(Qt::cyan));
+                painter.drawText(width/2 - 350, 30, "Use the arrow keys or the numpad to move the camera...");
+                break;
+            }
+        case 2:
+            {
+                painter.setPen(QPen(Qt::magenta));
+                painter.drawText(width/2 - 350, 30, "Required board Com Port not found, cannot communicate with the board!");
+                painter.drawText(width/2 - 350, 80, "Please try to re-connect the USB Port!");
+                break;
+            }
+        default:
+        {
+            qDebug() << "Serial communications fatal error occured...";
+            Errors::fatalError("Unexpected value caught in the Serial communications methods.");
+        }
     }
 }

@@ -332,3 +332,21 @@ void MainWindow::on_actionEnumerate_Ports_triggered()
 
     return;
 }
+
+void MainWindow::on_actionAttempt_to_connect_triggered()
+{
+    QMessageBox msgBox;
+    _ardSerial.connectToSerial(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID);
+
+    if(_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
+    {
+        msgBox.setText("Serial ports enumeration");
+        msgBox.setInformativeText("Successfully connected to the board: " + QString::fromStdString(ARDUINO_VENDOR_ID) + " " + QString::fromStdString(ARDUINO_PRODUCT_ID));
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
+    else
+    {
+        Errors::serialNoEnumsFound();
+    }
+}

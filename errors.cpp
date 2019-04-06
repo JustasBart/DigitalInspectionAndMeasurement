@@ -104,14 +104,22 @@ void Errors::serialConnectionError()
     return;
 }
 
-
-
 void Errors::serialNoEnumsFound()
 {
     QMessageBox msgBox;
 
     msgBox.setText("Serial ports enumeration");
     msgBox.setInformativeText("No Serial Ports enumerations found.\nPlease ensure that the Arduino board USB cable is connected properly.");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+}
+
+void Errors::serialIsAlreadyConnected()
+{
+    QMessageBox msgBox;
+
+    msgBox.setText("Connection already established");
+    msgBox.setInformativeText("The Serial connection with the board is already established.");
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }

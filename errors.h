@@ -16,6 +16,7 @@ public:
     static int clearAllRulersErrorWindow();
     static int cameraPositionUncalibrated();
     static void serialConnectionError();
+    static void serialIsAlreadyConnected();
     static void serialNoEnumsFound();
 };
 
