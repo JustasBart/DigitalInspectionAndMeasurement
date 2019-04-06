@@ -735,9 +735,18 @@
     </property>
     <addaction name="actionSet_to_defaults"/>
    </widget>
+   <widget class="QMenu" name="menuArduino_Board">
+    <property name="title">
+     <string>Arduino Board</string>
+    </property>
+    <addaction name="actionEnumerate_Ports"/>
+    <addaction name="actionAttempt_to_connect"/>
+    <addaction name="actionCheck_connection_status"/>
+   </widget>
    <addaction name="File"/>
    <addaction name="menuView"/>
    <addaction name="menuCamera"/>
+   <addaction name="menuArduino_Board"/>
   </widget>
   <action name="actionExit">
    <property name="text">
@@ -775,6 +784,21 @@
   <action name="actionCamera_options">
    <property name="text">
     <string>Camera options</string>
+   </property>
+  </action>
+  <action name="actionEnumerate_Ports">
+   <property name="text">
+    <string>Enumerate Ports</string>
+   </property>
+  </action>
+  <action name="actionAttempt_to_connect">
+   <property name="text">
+    <string>Attempt to connect to board</string>
+   </property>
+  </action>
+  <action name="actionCheck_connection_status">
+   <property name="text">
+    <string>Check connection status</string>
    </property>
   </action>
  </widget>

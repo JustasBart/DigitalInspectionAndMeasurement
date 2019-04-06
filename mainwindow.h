@@ -76,6 +76,8 @@ private slots:
 
     void on_lensCorrectioncheckBox_stateChanged(int arg1);
 
+    void on_actionEnumerate_Ports_triggered();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;

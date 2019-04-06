@@ -51,6 +51,7 @@ public:
     ~SerialComms();
     void connectToSerial(QString vendorID, QString productID);
 
+    QList<QString> getSerialEnumerations();
     bool serialIsConnected();
     int receiveData();
     int sendData();

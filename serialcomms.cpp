@@ -112,6 +112,34 @@ bool SerialComms::serialIsConnected()
     return false;
 }
 
+QList<QString> SerialComms::getSerialEnumerations()
+{
+    QList<QString> tempList;
+    QString currentItem;
+
+    tempList.clear();
+
+    getComPortsEnums();
+
+    for(int i = 0; i < _availablePorts.count(); i++)
+    {
+        currentItem = "Serial Port: " + QString::number(i + 1) + "\n"
+                + "Port: " + _availablePorts[i].getPort() + "\n"
+                + "Location: " + _availablePorts[i].getLocation() + "\n"
+                + "Description: " + _availablePorts[i].getDescription() + "\n"
+                + "Manufacturer: " + _availablePorts[i].getManufacturer() + "\n"
+                + "Serial number: " + _availablePorts[i].getSerialNumber() + "\n"
+                + "Vendor Identifier: " + _availablePorts[i].getVendorID() + "\n"
+                + "Product Identifier: " + _availablePorts[i].getProductID() + "\n"
+                + "Busy: " + _availablePorts[i].getBusyState() + "\n";
+
+        tempList.push_back(currentItem);
+        currentItem.clear();
+    }
+
+    return tempList;
+}
+
 // Port Class
 // **-----------------------------------** //
 

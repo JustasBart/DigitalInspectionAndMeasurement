@@ -283,3 +283,52 @@ void MainWindow::on_lensCorrectioncheckBox_stateChanged(int arg1)
 {
     _liveLensCorrection = arg1;
 }
+
+void MainWindow::on_actionEnumerate_Ports_triggered()
+{
+    QList<QString> enumsList = _ardSerial.getSerialEnumerations();
+    QMessageBox msgBox;
+
+    if (enumsList.count() > 0)
+    {
+        for(int i = 0; i < enumsList.count(); i++)
+        {
+            msgBox.setText("Serial ports enumeration");
+            msgBox.setInformativeText(enumsList[i]);
+            msgBox.setStandardButtons(QMessageBox::Ok);
+            msgBox.exec();
+        }
+
+        if (!_ardSerial.serialIsConnected())
+        {
+            msgBox.setText("One or more Serial ports found");
+            msgBox.setInformativeText("Would you like to try and to make a Serial connection with the Arduino board?");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+
+            int ret = msgBox.exec();
+
+            switch (ret)
+            {
+                case QMessageBox::Yes:
+                {
+                    _ardSerial.connectToSerial(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID);
+                    break;
+                }
+                case QMessageBox::No:
+                {
+                    qDebug() << "User chose not to attempt a Serial connection to the available Port(s).";
+                    break;
+                }
+                default:
+                    qDebug() << "User exited from the Serial connection prompt after enumerating the Serial ports.";
+            }
+        }
+    }
+    else
+    {
+        Errors::serialNoEnumsFound();
+    }
+
+    return;
+}
