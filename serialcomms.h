@@ -53,8 +53,8 @@ public:
 
     QList<QString> getSerialEnumerations();
     int serialIsConnected(QString vendorID, QString productID);
-    int receiveData();
-    int sendData();
+    QByteArray receiveData();
+    int sendData(QString data);
 
 private:
     int initSerialComms(QString portNumber);

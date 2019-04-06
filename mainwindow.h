@@ -3,6 +3,7 @@
 
 // Defines //
 #define GROUP_LOCATION     "GUISettings"
+
 #define ARDUINO_VENDOR_ID  "2341"
 #define ARDUINO_PRODUCT_ID "8037"
 
@@ -75,10 +76,14 @@ private slots:
     void on_distortionButton_pressed();
 
     void on_lensCorrectioncheckBox_stateChanged(int arg1);
-
     void on_actionEnumerate_Ports_triggered();
-
     void on_actionAttempt_to_connect_triggered();
+
+    void setRingLighGUI(bool state);
+
+    void on_actionCheck_connection_status_triggered();
+
+    void on_LightLevelSlider_sliderMoved(int position);
 
 private:
     Ui::MainWindow *ui;

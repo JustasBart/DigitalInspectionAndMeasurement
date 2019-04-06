@@ -165,6 +165,36 @@ QList<QString> SerialComms::getSerialEnumerations()
     return tempList;
 }
 
+QByteArray SerialComms::receiveData()
+{
+    if (_serial->isOpen())
+    {
+        return _serial->readAll();
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+int SerialComms::sendData(QString data)
+{
+    if(_serial->isOpen())
+    {
+        if (_serial->write(data.toStdString().c_str(), sizeof(data)))
+        {
+            return 1;
+        }
+        else
+        {
+            qDebug() << "Can't write data to the Board!";
+            return 0;
+        }
+    }
+
+    return -1;
+}
+
 // Port Class
 // **-----------------------------------** //
 

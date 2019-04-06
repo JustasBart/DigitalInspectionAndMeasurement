@@ -350,3 +350,48 @@ void MainWindow::on_actionAttempt_to_connect_triggered()
         Errors::serialNoEnumsFound();
     }
 }
+
+void MainWindow::on_actionCheck_connection_status_triggered()
+{
+    QMessageBox msgBox;
+
+    msgBox.setText("Serial port connection status:");
+    int status = _ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID);
+
+    switch (status)
+    {
+    case 0:
+    {
+        msgBox.setInformativeText("The Arduino board is currently NOT connected.\nThe reason for this is that no Serial Ports are found at all.");
+        break;
+    }
+    case 1:
+    {
+        msgBox.setInformativeText("The Arduino board is currently successfully connected to the system.");
+        break;
+    }
+    case 2:
+    {
+        msgBox.setInformativeText("The Arduino board is currently located as available Ports, but is not yet Connected to.");
+        break;
+    }
+    case 3:
+    {
+        msgBox.setInformativeText("There are some Port(s) found on the system, but the Arduino board ID's are not found.\nThe board is not connected.");
+        break;
+    }
+    default:
+    {
+        msgBox.setInformativeText("ERROR: The status ran into a critical unexpected error!");
+    }
+    }
+
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+}
+
+void MainWindow::on_LightLevelSlider_sliderMoved(int position)
+{
+    // qDebug() << "Sending Ring light level of: " << position;
+    _ardSerial.sendData( QString::number(position) + "\n" );
+}

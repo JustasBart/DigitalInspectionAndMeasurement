@@ -30,6 +30,10 @@ void MainWindow::init()
         _liveLensCorrection = true;
 
     _ardSerial.connectToSerial(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID);
+    if (_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
+        setRingLighGUI(true);
+    else
+        setRingLighGUI(false);
 }
 
 void MainWindow::resizeWindowToScreenSize()
@@ -232,12 +236,14 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
     {
         painter.setPen(QPen(Qt::red));
         painter.drawText(width/2 - 400, 50, "No Serial connections ports found!!!");
+        setRingLighGUI(false);
         break;
     }
     case 1:
     {
         painter.setPen(QPen(Qt::cyan));
         painter.drawText(width/2 - 610, 50, "Use the arrow keys or the numpad to move the camera...");
+        setRingLighGUI(true);
         break;
     }
     case 2:
@@ -245,6 +251,7 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
         painter.setPen(QPen(Qt::yellow));
         painter.drawText(width/2 - 550, 50, "Board Com Port found, but no Connection is made...");
         painter.drawText(width/2 - 380, 100, "Please connect to the board now.");
+        setRingLighGUI(false);
         break;
     }
     case 3:
@@ -252,6 +259,7 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
         painter.setPen(QPen(Qt::magenta));
         painter.drawText(width/2 - 700, 50, "Some Ports are available, but the board Port cannot be located!");
         painter.drawText(width/2 - 430, 100, "Please ensure that the board is connect!");
+        setRingLighGUI(false);
         break;
     }
     default:
@@ -260,4 +268,11 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
         Errors::fatalError("Unexpected value caught in the Serial communications methods.");
     }
     }
+}
+
+void MainWindow::setRingLighGUI(bool state)
+{
+    ui->ringLightLabel->setEnabled(state);
+    ui->LightLevelSlider->setEnabled(state);
+    ui->defaultRingLevelLight->setEnabled(state);
 }
