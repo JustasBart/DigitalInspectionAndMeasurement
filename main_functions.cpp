@@ -226,5 +226,11 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
 
     painter.setPen(QPen(Qt::cyan));
     painter.setFont(QFont("Arial", static_cast<int>(frameToDrawOn->width() * 0.02)));
-    painter.drawText(width/2 - 350, 30, "Use the arrow keys or the numpad to move the camera...");
+    if (_ardSerial.serialIsConnected())
+        painter.drawText(width/2 - 350, 30, "Use the arrow keys or the numpad to move the camera...");
+    else
+    {
+        painter.drawText(width/2 - 350, 30, "Board not connected, cannot move the camera motors!");
+        painter.drawText(width/2 - 350, 80, "Please try to re-connect the USB Port!");
+    }
 }
