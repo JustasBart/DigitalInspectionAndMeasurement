@@ -130,7 +130,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
 {
     if(ui->positionCalibrationButton->text() == "Position calibration")
     {
-        if(!_ardSerial.serialIsConnected())
+        if(!_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
         {
             Errors::serialConnectionError();
         }
@@ -299,7 +299,7 @@ void MainWindow::on_actionEnumerate_Ports_triggered()
             msgBox.exec();
         }
 
-        if (!_ardSerial.serialIsConnected())
+        if (!_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
         {
             msgBox.setText("One or more Serial ports found");
             msgBox.setInformativeText("Would you like to try and to make a Serial connection with the Arduino board?");

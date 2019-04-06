@@ -102,13 +102,21 @@ void SerialComms::connectToSerial(QString vendorID, QString productID)
     }
 }
 
-bool SerialComms::serialIsConnected()
+bool SerialComms::serialIsConnected(QString vendorID, QString productID)
 {
-    if (_serial != nullptr)
+    getSerialEnumerations();
+
+    if (_availablePorts.count() > 0)
     {
-        if (_serial->isOpen())
-            return true;
+        for (int i = 0; i < _availablePorts.count(); i++)
+        {
+            if (_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID)
+            {
+                return true;
+            }
+        }
     }
+
     return false;
 }
 
