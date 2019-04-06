@@ -228,29 +228,36 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
 
     switch(_ardSerial.serialIsConnected(ARDUINO_VENDOR_ID, ARDUINO_PRODUCT_ID))
     {
-        case 0:
-        {
-            painter.setPen(QPen(Qt::red));
-            painter.drawText(width/2 - 350, 30, "No Serial connections ports found!!!");
-            break;
-        }
-        case 1:
-            {
-                painter.setPen(QPen(Qt::cyan));
-                painter.drawText(width/2 - 350, 30, "Use the arrow keys or the numpad to move the camera...");
-                break;
-            }
-        case 2:
-            {
-                painter.setPen(QPen(Qt::magenta));
-                painter.drawText(width/2 - 350, 30, "Required board Com Port not found, cannot communicate with the board!");
-                painter.drawText(width/2 - 350, 80, "Please try to re-connect the USB Port!");
-                break;
-            }
-        default:
-        {
-            qDebug() << "Serial communications fatal error occured...";
-            Errors::fatalError("Unexpected value caught in the Serial communications methods.");
-        }
+    case 0:
+    {
+        painter.setPen(QPen(Qt::red));
+        painter.drawText(width/2 - 400, 50, "No Serial connections ports found!!!");
+        break;
+    }
+    case 1:
+    {
+        painter.setPen(QPen(Qt::cyan));
+        painter.drawText(width/2 - 610, 50, "Use the arrow keys or the numpad to move the camera...");
+        break;
+    }
+    case 2:
+    {
+        painter.setPen(QPen(Qt::yellow));
+        painter.drawText(width/2 - 550, 50, "Board Com Port found, but no Connection is made...");
+        painter.drawText(width/2 - 380, 100, "Please connect to the board now.");
+        break;
+    }
+    case 3:
+    {
+        painter.setPen(QPen(Qt::magenta));
+        painter.drawText(width/2 - 700, 50, "Some Ports are available, but the board Port cannot be located!");
+        painter.drawText(width/2 - 430, 100, "Please ensure that the board is connect!");
+        break;
+    }
+    default:
+    {
+        qDebug() << "Serial communications fatal error occured...";
+        Errors::fatalError("Unexpected value caught in the Serial communications methods.");
+    }
     }
 }

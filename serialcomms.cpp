@@ -119,11 +119,15 @@ int SerialComms::serialIsConnected(QString vendorID, QString productID)
         {
             if (_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID && _serial->isOpen())
             {
-                return 1; // Correct Port
+                return 1; // Connected
+            }
+            else if(_availablePorts[i].getVendorID() == vendorID && _availablePorts[i].getProductID() == productID)
+            {
+                return 2; // Found, but not connected
             }
         }
 
-        return 2; // Required Port not available
+        return 3; // Ports found, but, Required Port not available...
     }
     else
     {
