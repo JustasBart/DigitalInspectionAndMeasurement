@@ -136,6 +136,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
         }
 
         setOptionsButtons(false);
+        switchAlgToGantry(true);
 
         if (!_videoFPSTimer.isActive())
             _videoFPSTimer.start();
@@ -151,6 +152,7 @@ void MainWindow::on_positionCalibrationButton_pressed()
     else
     {
         setOptionsButtons(true);
+        switchAlgToGantry(false);
 
         if (ui->modeButton->text() == "Current mode: Static")
             _videoFPSTimer.stop();
@@ -394,17 +396,46 @@ void MainWindow::on_LightLevelSlider_sliderMoved(int position)
 {
     // qDebug() << "Sending Master Ring light level of: " << position;
 
-    QString commandString;
-    QString prefix = "";
-
     if (position < 255)
     {
-        _ardSerial.sendData( "RING_L " + QByteArray::number(position) );
-        _ardSerial.sendData( "RING_R 0" );
+        _ardSerial.sendData("RING_L255");
+        _ardSerial.sendData("RING_R" + QByteArray::number(position));
     }
     else
     {
-        _ardSerial.sendData( "RING_L 255" );
-        _ardSerial.sendData( "RING_R " + QByteArray::number(position - 255) );
+        _ardSerial.sendData("RING_L" + QByteArray::number(position));
+        _ardSerial.sendData("RING_R0");
     }
+}
+
+void MainWindow::on_gantryUpButton_pressed()
+{
+    if (ui->sensitiveGantryCheckBox->isChecked())
+        _ardSerial.sendData("STEP_U4");
+    else
+        _ardSerial.sendData("STEP_U10");
+}
+
+void MainWindow::on_gantryDownButton_pressed()
+{
+    if (ui->sensitiveGantryCheckBox->isChecked())
+        _ardSerial.sendData("STEP_D4");
+    else
+        _ardSerial.sendData("STEP_D10");
+}
+
+void MainWindow::on_gantryLeftButton_pressed()
+{
+    if (ui->sensitiveGantryCheckBox->isChecked())
+        _ardSerial.sendData("STEP_L4");
+    else
+        _ardSerial.sendData("STEP_L10");
+}
+
+void MainWindow::on_gantryRightButton_pressed()
+{
+    if (ui->sensitiveGantryCheckBox->isChecked())
+        _ardSerial.sendData("STEP_R4");
+    else
+        _ardSerial.sendData("STEP_R10");
 }

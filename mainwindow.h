@@ -83,6 +83,14 @@ private slots:
     void on_actionCheck_connection_status_triggered();
     void on_LightLevelSlider_sliderMoved(int position);
 
+    void on_gantryUpButton_pressed();
+
+    void on_gantryDownButton_pressed();
+
+    void on_gantryLeftButton_pressed();
+
+    void on_gantryRightButton_pressed();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;
@@ -101,6 +109,7 @@ private:
     void setMeasurementButtons(bool val);
     void drawCalibrationLines(QPixmap *frameToDrawOn);
     void listenToKeyPress(QKeyEvent *event);
+    void switchAlgToGantry(bool state);
 
     QTimer _videoFPSTimer;
 

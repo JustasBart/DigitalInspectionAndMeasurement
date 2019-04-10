@@ -3,6 +3,7 @@
 
 void MainWindow::init()
 {
+    switchAlgToGantry(false);
     ui->actionFull_screen->setChecked( _fullScreen );
     ui->modesLabel->setStyleSheet("QLabel { background-color : orange; color : black; }");
 
@@ -275,4 +276,24 @@ void MainWindow::setRingLighGUI(bool state)
     ui->ringLightLabel->setEnabled(state);
     ui->LightLevelSlider->setEnabled(state);
     ui->defaultRingLevelLight->setEnabled(state);
+}
+
+void MainWindow::switchAlgToGantry(bool state)
+{
+    if (state)
+    {
+        ui->algorithmsGroup->setEnabled(false);
+        ui->algorithmsGroup->setHidden(true);
+
+        ui->gantryControlsGroup->setEnabled(true);
+        ui->gantryControlsGroup->setHidden(false);
+    }
+    else
+    {
+        ui->algorithmsGroup->setEnabled(true);
+        ui->algorithmsGroup->setHidden(false);
+
+        ui->gantryControlsGroup->setEnabled(false);
+        ui->gantryControlsGroup->setHidden(true);
+    }
 }
