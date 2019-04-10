@@ -411,7 +411,7 @@ void MainWindow::on_LightLevelSlider_sliderMoved(int position)
 void MainWindow::on_gantryUpButton_pressed()
 {
     if (ui->sensitiveGantryCheckBox->isChecked())
-        _ardSerial.sendData("STEP_U4");
+        _ardSerial.sendData("STEP_U6");
     else
         _ardSerial.sendData("STEP_U10");
 }
@@ -419,7 +419,7 @@ void MainWindow::on_gantryUpButton_pressed()
 void MainWindow::on_gantryDownButton_pressed()
 {
     if (ui->sensitiveGantryCheckBox->isChecked())
-        _ardSerial.sendData("STEP_D4");
+        _ardSerial.sendData("STEP_D6");
     else
         _ardSerial.sendData("STEP_D10");
 }
@@ -427,7 +427,7 @@ void MainWindow::on_gantryDownButton_pressed()
 void MainWindow::on_gantryLeftButton_pressed()
 {
     if (ui->sensitiveGantryCheckBox->isChecked())
-        _ardSerial.sendData("STEP_L4");
+        _ardSerial.sendData("STEP_L6");
     else
         _ardSerial.sendData("STEP_L10");
 }
@@ -435,7 +435,7 @@ void MainWindow::on_gantryLeftButton_pressed()
 void MainWindow::on_gantryRightButton_pressed()
 {
     if (ui->sensitiveGantryCheckBox->isChecked())
-        _ardSerial.sendData("STEP_R4");
+        _ardSerial.sendData("STEP_R6");
     else
         _ardSerial.sendData("STEP_R10");
 }
