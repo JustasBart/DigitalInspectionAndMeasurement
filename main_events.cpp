@@ -392,6 +392,19 @@ void MainWindow::on_actionCheck_connection_status_triggered()
 
 void MainWindow::on_LightLevelSlider_sliderMoved(int position)
 {
-    // qDebug() << "Sending Ring light level of: " << position;
-    _ardSerial.sendData( QString::number(position) + "\n" );
+    // qDebug() << "Sending Master Ring light level of: " << position;
+
+    QString commandString;
+    QString prefix = "";
+
+    if (position < 255)
+    {
+        _ardSerial.sendData( "RING_L " + QByteArray::number(position) );
+        _ardSerial.sendData( "RING_R 0" );
+    }
+    else
+    {
+        _ardSerial.sendData( "RING_L 255" );
+        _ardSerial.sendData( "RING_R " + QByteArray::number(position - 255) );
+    }
 }

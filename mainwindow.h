@@ -80,9 +80,7 @@ private slots:
     void on_actionAttempt_to_connect_triggered();
 
     void setRingLighGUI(bool state);
-
     void on_actionCheck_connection_status_triggered();
-
     void on_LightLevelSlider_sliderMoved(int position);
 
 private:

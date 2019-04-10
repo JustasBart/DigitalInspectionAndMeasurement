@@ -113,7 +113,7 @@ int SerialComms::serialIsConnected(QString vendorID, QString productID)
 {
     getSerialEnumerations();
 
-    if (_availablePorts.count() > 0)
+    if (_availablePorts.count() > 0 && _serial->isOpen())
     {
         for (int i = 0; i < _availablePorts.count(); i++)
         {
@@ -133,8 +133,6 @@ int SerialComms::serialIsConnected(QString vendorID, QString productID)
     {
         return 0; // No Ports found
     }
-
-    return -1;
 }
 
 QList<QString> SerialComms::getSerialEnumerations()
@@ -177,11 +175,11 @@ QByteArray SerialComms::receiveData()
     }
 }
 
-int SerialComms::sendData(QString data)
+int SerialComms::sendData(const QByteArray &data)
 {
     if(_serial->isOpen())
     {
-        if (_serial->write(data.toStdString().c_str(), sizeof(data)))
+        if (_serial->write(data, sizeof(data)))
         {
             return 1;
         }

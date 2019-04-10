@@ -50,11 +50,11 @@ public:
     SerialComms();
     ~SerialComms();
     void connectToSerial(QString vendorID, QString productID);
-
     QList<QString> getSerialEnumerations();
     int serialIsConnected(QString vendorID, QString productID);
+
     QByteArray receiveData();
-    int sendData(QString data);
+    int sendData(const QByteArray &data);
 
 private:
     int initSerialComms(QString portNumber);
