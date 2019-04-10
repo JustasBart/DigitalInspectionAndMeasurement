@@ -273,9 +273,10 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
 
 void MainWindow::setRingLighGUI(bool state)
 {
-    ui->ringLightLabel->setEnabled(state);
-    ui->LightLevelSlider->setEnabled(state);
-    ui->defaultRingLevelLight->setEnabled(state);
+    ui->ringLeftUpBut->setEnabled(state);
+    ui->ringLeftDownBut->setEnabled(state);
+    ui->ringRightUpBut->setEnabled(state);
+    ui->ringRightDownBut->setEnabled(state);
 }
 
 void MainWindow::switchAlgToGantry(bool state)

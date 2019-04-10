@@ -81,19 +81,18 @@ private slots:
 
     void setRingLighGUI(bool state);
     void on_actionCheck_connection_status_triggered();
-    void on_LightLevelSlider_sliderMoved(int position);
 
     void on_gantryUpButton_pressed();
-
     void on_gantryDownButton_pressed();
-
     void on_gantryLeftButton_pressed();
-
     void on_gantryRightButton_pressed();
-
     void on_ringLightOnButton_pressed();
-
     void on_ringLightOffButton_pressed();
+
+    void on_ringLeftUpBut_pressed();
+    void on_ringLeftDownBut_pressed();
+    void on_ringRightUpBut_pressed();
+    void on_ringRightDownBut_pressed();
 
 private:
     Ui::MainWindow *ui;

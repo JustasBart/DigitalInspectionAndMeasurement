@@ -392,25 +392,6 @@ void MainWindow::on_actionCheck_connection_status_triggered()
     msgBox.exec();
 }
 
-void MainWindow::on_LightLevelSlider_sliderMoved(int position)
-{
-    // qDebug() << "Sending Master Ring light level of: " << position;
-
-    QByteArray converted;
-    converted.setNum(position);
-
-    if (position < 255)
-    {
-        _ardSerial.sendData("RING_R 255");
-        _ardSerial.sendData("RING_L " + converted );
-    }
-    else
-    {
-        _ardSerial.sendData("RING_R " + converted );
-        _ardSerial.sendData("RING_L 0");
-    }
-}
-
 void MainWindow::on_gantryUpButton_pressed()
 {
     if (ui->sensitiveGantryCheckBox->isChecked())
@@ -451,4 +432,24 @@ void MainWindow::on_ringLightOnButton_pressed()
 void MainWindow::on_ringLightOffButton_pressed()
 {
     _ardSerial.sendData("RING_OFF");
+}
+
+void MainWindow::on_ringLeftUpBut_pressed()
+{
+    _ardSerial.sendData("LIGHTL_U");
+}
+
+void MainWindow::on_ringLeftDownBut_pressed()
+{
+    _ardSerial.sendData("LIGHTL_D");
+}
+
+void MainWindow::on_ringRightUpBut_pressed()
+{
+    _ardSerial.sendData("LIGHTR_U");
+}
+
+void MainWindow::on_ringRightDownBut_pressed()
+{
+    _ardSerial.sendData("LIGHTR_D");
 }
