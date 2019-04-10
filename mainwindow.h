@@ -91,6 +91,10 @@ private slots:
 
     void on_gantryRightButton_pressed();
 
+    void on_ringLightOnButton_pressed();
+
+    void on_ringLightOffButton_pressed();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;

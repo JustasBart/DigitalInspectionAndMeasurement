@@ -396,15 +396,18 @@ void MainWindow::on_LightLevelSlider_sliderMoved(int position)
 {
     // qDebug() << "Sending Master Ring light level of: " << position;
 
+    QByteArray converted;
+    converted.setNum(position);
+
     if (position < 255)
     {
-        _ardSerial.sendData("RING_L255");
-        _ardSerial.sendData("RING_R" + QByteArray::number(position));
+        _ardSerial.sendData("RING_R 255");
+        _ardSerial.sendData("RING_L " + converted );
     }
     else
     {
-        _ardSerial.sendData("RING_L" + QByteArray::number(position));
-        _ardSerial.sendData("RING_R0");
+        _ardSerial.sendData("RING_R " + converted );
+        _ardSerial.sendData("RING_L 0");
     }
 }
 
@@ -438,4 +441,14 @@ void MainWindow::on_gantryRightButton_pressed()
         _ardSerial.sendData("STEP_R6");
     else
         _ardSerial.sendData("STEP_R10");
+}
+
+void MainWindow::on_ringLightOnButton_pressed()
+{
+    _ardSerial.sendData("RING_ON");
+}
+
+void MainWindow::on_ringLightOffButton_pressed()
+{
+    _ardSerial.sendData("RING_OFF");
 }
