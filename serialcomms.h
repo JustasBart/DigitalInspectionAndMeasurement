@@ -50,6 +50,7 @@ public:
     SerialComms();
     ~SerialComms();
     void connectToSerial(QString vendorID, QString productID);
+    void disconnectSerial();
     QList<QString> getSerialEnumerations();
     int serialIsConnected(QString vendorID, QString productID);
 

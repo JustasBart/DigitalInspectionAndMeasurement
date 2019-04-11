@@ -109,6 +109,11 @@ void SerialComms::connectToSerial(QString vendorID, QString productID)
     }
 }
 
+void SerialComms::disconnectSerial()
+{
+    _serial->close();
+}
+
 int SerialComms::serialIsConnected(QString vendorID, QString productID)
 {
     getSerialEnumerations();

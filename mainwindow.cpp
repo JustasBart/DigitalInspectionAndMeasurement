@@ -32,7 +32,6 @@ MainWindow::~MainWindow()
 {
     _camObj.releaseCamera();
     _videoFPSTimer.stop();
-    _ardSerial.~SerialComms();
 
     if (_savePreferences)
     {

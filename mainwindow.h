@@ -94,6 +94,8 @@ private slots:
     void on_ringRightUpBut_pressed();
     void on_ringRightDownBut_pressed();
 
+    void on_actionDisconnect_Serial_triggered();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;

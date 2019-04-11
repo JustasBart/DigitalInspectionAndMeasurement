@@ -463,3 +463,8 @@ void MainWindow::on_ringRightDownBut_pressed()
 {
     _ardSerial.sendData("LIGHTR_D");
 }
+
+void MainWindow::on_actionDisconnect_Serial_triggered()
+{
+    _ardSerial.disconnectSerial();
+}
