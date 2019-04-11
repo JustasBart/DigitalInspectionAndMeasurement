@@ -632,6 +632,9 @@
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="1">
            <widget class="QLabel" name="distortionLabel">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates whether the lens correction algorithm was used to un-distort the current frame visible or not.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>*Distorted*</string>
             </property>
@@ -665,6 +668,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="newInterfaceLabel">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This label indicates that when the 'Measure' button is pressed a new window will be opened containing the Measurements panels.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -678,6 +684,9 @@
           </item>
           <item row="2" column="0">
            <widget class="QCheckBox" name="bypassLebsCorCheckBox">
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;*This is only a temporary feature used for the Demonstration of the Project.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Normally you would always want to un-distort your frame before measuring it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Bypass Lens correction*</string>
             </property>
@@ -697,6 +706,9 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This group panel is used for controling the gantry Hardware (That is moving the camera around and controling the Ring-light).&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;From here the user can use the buttons (Assuming that the Arduino board is connected successfully) to control the Hardware.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="title">
           <string>Gantry Group</string>
          </property>
@@ -708,6 +720,9 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button makes the Gantry movements more sensitive for all 4 of the moving directions (Up, Down, Left, Right).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Sensitive</string>
@@ -731,6 +746,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button is just a place holder and has no functiionality.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -749,6 +767,9 @@
               <width>100</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will move the Camera gantry to the right (Assuming that the Arduino board is connected)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Move right</string>
@@ -769,6 +790,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will move the Camera gantry upwards (Assuming that the Arduino board is connected)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Move up</string>
             </property>
@@ -787,6 +811,9 @@
               <width>100</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will move the Camera gantry downwards (Assuming that the Arduino board is connected)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Move down</string>
@@ -816,6 +843,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will move the Camera gantry to the left (Assuming that the Arduino board is connected)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Move left</string>
             </property>
@@ -834,6 +864,9 @@
               <width>100</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will fully turn the Light-ring ON (Assuming that the Arduino board is connected)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Ring light ON</string>
@@ -854,6 +887,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will fully turn the Light-ring OFF (Assuming that the Arduino board is connected)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Ring light OFF</string>
             </property>
@@ -870,6 +906,9 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This panel is used for the user notes (If the user desires to take down any).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string>User notes:</string>
          </property>
@@ -885,6 +924,9 @@
          </property>
          <property name="cursor" stdset="0">
           <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This window stores any user-notes that the user may wish to keep.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
