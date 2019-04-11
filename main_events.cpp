@@ -176,9 +176,6 @@ void MainWindow::setOptionsButtons(bool val)
 void MainWindow::setMeasurementButtons(bool val)
 {
     ui->measureButton->setEnabled(val);
-    ui->detailMergeButton->setEnabled(val);
-    ui->stackImagesButton->setEnabled(val);
-    ui->edgeDetectButton->setEnabled(val);
 }
 
 void MainWindow::on_actionFull_screen_triggered(bool checked)
@@ -259,7 +256,14 @@ void MainWindow::on_focusOptionsBtn_pressed()
 
 void MainWindow::on_measureButton_pressed()
 {
-    emit sendGlobalMat(_camObj.retrieveGlobalUndistortedFrame(_res_Width), QSize(_res_Width, _res_Height), _screenGeometry);
+    if (ui->bypassLebsCorCheckBox->isChecked())
+    {
+        emit sendGlobalMat(_camObj.retrieveGlobalFrame(), QSize(_res_Width, _res_Height), _screenGeometry);
+    }
+    else
+    {
+        emit sendGlobalMat(_camObj.retrieveGlobalUndistortedFrame(_res_Width), QSize(_res_Width, _res_Height), _screenGeometry);
+    }
 
     _measuringInterface -> setModal(true);
     _measuringInterface -> exec();
