@@ -172,7 +172,7 @@ void LinesClass::addTableRulerText(Mat *frameToDrawOn)
             lineLength = calculateLenghtOfLine(_rulersList[i].getFirstPoint(), _rulersList[i].getSecondPoint());
 
             cv::putText(*frameToDrawOn, "Ruler " + QString::number(i+1).toStdString() + " Lenght: " +
-                        QString::number(lineLength).toStdString() + "mm",
+                        QString::number(lineLength / _PXtoMM).toStdString() + "mm",
                         cv::Point2d(frameToDrawOn->cols - 370, (i * 30) + 50),5, 1, _rulersList[0].getColorAtIndex(i));
         }
     }
