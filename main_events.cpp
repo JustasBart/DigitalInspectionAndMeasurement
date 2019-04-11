@@ -88,6 +88,7 @@ void MainWindow::on_modeButton_pressed()
             _videoFPSTimer.stop();
 
             ui->positionCalibrationButton->setEnabled(false);
+            setMeasurementButtons(true);
 
             ui->adjustmentsGroup->setTitle("Adjustments Group");
             ui->algorithmsGroup->setTitle("*Algorithms group");
@@ -123,6 +124,7 @@ void MainWindow::on_modeButton_pressed()
         ui->captureButton->setEnabled(false);
         ui->adjustmentsGroup->setEnabled(true);
         ui->algorithmsGroup->setEnabled(false);
+        setMeasurementButtons(false);
     }
 }
 
@@ -155,13 +157,15 @@ void MainWindow::on_positionCalibrationButton_pressed()
         switchAlgToGantry(false);
 
         if (ui->modeButton->text() == "Current mode: Static")
+        {
             _videoFPSTimer.stop();
+            setMeasurementButtons(true);
+        }
 
         ui->positionCalibrationButton->setText("Position calibration");
         ui->positionCalibrationButton->setStyleSheet("background-color: lightGray");
 
         ui->calibrationLabel->setText(">Calibrated<");
-        setMeasurementButtons(true);
 
         _calibrationInProgress = false;
     }
@@ -171,11 +175,13 @@ void MainWindow::setOptionsButtons(bool val)
 {
     ui->modeButton->setEnabled(val);
     ui->captureButton->setEnabled(val);
+    ui->lensCorrectioncheckBox->setEnabled(val);
 }
 
 void MainWindow::setMeasurementButtons(bool val)
 {
     ui->measureButton->setEnabled(val);
+    ui->bypassLebsCorCheckBox->setEnabled(val);
 }
 
 void MainWindow::on_actionFull_screen_triggered(bool checked)

@@ -243,7 +243,7 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
     case 1:
     {
         painter.setPen(QPen(Qt::cyan));
-        painter.drawText(width/2 - 610, 50, "Use the arrow keys or the numpad to move the camera...");
+        painter.drawText(width/2 - 600, 50, "Use the buttons on the screen to move the camera...");
         setRingLighGUI(true);
         break;
     }

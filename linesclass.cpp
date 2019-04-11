@@ -38,7 +38,7 @@ void Ruler::drawRuler(Mat &frameMat, int rulerEnumerator)
     midPoint.x = ((_point1.x() + _point2.x()) / 2 - 45);
     midPoint.y = ((_point1.y() + _point2.y()) / 2);
 
-    cv::putText(frameMat, "Ruler " + QString::number(rulerEnumerator).toStdString(), midPoint, 5, 1, Scalar(255, 255, 255));
+    cv::putText(frameMat, "Ruler " + QString::number(rulerEnumerator).toStdString(), midPoint, 5, 1, Scalar(45, 255, 241));
 }
 
 QPoint Ruler::getFirstPoint()
