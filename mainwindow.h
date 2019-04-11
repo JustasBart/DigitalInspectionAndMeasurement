@@ -96,6 +96,8 @@ private slots:
 
     void on_actionDisconnect_Serial_triggered();
 
+    void on_actionRe_Establish_the_connection_triggered();
+
 private:
     Ui::MainWindow *ui;
     StartupDialog *_startUpDialog;

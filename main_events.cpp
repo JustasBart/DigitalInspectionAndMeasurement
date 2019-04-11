@@ -468,3 +468,9 @@ void MainWindow::on_actionDisconnect_Serial_triggered()
 {
     _ardSerial.disconnectSerial();
 }
+
+void MainWindow::on_actionRe_Establish_the_connection_triggered()
+{
+    ui->actionDisconnect_Serial->trigger();
+    ui->actionAttempt_to_connect->trigger();
+}

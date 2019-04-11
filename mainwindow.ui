@@ -984,6 +984,7 @@
     <property name="title">
      <string>Arduino Board</string>
     </property>
+    <addaction name="actionRe_Establish_the_connection"/>
     <addaction name="actionEnumerate_Ports"/>
     <addaction name="actionAttempt_to_connect"/>
     <addaction name="actionCheck_connection_status"/>
@@ -1050,6 +1051,11 @@
   <action name="actionDisconnect_Serial">
    <property name="text">
     <string>Disconnect Serial</string>
+   </property>
+  </action>
+  <action name="actionRe_Establish_the_connection">
+   <property name="text">
+    <string>Re-Establish the connection</string>
    </property>
   </action>
  </widget>
