@@ -73,6 +73,7 @@ private:
     void clickedLabel(QMouseEvent *event);
     void updateGridSizeLabel(int val);
     void hideScaleLine();
+    void setEnableRulerOptions(bool state);
 
     LinesClass *_lClassObj;
 

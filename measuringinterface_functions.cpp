@@ -57,3 +57,16 @@ void MeasuringInterface::updateFrame(Mat newFrame)
 {
     ui -> frameLabel -> setPixmap( matToPixmap(newFrame) );
 }
+
+void MeasuringInterface::setEnableRulerOptions(bool state)
+{
+    ui->drawRulerButton->setEnabled(state);
+    ui->removeRulerButton->setEnabled(state);
+    ui->clearAllRulersButton->setEnabled(state);
+    ui->saveImageWithRulersPushButton->setEnabled(state);
+    ui->savePlainImageButton->setEnabled(state);
+    ui->drawGridCheckbox->setEnabled(state);
+    ui->updateRulersButton->setEnabled(state);
+    ui->mmSpinbox->setEnabled(state);
+    ui->updateRulersButton->setEnabled(state);
+}

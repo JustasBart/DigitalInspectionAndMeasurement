@@ -80,6 +80,8 @@ void MeasuringInterface::on_drawScaleButton_pressed()
         updateFrame(_workingFrame);
         ui->drawScaleButton->setText("Drawing scale");
         ui->drawScaleButton->setEnabled(false);
+        setEnableRulerOptions(false);
+
         ui->scaledLabel->setStyleSheet("QLabel { background-color : orange; color : white; }");
         ui->scaledLabel->setText("Drawing - Point 1");
         _scaleDrawingStatus = true;
@@ -216,7 +218,8 @@ void MeasuringInterface::labelMouseClickedPos(QPoint &pos)
             ui->drawGridCheckbox->setEnabled(true);
             ui->drawRulerButton->setEnabled(true);
 
-            ui->statusLabel->setText("Status: Ready to draw rulers");
+            ui->statusLabel->setText("Status: Ready to start drawing rulers!");
+            setEnableRulerOptions(true);
         }
     }
 }
