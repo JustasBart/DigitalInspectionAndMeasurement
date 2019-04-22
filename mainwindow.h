@@ -132,7 +132,7 @@ private:
     bool _fullScreen;
     int _res_Width;
     int _res_Height;
-    int _fps;
+    int _fps = 30;
 
     bool _calibrationInProgress;
     bool _liveLensCorrection;

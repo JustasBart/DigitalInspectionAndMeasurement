@@ -236,7 +236,7 @@ void MainWindow::drawCalibrationLines(QPixmap *frameToDrawOn)
     case 0:
     {
         painter.setPen(QPen(Qt::red));
-        painter.drawText(width/2 - 400, 50, "No Serial connections ports found!!!");
+        painter.drawText(width/2 - 270, 50, "No Serial connections ports found!!!");
         setRingLighGUI(false);
         break;
     }
